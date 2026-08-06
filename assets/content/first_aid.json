@@ -1,0 +1,137 @@
+{
+  "id": "first_aid",
+  "order": 4,
+  "title": { "bn": "প্রাথমিক সাহায্য", "en": "First Aid" },
+  "themeColor": "#F2896B",
+  "iconAsset": "icons/first_aid.png",
+  "safeAction": {
+    "bn": "শান্ত থাকো, বড়দের ডাকো, আর জরুরি হলে ৯৯৯ নম্বরে কল করো",
+    "en": "Stay calm, call a grown-up, and dial 999 if it's serious"
+  },
+  "badge": {
+    "id": "first_aid_badge",
+    "title": { "bn": "সাহায্যকারী বীর", "en": "Helper Hero" },
+    "iconAsset": "icons/badge_first_aid.png"
+  },
+  "beats": [
+    {
+      "id": "fa_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/fa_slide_1.png",
+          "text": { "bn": "এক রৌদ্রোজ্জ্বল বিকেলে টুকুর বন্ধু হোঁচট খেয়ে পড়ে গেল।", "en": "One sunny afternoon, Tuku's friend tripped and fell." }
+        },
+        {
+          "imageAsset": "story/fa_slide_2.png",
+          "text": { "bn": "তার হাঁটুতে একটু ব্যথা লাগল আর সে একটু ভয় পেয়ে গেল।", "en": "Their knee hurt a little, and they felt a bit scared." }
+        },
+        {
+          "imageAsset": "story/fa_slide_3.png",
+          "text": { "bn": "টুকু শান্ত থাকল, একদম ঘাবড়ে গেল না।", "en": "Tuku stayed calm and didn't panic." }
+        },
+        {
+          "imageAsset": "story/fa_slide_4.png",
+          "text": { "bn": "টুকু তখনই ছুটে গিয়ে একজন বড় মানুষকে ডেকে আনল।", "en": "Tuku ran right away to get a grown-up." }
+        }
+      ]
+    },
+    {
+      "id": "fa_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/fa_step_1.png",
+          "text": { "bn": "ধাপ ১: শান্ত থাকো।", "en": "Step 1: Stay calm." }
+        },
+        {
+          "imageAsset": "steps/fa_step_2.png",
+          "text": { "bn": "ধাপ ২: জোরে ডাকো বা বড়দের কাছে যাও।", "en": "Step 2: Call or shout for a grown-up." }
+        },
+        {
+          "imageAsset": "steps/fa_step_3.png",
+          "text": {
+            "bn": "ধাপ ৩: বিষয়টা গুরুতর হলে বড়রা ৯৯৯ নম্বরে কল করবে।",
+            "en": "Step 3: If it's serious, a grown-up will call 999."
+          }
+        },
+        {
+          "imageAsset": "steps/fa_step_4.png",
+          "text": { "bn": "ধাপ ৪: বন্ধুর পাশে থাকো আর তাকে ভরসা দাও।", "en": "Step 4: Stay with your friend and comfort them." }
+        }
+      ]
+    },
+    {
+      "id": "fa_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "sequence_tap",
+      "config": {
+        "instructions": {
+          "bn": "সাহায্যের ধাপগুলো ঠিক ক্রমে সাজাও!",
+          "en": "Put the helper steps in the right order!"
+        },
+        "items": [
+          {
+            "id": "stay_calm",
+            "label": { "bn": "শান্ত থাকো", "en": "Stay calm" },
+            "imageAsset": "practice/fa_calm.png",
+            "sequenceOrder": 1
+          },
+          {
+            "id": "get_grownup",
+            "label": { "bn": "বড়দের ডাকো", "en": "Get a grown-up" },
+            "imageAsset": "practice/fa_grownup.png",
+            "sequenceOrder": 2
+          },
+          {
+            "id": "call_999",
+            "label": { "bn": "৯৯৯ নম্বরে কল করো", "en": "Call 999" },
+            "imageAsset": "practice/fa_call.png",
+            "sequenceOrder": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "fa_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "fa_q1",
+          "prompt": { "bn": "তোমার বন্ধু ব্যথা পেয়েছে। তুমি প্রথমে কী করবে?", "en": "Your friend got hurt. What do you do first?" },
+          "imageAsset": "quiz/fa_q1.png",
+          "options": [
+            { "id": "a", "label": { "bn": "একজন বড় মানুষকে ডাকব", "en": "Get a grown-up" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "সেটা উপেক্ষা করব", "en": "Ignore it" }, "isCorrect": false },
+            { "id": "c", "label": { "bn": "নিজেই চিকিৎসা করব", "en": "Try to treat it myself" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "fa_q2",
+          "prompt": { "bn": "বিষয়টা যদি গুরুতর হয়, ৯৯৯ নম্বরে কে কল করবে?", "en": "If it's serious, who calls 999?" },
+          "imageAsset": "quiz/fa_q2.png",
+          "options": [
+            { "id": "a", "label": { "bn": "একজন বড় মানুষ", "en": "A grown-up" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "আমি নিজে", "en": "I call it myself" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "fa_q3",
+          "prompt": {
+            "bn": "বন্ধু অপেক্ষা করার সময় তুমি কীভাবে সাহায্য করতে পারো?",
+            "en": "How can you help while your friend waits?"
+          },
+          "imageAsset": "quiz/fa_q3.png",
+          "options": [
+            { "id": "a", "label": { "bn": "পাশে থেকে ভরসা দেব", "en": "Stay with them and comfort them" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "একা রেখে চলে যাব", "en": "Leave them alone" }, "isCorrect": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

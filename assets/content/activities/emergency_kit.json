@@ -1,0 +1,90 @@
+{
+  "id": "emergency_kit",
+  "title": { "bn": "আমার জরুরি ব্যাগ", "en": "My Emergency Kit" },
+  "themeColor": "#6C63FF",
+  "iconAsset": "icons/emergency_kit.png",
+  "instructions": {
+    "bn": "সঠিক জিনিসগুলো ব্যাগে টেনে নিয়ে যাও!",
+    "en": "Drag the right items into the bag!"
+  },
+  "badge": {
+    "id": "ready_kit_badge",
+    "title": { "bn": "প্রস্তুত কিট বীর", "en": "Ready Kit Hero" },
+    "iconAsset": "icons/badge_emergency_kit.png"
+  },
+  "items": [
+    {
+      "id": "water",
+      "label": { "bn": "পানি", "en": "Water" },
+      "imageAsset": "activities/kit/water.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "পানি আমাদের নিরাপদ রাখে।", "en": "Water keeps us safe." }
+    },
+    {
+      "id": "torch",
+      "label": { "bn": "টর্চ লাইট", "en": "Torch" },
+      "imageAsset": "activities/kit/torch.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "অন্ধকারে টর্চ আমাদের দেখতে সাহায্য করে।", "en": "A torch helps us see in the dark." }
+    },
+    {
+      "id": "dry_food",
+      "label": { "bn": "শুকনো খাবার", "en": "Dry food" },
+      "imageAsset": "activities/kit/dry_food.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "শুকনো খাবার অনেকদিন ভালো থাকে।", "en": "Dry food stays good for many days." }
+    },
+    {
+      "id": "whistle",
+      "label": { "bn": "বাঁশি", "en": "Whistle" },
+      "imageAsset": "activities/kit/whistle.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "বাঁশি বাজিয়ে আমরা সাহায্যের জন্য ডাকতে পারি।", "en": "A whistle helps us call for help." }
+    },
+    {
+      "id": "papers",
+      "label": { "bn": "জরুরি কাগজপত্র", "en": "Important papers" },
+      "imageAsset": "activities/kit/papers.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "জরুরি কাগজপত্র আমাদের পরিচয় বলে দেয়।", "en": "Important papers help show who we are." }
+    },
+    {
+      "id": "first_aid_box",
+      "label": { "bn": "ফার্স্ট এইড বক্স", "en": "First-aid box" },
+      "imageAsset": "activities/kit/first_aid_box.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "ফার্স্ট এইড বক্স ছোট আঘাতে সাহায্য করে।", "en": "A first-aid box helps with small injuries." }
+    },
+    {
+      "id": "radio",
+      "label": { "bn": "রেডিও", "en": "Radio" },
+      "imageAsset": "activities/kit/radio.png",
+      "isCorrect": true,
+      "affirmation": { "bn": "রেডিও আমাদের গুরুত্বপূর্ণ খবর শোনায়।", "en": "A radio lets us hear important news." }
+    },
+    {
+      "id": "toy",
+      "label": { "bn": "খেলনা", "en": "Toy" },
+      "imageAsset": "activities/kit/toy.png",
+      "isCorrect": false
+    },
+    {
+      "id": "sweets",
+      "label": { "bn": "মিষ্টি", "en": "Sweets" },
+      "imageAsset": "activities/kit/sweets.png",
+      "isCorrect": false
+    },
+    {
+      "id": "football",
+      "label": { "bn": "ফুটবল", "en": "Football" },
+      "imageAsset": "activities/kit/football.png",
+      "isCorrect": false
+    },
+    {
+      "id": "video_game",
+      "label": { "bn": "ভিডিও গেম", "en": "Video game" },
+      "imageAsset": "activities/kit/video_game.png",
+      "isCorrect": false
+    }
+  ]
+}

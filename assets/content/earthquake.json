@@ -1,0 +1,128 @@
+{
+  "id": "earthquake",
+  "order": 1,
+  "title": { "bn": "ভূমিকম্প", "en": "Earthquake" },
+  "themeColor": "#A0522D",
+  "iconAsset": "icons/earthquake.png",
+  "safeAction": { "bn": "থামো, নিচে বসো, ঢেকে রাখো, ধরে থাকো", "en": "Drop, Cover, and Hold On" },
+  "badge": {
+    "id": "earthquake_badge",
+    "title": { "bn": "ভূমিকম্প বীর", "en": "Earthquake Hero" },
+    "iconAsset": "icons/badge_earthquake.png"
+  },
+  "beats": [
+    {
+      "id": "eq_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/eq_slide_1.png",
+          "text": { "bn": "একদিন হঠাৎ মাটি কাঁপতে লাগল।", "en": "One day, the ground suddenly started to shake." }
+        },
+        {
+          "imageAsset": "story/eq_slide_2.png",
+          "text": { "bn": "টুকুর মনে হলো যেন সে একটা নৌকায় দুলছে!", "en": "Tuku felt wobbly, like being on a boat!" }
+        },
+        {
+          "imageAsset": "story/eq_slide_3.png",
+          "text": { "bn": "এটাকে বলে ভূমিকম্প। এটা বেশিক্ষণ থাকে না।", "en": "This is called an earthquake. It doesn't last long." }
+        },
+        {
+          "imageAsset": "story/eq_slide_4.png",
+          "text": { "bn": "টুকু জানত নিরাপদ থাকতে কী করতে হয়।", "en": "Tuku knew exactly what to do to stay safe." }
+        }
+      ]
+    },
+    {
+      "id": "eq_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/eq_step_1.png",
+          "text": { "bn": "ধাপ ১: মাটিতে বসে পড়ো।", "en": "Step 1: DROP down to the floor." }
+        },
+        {
+          "imageAsset": "steps/eq_step_2.png",
+          "text": {
+            "bn": "ধাপ ২: শক্ত টেবিলের নিচে মাথা ও ঘাড় ঢেকে রাখো।",
+            "en": "Step 2: COVER your head and neck under a sturdy table."
+          }
+        },
+        {
+          "imageAsset": "steps/eq_step_3.png",
+          "text": { "bn": "ধাপ ৩: কাঁপুনি থামা পর্যন্ত ধরে থাকো।", "en": "Step 3: HOLD ON until the shaking stops." }
+        }
+      ]
+    },
+    {
+      "id": "eq_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "sequence_tap",
+      "config": {
+        "instructions": { "bn": "সঠিক ক্রমে চাপো: বসো, ঢেকে রাখো, ধরে থাকো!", "en": "Tap them in order: Drop, Cover, Hold On!" },
+        "items": [
+          {
+            "id": "drop",
+            "label": { "bn": "বসো", "en": "Drop" },
+            "imageAsset": "practice/eq_drop.png",
+            "sequenceOrder": 1
+          },
+          {
+            "id": "cover",
+            "label": { "bn": "ঢেকে রাখো", "en": "Cover" },
+            "imageAsset": "practice/under_table.png",
+            "sequenceOrder": 2
+          },
+          {
+            "id": "hold",
+            "label": { "bn": "ধরে থাকো", "en": "Hold On" },
+            "imageAsset": "practice/eq_hold.png",
+            "sequenceOrder": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "eq_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "eq_q1",
+          "prompt": {
+            "bn": "মাটি কাঁপতে শুরু করলে প্রথমে কী করবে?",
+            "en": "What should you do first when the ground shakes?"
+          },
+          "imageAsset": "quiz/eq_q1.png",
+          "options": [
+            { "id": "a", "label": { "bn": "মাটিতে বসে পড়ব", "en": "Drop to the floor" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "দৌড়ে বাইরে যাব", "en": "Run outside fast" }, "isCorrect": false },
+            { "id": "c", "label": { "bn": "জানালার পাশে দাঁড়াব", "en": "Stand near a window" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "eq_q2",
+          "prompt": { "bn": "ঢেকে রাখার জন্য সবচেয়ে নিরাপদ জায়গা কোনটি?", "en": "Where is the safest place to Cover?" },
+          "imageAsset": "quiz/eq_q2.png",
+          "options": [
+            { "id": "a", "label": { "bn": "শক্ত টেবিলের নিচে", "en": "Under a sturdy table" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "কাঁচের জানালার পাশে", "en": "Next to a glass window" }, "isCorrect": false },
+            { "id": "c", "label": { "bn": "লিফটে", "en": "In an elevator" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "eq_q3",
+          "prompt": { "bn": "কাঁপুনি না থামা পর্যন্ত তুমি কী করবে?", "en": "What do you do until the shaking stops?" },
+          "imageAsset": "quiz/eq_q3.png",
+          "options": [
+            { "id": "a", "label": { "bn": "শান্ত থেকে ধরে থাকব", "en": "Hold on and stay calm" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "ঘরের মধ্যে দৌড়াব", "en": "Run around the room" }, "isCorrect": false }
+          ]
+        }
+      ]
+    }
+  ]
+}

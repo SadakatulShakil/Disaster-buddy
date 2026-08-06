@@ -1,0 +1,215 @@
+{
+  "challenges": [
+    {
+      "id": "dc_eq_quiz_1",
+      "type": "quiz",
+      "relatedHazardId": "earthquake",
+      "difficulty": 1,
+      "payload": {
+        "id": "dc_eq_quiz_1_q",
+        "prompt": {
+          "bn": "ভূমিকম্প হলে প্রথমে তোমার কী করা উচিত?",
+          "en": "What should you do first when the ground starts shaking?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "দৌড়ে বাইরে যাও", "en": "Run outside" }, "isCorrect": false },
+          { "id": "b", "label": { "bn": "নিচে নামো, ঢেকে রাখো, ধরে থাকো", "en": "Drop, Cover, and Hold On" }, "isCorrect": true },
+          { "id": "c", "label": { "bn": "লিফট ব্যবহার করো", "en": "Use the elevator" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_eq_whatif_1",
+      "type": "whatWouldYouDo",
+      "relatedHazardId": "earthquake",
+      "difficulty": 2,
+      "payload": {
+        "id": "dc_eq_whatif_1_q",
+        "prompt": {
+          "bn": "তুমি টেবিলে বসে আছো আর হঠাৎ মাটি কাঁপতে শুরু করলো। তুমি কী করবে?",
+          "en": "You're sitting at a table and the ground suddenly starts to shake. What do you do?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "টেবিলের নিচে লুকিয়ে ধরে থাকো", "en": "Get under the table and hold on" }, "isCorrect": true },
+          { "id": "b", "label": { "bn": "জানালার কাছে দৌড়ে যাও", "en": "Run to the window" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_eq_kit_1",
+      "type": "kitRound",
+      "relatedHazardId": "earthquake",
+      "difficulty": 2,
+      "payload": {
+        "gameId": "tap_correct_choice",
+        "instructions": {
+          "bn": "জরুরি ব্যাগে রাখার মতো জিনিসগুলো খুঁজে বের করো!",
+          "en": "Tap every item that belongs in an emergency kit!"
+        },
+        "items": [
+          { "id": "water", "label": { "bn": "পানি", "en": "Water" }, "imageAsset": "activities/kit/water.png", "isCorrect": true },
+          { "id": "torch", "label": { "bn": "টর্চ লাইট", "en": "Torch" }, "imageAsset": "activities/kit/torch.png", "isCorrect": true },
+          { "id": "toy", "label": { "bn": "খেলনা", "en": "Toy" }, "imageAsset": "activities/kit/toy.png", "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fl_quiz_1",
+      "type": "quiz",
+      "relatedHazardId": "flood",
+      "difficulty": 1,
+      "payload": {
+        "id": "dc_fl_quiz_1_q",
+        "prompt": {
+          "bn": "বন্যার পানি বাড়তে দেখলে তোমার কোথায় যাওয়া উচিত?",
+          "en": "If you see flood water rising, where should you go?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "উঁচু জায়গায়", "en": "Higher ground" }, "isCorrect": true },
+          { "id": "b", "label": { "bn": "নদীর কাছে", "en": "Near the river" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fl_whatif_1",
+      "type": "whatWouldYouDo",
+      "relatedHazardId": "flood",
+      "difficulty": 2,
+      "payload": {
+        "id": "dc_fl_whatif_1_q",
+        "prompt": {
+          "bn": "রাস্তায় পানি জমে গেছে। তুমি কী করবে?",
+          "en": "The street is filling up with water. What do you do?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "একজন বড়কে বলো এবং উঁচু জায়গায় যাও", "en": "Tell a grown-up and head to higher ground" }, "isCorrect": true },
+          { "id": "b", "label": { "bn": "পানিতে হেঁটে যাও", "en": "Walk through the water" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fl_spot_1",
+      "type": "spotTheDanger",
+      "relatedHazardId": "flood",
+      "difficulty": 2,
+      "payload": {
+        "gameId": "tap_correct_choice",
+        "instructions": {
+          "bn": "বন্যার সময় নিরাপদ জায়গাটি খুঁজে বের করো!",
+          "en": "Tap the safe spot during a flood!"
+        },
+        "items": [
+          { "id": "rooftop", "label": { "bn": "উঁচু ছাদ", "en": "Higher rooftop" }, "imageAsset": "practice/rooftop.png", "isCorrect": true },
+          { "id": "flooded_street", "label": { "bn": "প্লাবিত রাস্তা", "en": "Flooded street" }, "imageAsset": "practice/flooded_street.png", "isCorrect": false },
+          { "id": "near_river", "label": { "bn": "নদীর ধার", "en": "Near the river" }, "imageAsset": "practice/near_river.png", "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_lt_quiz_1",
+      "type": "quiz",
+      "relatedHazardId": "lightning",
+      "difficulty": 1,
+      "payload": {
+        "id": "dc_lt_quiz_1_q",
+        "prompt": {
+          "bn": "বজ্রপাতের সময় সবচেয়ে নিরাপদ জায়গা কোনটি?",
+          "en": "Where is the safest place to be during lightning?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "খোলা মাঠে", "en": "An open field" }, "isCorrect": false },
+          { "id": "b", "label": { "bn": "ঘরের ভেতরে", "en": "Inside a building" }, "isCorrect": true },
+          { "id": "c", "label": { "bn": "গাছের নিচে", "en": "Under a tree" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_lt_spot_1",
+      "type": "spotTheDanger",
+      "relatedHazardId": "lightning",
+      "difficulty": 2,
+      "payload": {
+        "gameId": "tap_correct_choice",
+        "instructions": {
+          "bn": "বজ্রপাতের সময় নিরাপদ জায়গাটি খুঁজে বের করো!",
+          "en": "Tap the safe spot during lightning!"
+        },
+        "items": [
+          { "id": "living_room", "label": { "bn": "বসার ঘর", "en": "Living room" }, "imageAsset": "practice/living_room.png", "isCorrect": true },
+          { "id": "open_field", "label": { "bn": "খোলা মাঠ", "en": "Open field" }, "imageAsset": "practice/open_field.png", "isCorrect": false },
+          { "id": "under_tree", "label": { "bn": "গাছের নিচে", "en": "Under a tree" }, "imageAsset": "practice/under_tree.png", "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_lt_kit_1",
+      "type": "kitRound",
+      "relatedHazardId": "lightning",
+      "difficulty": 2,
+      "payload": {
+        "gameId": "tap_correct_choice",
+        "instructions": {
+          "bn": "জরুরি ব্যাগে রাখার মতো জিনিসগুলো খুঁজে বের করো!",
+          "en": "Tap every item that belongs in an emergency kit!"
+        },
+        "items": [
+          { "id": "radio", "label": { "bn": "রেডিও", "en": "Radio" }, "imageAsset": "activities/kit/radio.png", "isCorrect": true },
+          { "id": "whistle", "label": { "bn": "বাঁশি", "en": "Whistle" }, "imageAsset": "activities/kit/whistle.png", "isCorrect": true },
+          { "id": "video_game", "label": { "bn": "ভিডিও গেম", "en": "Video game" }, "imageAsset": "activities/kit/video_game.png", "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fa_quiz_1",
+      "type": "quiz",
+      "relatedHazardId": "first_aid",
+      "difficulty": 1,
+      "payload": {
+        "id": "dc_fa_quiz_1_q",
+        "prompt": {
+          "bn": "কেউ ব্যথা পেলে তুমি সবার আগে কী করবে?",
+          "en": "If someone gets hurt, what should you do first?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "শান্ত থাকো এবং একজন বড়কে ডাকো", "en": "Stay calm and call a grown-up" }, "isCorrect": true },
+          { "id": "b", "label": { "bn": "একা সামলানোর চেষ্টা করো", "en": "Try to handle it alone" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fa_whatif_1",
+      "type": "whatWouldYouDo",
+      "relatedHazardId": "first_aid",
+      "difficulty": 2,
+      "payload": {
+        "id": "dc_fa_whatif_1_q",
+        "prompt": {
+          "bn": "তোমার বন্ধু পড়ে গিয়ে ব্যথা পেয়েছে। তুমি কী করবে?",
+          "en": "Your friend fell and got hurt. What do you do?"
+        },
+        "options": [
+          { "id": "a", "label": { "bn": "শান্ত থেকে একজন বড়কে ডাকো", "en": "Stay calm and get a grown-up" }, "isCorrect": true },
+          { "id": "b", "label": { "bn": "বন্ধুকে রেখে চলে যাও", "en": "Walk away" }, "isCorrect": false }
+        ]
+      }
+    },
+    {
+      "id": "dc_fa_kit_1",
+      "type": "kitRound",
+      "relatedHazardId": "first_aid",
+      "difficulty": 2,
+      "payload": {
+        "gameId": "tap_correct_choice",
+        "instructions": {
+          "bn": "জরুরি ব্যাগে রাখার মতো জিনিসগুলো খুঁজে বের করো!",
+          "en": "Tap every item that belongs in an emergency kit!"
+        },
+        "items": [
+          { "id": "first_aid_box", "label": { "bn": "প্রাথমিক চিকিৎসা বাক্স", "en": "First-aid box" }, "imageAsset": "activities/kit/first_aid_box.png", "isCorrect": true },
+          { "id": "dry_food", "label": { "bn": "শুকনো খাবার", "en": "Dry food" }, "imageAsset": "activities/kit/dry_food.png", "isCorrect": true },
+          { "id": "football", "label": { "bn": "ফুটবল", "en": "Football" }, "imageAsset": "activities/kit/football.png", "isCorrect": false }
+        ]
+      }
+    }
+  ]
+}

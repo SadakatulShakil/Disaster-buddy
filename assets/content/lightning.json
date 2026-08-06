@@ -1,0 +1,139 @@
+{
+  "id": "lightning",
+  "order": 3,
+  "title": { "bn": "বজ্রপাত", "en": "Lightning" },
+  "themeColor": "#F4C430",
+  "iconAsset": "icons/lightning.png",
+  "safeAction": {
+    "bn": "বাজ পড়লেই ঘরে চলে যাও, খোলা মাঠ, উঁচু গাছ ও পানি থেকে দূরে থাকো",
+    "en": "When thunder roars, go indoors — away from open fields, tall trees, and water"
+  },
+  "badge": {
+    "id": "lightning_badge",
+    "title": { "bn": "বজ্র তারা", "en": "Lightning Star" },
+    "iconAsset": "icons/badge_lightning.png"
+  },
+  "beats": [
+    {
+      "id": "lt_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/lt_slide_1.png",
+          "text": { "bn": "আকাশ কালো হয়ে গর্জন করল।", "en": "The sky turned dark and rumbled." }
+        },
+        {
+          "imageAsset": "story/lt_slide_2.png",
+          "text": { "bn": "টুকু জোরে বাজ পড়ার শব্দ শুনল।", "en": "Tuku heard a loud clap of thunder." }
+        },
+        {
+          "imageAsset": "story/lt_slide_3.png",
+          "text": { "bn": "বাজ পড়লে বজ্রপাতও কাছে থাকে।", "en": "Thunder means lightning is nearby." }
+        },
+        {
+          "imageAsset": "story/lt_slide_4.png",
+          "text": { "bn": "টুকু তখনই নিরাপদ থাকতে ঘরে ঢুকে গেল।", "en": "Tuku ran indoors right away to stay safe." }
+        }
+      ]
+    },
+    {
+      "id": "lt_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/lt_step_1.png",
+          "text": { "bn": "ধাপ ১: বাজ শুনলেই ঘরে চলে যাও।", "en": "Step 1: When you hear thunder, go indoors." }
+        },
+        {
+          "imageAsset": "steps/lt_step_2.png",
+          "text": {
+            "bn": "ধাপ ২: খোলা মাঠ, উঁচু গাছ ও পানি থেকে দূরে থাকো।",
+            "en": "Step 2: Stay away from open fields, tall trees, and water."
+          }
+        },
+        {
+          "imageAsset": "steps/lt_step_3.png",
+          "text": {
+            "bn": "ধাপ ৩: শেষ বাজ শোনার ৩০ মিনিট পর পর্যন্ত ঘরে থাকো।",
+            "en": "Step 3: Wait inside until 30 minutes after the last thunder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "lt_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "tap_correct_choice",
+      "config": {
+        "instructions": {
+          "bn": "টুকুর জন্য নিরাপদ ঘরের জায়গাটি চাপো!",
+          "en": "Tap the safe indoor spot for Tuku!"
+        },
+        "items": [
+          {
+            "id": "living_room",
+            "label": { "bn": "ঘরের ভেতরে", "en": "Indoors" },
+            "imageAsset": "practice/living_room.png",
+            "isCorrect": true
+          },
+          {
+            "id": "open_field",
+            "label": { "bn": "খোলা মাঠ", "en": "Open field" },
+            "imageAsset": "practice/open_field.png",
+            "isCorrect": false
+          },
+          {
+            "id": "under_tree",
+            "label": { "bn": "গাছের নিচে", "en": "Under a tree" },
+            "imageAsset": "practice/under_tree.png",
+            "isCorrect": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "lt_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "lt_q1",
+          "prompt": { "bn": "বাজ শুনলে তুমি কী করবে?", "en": "What should you do when thunder roars?" },
+          "imageAsset": "quiz/lt_q1.png",
+          "options": [
+            { "id": "a", "label": { "bn": "ঘরে চলে যাব", "en": "Go indoors" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "বাইরে খেলতে থাকব", "en": "Keep playing outside" }, "isCorrect": false },
+            { "id": "c", "label": { "bn": "উঁচু গাছের নিচে দাঁড়াব", "en": "Stand under a tall tree" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "lt_q2",
+          "prompt": {
+            "bn": "বজ্রপাতের সময় কোথায় থাকা বিপজ্জনক?",
+            "en": "Where is it dangerous to be during lightning?"
+          },
+          "imageAsset": "quiz/lt_q2.png",
+          "options": [
+            { "id": "a", "label": { "bn": "খোলা মাঠে", "en": "An open field" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "ঘরের ভেতরে", "en": "Inside a house" }, "isCorrect": false }
+          ]
+        },
+        {
+          "id": "lt_q3",
+          "prompt": {
+            "bn": "শেষ বাজ শোনার পর কতক্ষণ ঘরে থাকা উচিত?",
+            "en": "How long should you wait inside after the last thunder?"
+          },
+          "imageAsset": "quiz/lt_q3.png",
+          "options": [
+            { "id": "a", "label": { "bn": "৩০ মিনিট", "en": "30 minutes" }, "isCorrect": true },
+            { "id": "b", "label": { "bn": "কয়েক সেকেন্ড", "en": "Just a few seconds" }, "isCorrect": false }
+          ]
+        }
+      ]
+    }
+  ]
+}
