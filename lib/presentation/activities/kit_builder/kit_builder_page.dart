@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../widgets/app_button.dart';
 import '../../widgets/app_error_view.dart';
 import '../../widgets/app_loader.dart';
 import '../../widgets/app_scaffold.dart';
@@ -64,51 +66,75 @@ class _KitBuilderBodyState extends State<_KitBuilderBody> {
     }
 
     return AppScaffold(
-      appBar: AppBar(
-        backgroundColor: themeColor,
-        title: Text(activity.title.resolve(langCode)),
-      ),
+      showSkyDecoration: true,
       // Reads `controller.isComplete`/`packedItemIds`, so packing the last
       // item swaps straight to the summary without needing another tap.
-      body: Obx(() {
-        if (controller.isComplete.value) {
-          return KitCompleteSummary(
-            activity: activity,
-            packedItemIds: controller.packedItemIds.toSet(),
-            badgeAwarded: controller.badgeAwarded.value,
-            themeColor: themeColor,
-          );
-        }
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+            child: Row(
+              children: [
+                AppButton(
+                  variant: AppButtonVariant.icon,
+                  icon: Icons.arrow_back_rounded,
+                  color: themeColor,
+                  semanticsLabel: 'back'.tr,
+                  onPressed: () => Get.back(),
+                ),
+                SizedBox(width: AppSpacing.md),
+                Text(
+                  activity.title.resolve(langCode),
+                  style: AppTextStyles.h1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Obx(() {
+              if (controller.isComplete.value) {
+                return KitCompleteSummary(
+                  activity: activity,
+                  packedItemIds: controller.packedItemIds.toSet(),
+                  badgeAwarded: controller.badgeAwarded.value,
+                  themeColor: themeColor,
+                );
+              }
 
-        return Column(
-          children: [
-            SizedBox(height: AppSpacing.sm),
-            Obx(() => MascotView(mood: _mascotMood.value, size: 88)),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-              child: Text(
-                activity.instructions.resolve(langCode),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Expanded(
-              flex: 4,
-              child: GoBagDropTarget(
-                controller: controller,
-                themeColor: themeColor,
-                onDrop: (item) {
-                  controller.handleDrop(item);
-                  _mascotMood.value = item.isCorrect ? MascotMood.cheer : MascotMood.idle;
-                },
-              ),
-            ),
-            Expanded(
-              flex: 5,
-              child: KitItemPool(controller: controller, themeColor: themeColor),
-            ),
-          ],
-        );
-      }),
+              return Column(
+                children: [
+                  SizedBox(height: AppSpacing.sm),
+                  Obx(() => MascotView(mood: _mascotMood.value, size: 88)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+                    child: Text(
+                      activity.instructions.resolve(langCode),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: GoBagDropTarget(
+                      controller: controller,
+                      themeColor: themeColor,
+                      onDrop: (item) {
+                        controller.handleDrop(item);
+                        _mascotMood.value = item.isCorrect ? MascotMood.cheer : MascotMood.idle;
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: KitItemPool(controller: controller, themeColor: themeColor),
+                  ),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 }
