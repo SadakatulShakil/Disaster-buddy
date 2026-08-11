@@ -68,13 +68,10 @@ flutter:
     - assets/images/activities/kit/
     - assets/icons/
     - assets/audio/
-    # Add these once real files exist in each folder — an empty/missing
-    # directory listed here breaks `flutter pub get` (see the note on
-    # assets/animations/ below):
-    # - assets/images/story/
-    # - assets/images/steps/
-    # - assets/images/practice/
-    # - assets/images/quiz/
+    - assets/images/story/
+    - assets/images/steps/
+    - assets/images/practice/
+    - assets/images/quiz/
 
   # --- Bangla font ---
   # Download Hind Siliguri (Google Fonts, free) and drop the 4 .ttf files

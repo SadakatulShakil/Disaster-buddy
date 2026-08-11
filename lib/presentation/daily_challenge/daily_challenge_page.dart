@@ -34,6 +34,7 @@ class DailyChallengePage extends GetView<DailyChallengeController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      showSkyDecoration: true,
       statusBarStyle: SystemUiOverlayStyle.light,
       appBar: AppBar(
         backgroundColor: AppColors.accent,

@@ -23,39 +23,66 @@ class StickerBookPage extends GetView<StickerBookController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: Text('sticker_book'.tr)),
-      body: Obx(() {
-        switch (controller.status.value) {
-          case StickerBookViewStatus.loading:
-            return const AppLoader();
-          case StickerBookViewStatus.error:
-            return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
-          case StickerBookViewStatus.data:
-            final modules = controller.earnedModules;
-            if (modules.isEmpty) {
-              return AppEmptyView(
-                title: 'empty_stickers_title'.tr,
-                subtitle: 'empty_stickers_subtitle'.tr,
-                icon: Icons.emoji_events_outlined,
-              );
-            }
-            return GridView.builder(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: AppSpacing.md,
-                crossAxisSpacing: AppSpacing.md,
-                childAspectRatio: 0.85,
-              ),
-              itemCount: modules.length,
-              itemBuilder: (context, index) => StickerTile(
-                module: modules[index],
-                index: index,
-                onTap: () => _showSource(context, modules[index]),
-              ),
-            );
-        }
-      }),
+      showSkyDecoration: true,
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+            child: Row(
+              children: [
+                AppButton(
+                  variant: AppButtonVariant.icon,
+                  icon: Icons.arrow_back_rounded,
+                  color: AppColors.primary,
+                  semanticsLabel: 'back'.tr,
+                  onPressed: () => Get.back(),
+                ),
+                SizedBox(width: AppSpacing.md),
+                Text(
+                  'sticker_book'.tr,
+                  style: AppTextStyles.h1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Obx(() {
+              switch (controller.status.value) {
+                case StickerBookViewStatus.loading:
+                  return const AppLoader();
+                case StickerBookViewStatus.error:
+                  return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
+                case StickerBookViewStatus.data:
+                  final modules = controller.earnedModules;
+                  if (modules.isEmpty) {
+                    return AppEmptyView(
+                      title: 'empty_stickers_title'.tr,
+                      subtitle: 'empty_stickers_subtitle'.tr,
+                      icon: Icons.emoji_events_outlined,
+                    );
+                  }
+                  return GridView.builder(
+                    padding: EdgeInsets.all(AppSpacing.lg),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: AppSpacing.md,
+                      crossAxisSpacing: AppSpacing.md,
+                      childAspectRatio: 0.85,
+                    ),
+                    itemCount: modules.length,
+                    itemBuilder: (context, index) => StickerTile(
+                      module: modules[index],
+                      index: index,
+                      onTap: () => _showSource(context, modules[index]),
+                    ),
+                  );
+              }
+            }),
+          ),
+        ],
+      ),
     );
   }
 

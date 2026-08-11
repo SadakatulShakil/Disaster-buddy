@@ -7,6 +7,7 @@ import '../../core/theme/app_durations.dart';
 import '../../core/theme/app_radii.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../widgets/app_button.dart';
 import '../widgets/app_scaffold.dart';
 import '../widgets/mascot_view.dart';
 import 'parent_gate_controller.dart';
@@ -20,49 +21,74 @@ class ParentGatePage extends GetView<ParentGateController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: Text('parent_zone'.tr)),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const MascotView(mood: MascotMood.idle, size: 130),
-              SizedBox(height: AppSpacing.lg),
-              Text('parent_gate_prompt'.tr, style: AppTextStyles.body, textAlign: TextAlign.center),
-              SizedBox(height: AppSpacing.sm),
-              Obx(
-                () => Text(
-                  '${controller.operandA.value} + ${controller.operandB.value} = ?',
-                  style: AppTextStyles.display,
+      showSkyDecoration: true,
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+            child: Row(
+              children: [
+                AppButton(
+                  variant: AppButtonVariant.icon,
+                  icon: Icons.arrow_back_rounded,
+                  color: AppColors.primary,
+                  semanticsLabel: 'back'.tr,
+                  onPressed: () => Get.back(),
                 ),
-              ),
-              SizedBox(height: AppSpacing.md),
-              Obx(
-                () => AnimatedOpacity(
-                  duration: AppDurations.fast,
-                  opacity: controller.showError.value ? 1 : 0,
-                  child: Text(
-                    'parent_gate_wrong'.tr,
-                    style: AppTextStyles.body.copyWith(color: AppColors.error),
-                  ),
+                SizedBox(width: AppSpacing.md),
+                Text(
+                  'parent_zone'.tr,
+                  style: AppTextStyles.h1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-              SizedBox(height: AppSpacing.lg),
-              Obx(
-                () => Wrap(
-                  spacing: AppSpacing.md,
-                  runSpacing: AppSpacing.md,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    for (final choice in controller.choices)
-                      _ChoiceButton(value: choice, onTap: () => controller.submit(choice)),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const MascotView(mood: MascotMood.idle, size: 130),
+                  SizedBox(height: AppSpacing.lg),
+                  Text('parent_gate_prompt'.tr, style: AppTextStyles.body, textAlign: TextAlign.center),
+                  SizedBox(height: AppSpacing.sm),
+                  Obx(
+                    () => Text(
+                      '${controller.operandA.value} + ${controller.operandB.value} = ?',
+                      style: AppTextStyles.display,
+                    ),
+                  ),
+                  SizedBox(height: AppSpacing.md),
+                  Obx(
+                    () => AnimatedOpacity(
+                      duration: AppDurations.fast,
+                      opacity: controller.showError.value ? 1 : 0,
+                      child: Text(
+                        'parent_gate_wrong'.tr,
+                        style: AppTextStyles.body.copyWith(color: AppColors.error),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: AppSpacing.lg),
+                  Obx(
+                    () => Wrap(
+                      spacing: AppSpacing.md,
+                      runSpacing: AppSpacing.md,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        for (final choice in controller.choices)
+                          _ChoiceButton(value: choice, onTap: () => controller.submit(choice)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

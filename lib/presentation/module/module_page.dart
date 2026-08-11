@@ -11,6 +11,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../domain/entities/beat.dart';
 import '../home/widgets/module_stop.dart';
 import '../lesson/lesson_args.dart';
+import '../widgets/app_button.dart';
 import '../widgets/app_error_view.dart';
 import '../widgets/app_loader.dart';
 import '../widgets/app_scaffold.dart';
@@ -34,18 +35,42 @@ class ModulePage extends GetView<ModuleController> {
       final themeColor = module != null ? AppColors.fromHex(module.themeColorHex) : AppColors.primary;
 
       return AppScaffold(
-        appBar: AppBar(
-          backgroundColor: themeColor,
-          title: Text(module?.title.resolve(Get.locale?.languageCode ?? AppConstants.langBn) ?? ''),
-        ),
-        body: switch (controller.status.value) {
-          ModuleViewStatus.loading => const AppLoader(),
-          ModuleViewStatus.error => AppErrorView(
-              message: controller.errorMessage.value,
-              onRetry: controller.load,
+        showSkyDecoration: true,
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+              child: Row(
+                children: [
+                  AppButton(
+                    variant: AppButtonVariant.icon,
+                    icon: Icons.arrow_back_rounded,
+                    color: themeColor,
+                    semanticsLabel: 'back'.tr,
+                    onPressed: () => Get.back(),
+                  ),
+                  SizedBox(width: AppSpacing.md),
+                  Text(
+                    module?.title.resolve(Get.locale?.languageCode ?? AppConstants.langBn) ?? '',
+                    style: AppTextStyles.h1,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
-          ModuleViewStatus.data => _ModuleBody(controller: controller, themeColor: themeColor),
-        },
+            Expanded(
+              child: switch (controller.status.value) {
+                ModuleViewStatus.loading => const AppLoader(),
+                ModuleViewStatus.error => AppErrorView(
+                    message: controller.errorMessage.value,
+                    onRetry: controller.load,
+                  ),
+                ModuleViewStatus.data => _ModuleBody(controller: controller, themeColor: themeColor),
+              },
+            ),
+          ],
+        ),
       );
     });
   }

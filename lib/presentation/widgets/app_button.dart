@@ -114,8 +114,8 @@ class _AppButtonState extends State<AppButton> {
           curve: Curves.easeOut,
           child: AnimatedContainer(
             duration: AppDurations.fast,
-            width: isIcon ? 56.r : null,
-            height: isIcon ? 56.r : null,
+            width: isIcon ? 50.r : null,
+            height: isIcon ? 50.r : null,
             constraints: isIcon ? null : BoxConstraints(minHeight: 56.r),
             padding: isIcon ? EdgeInsets.zero : EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             alignment: Alignment.center,

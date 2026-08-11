@@ -15,11 +15,11 @@ import '../widgets/app_card.dart';
 import '../widgets/app_error_view.dart';
 import '../widgets/app_loader.dart';
 import '../widgets/app_scaffold.dart';
+import '../widgets/doodle_sky_painter.dart';
 import '../widgets/mascot_view.dart';
 import '../widgets/streak_chip.dart';
 import 'den_controller.dart';
 import 'widgets/collection_tray.dart';
-import 'widgets/den_room_painter.dart';
 import 'widgets/den_room_palette.dart';
 import 'widgets/den_shelf_slot.dart';
 
@@ -83,8 +83,8 @@ class _DenBodyState extends State<_DenBody> {
 
       return Stack(
         children: [
-          Positioned.fill(
-            child: IgnorePointer(child: CustomPaint(painter: DenRoomPainter(palette: palette))),
+          const Positioned.fill(
+            child: IgnorePointer(child: CustomPaint(painter: DoodleSkyPainter())),
           ),
           Column(
             children: [
@@ -176,7 +176,7 @@ class _DenHeader extends StatelessWidget {
             semanticsLabel: 'back'.tr,
             onPressed: () => Get.back(),
           ),
-          SizedBox(width: AppSpacing.sm),
+          SizedBox(width: AppSpacing.md),
           Expanded(
             child: Text(
               'tuku_den'.tr,

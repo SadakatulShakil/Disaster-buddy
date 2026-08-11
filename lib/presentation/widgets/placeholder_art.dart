@@ -18,6 +18,8 @@ class PlaceholderArt extends StatelessWidget {
     required this.themeColor,
     required this.fallbackIcon,
     this.size,
+    this.width,
+    this.height,
     this.borderRadius,
   });
 
@@ -25,8 +27,19 @@ class PlaceholderArt extends StatelessWidget {
   final String assetPath;
   final Color themeColor;
   final IconData fallbackIcon;
+
+  /// Square side length. Ignored if [width] or [height] is set.
   final double? size;
+
+  /// Overrides [size] for the horizontal dimension.
+  final double? width;
+
+  /// Overrides [size] for the vertical dimension.
+  final double? height;
   final BorderRadius? borderRadius;
+
+  double? get _width => width ?? size;
+  double? get _height => height ?? size;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +48,8 @@ class PlaceholderArt extends StatelessWidget {
       borderRadius: radius,
       child: Image.asset(
         AssetPaths.image(assetPath),
-        width: size,
-        height: size,
+        width: _width,
+        height: _height,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => _fallback(radius),
       ),
@@ -45,15 +58,15 @@ class PlaceholderArt extends StatelessWidget {
 
   Widget _fallback(BorderRadius radius) {
     return Container(
-      width: size,
-      height: size,
+      width: _width,
+      height: _height,
       decoration: BoxDecoration(
         color: themeColor.withValues(alpha: 0.15),
         borderRadius: radius,
         border: Border.all(color: themeColor.withValues(alpha: 0.4), width: 2),
       ),
       alignment: Alignment.center,
-      child: Icon(fallbackIcon, color: themeColor, size: (size ?? 48.0).clamp(24.0, 96.0) * 0.5),
+      child: Icon(fallbackIcon, color: themeColor, size: (_height ?? 48.0).clamp(24.0, 96.0) * 0.5),
     );
   }
 }

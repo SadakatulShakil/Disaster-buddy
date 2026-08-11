@@ -75,6 +75,7 @@ class _LessonBodyState extends State<_LessonBody> {
         _handleLeaveRequest();
       },
       child: AppScaffold(
+        showSkyDecoration: true,
         appBar: AppBar(
           backgroundColor: themeColor,
           leading: IconButton(

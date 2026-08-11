@@ -6,6 +6,7 @@ import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../widgets/app_button.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_error_view.dart';
 import '../widgets/app_loader.dart';
@@ -24,110 +25,137 @@ class ParentZonePage extends GetView<ParentZoneController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: Text('parent_zone'.tr)),
-      body: Obx(() {
-        switch (controller.status.value) {
-          case ParentZoneViewStatus.loading:
-            return const AppLoader();
-          case ParentZoneViewStatus.error:
-            return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
-          case ParentZoneViewStatus.data:
-            return ListView(
-              padding: EdgeInsets.all(AppSpacing.lg),
+      showSkyDecoration: true,
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+            child: Row(
               children: [
-                SectionHeader(title: 'progress_summary'.tr),
-                SizedBox(height: AppSpacing.sm),
-                AppCard(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _StatColumn(
-                          icon: Icons.map_rounded,
-                          value: '${controller.completedModules.value}/${controller.totalModules.value}',
-                          label: 'modules_completed'.tr,
-                        ),
-                      ),
-                      Container(width: 1, height: 48.r, color: AppColors.divider),
-                      Expanded(
-                        child: _StatColumn(
-                          icon: Icons.backpack_rounded,
-                          value: '${controller.completedActivities.value}/${controller.totalActivities.value}',
-                          label: 'activities_completed'.tr,
-                        ),
-                      ),
-                      Container(width: 1, height: 48.r, color: AppColors.divider),
-                      Expanded(
-                        child: _StatColumn(
-                          icon: Icons.emoji_events_rounded,
-                          value: '${controller.badgesEarned.value}',
-                          label: 'badges_earned'.tr,
-                        ),
-                      ),
-                    ],
-                  ),
+                AppButton(
+                  variant: AppButtonVariant.icon,
+                  icon: Icons.arrow_back_rounded,
+                  color: AppColors.primary,
+                  semanticsLabel: 'back'.tr,
+                  onPressed: () => Get.back(),
                 ),
-                SizedBox(height: AppSpacing.xl),
-                SectionHeader(title: 'settings'.tr),
-                SizedBox(height: AppSpacing.sm),
-                AppCard(
-                  onTap: () => Get.toNamed(AppRoutes.settings),
-                  semanticsLabel: 'open_settings'.tr,
-                  child: Row(
-                    children: [
-                      const Icon(Icons.settings_rounded, color: AppColors.primary),
-                      SizedBox(width: AppSpacing.md),
-                      Expanded(child: Text('open_settings'.tr, style: AppTextStyles.body)),
-                      const Icon(Icons.chevron_right_rounded, color: AppColors.textGrey),
-                    ],
-                  ),
+                SizedBox(width: AppSpacing.md),
+                Text(
+                  'parent_zone'.tr,
+                  style: AppTextStyles.h1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: AppSpacing.xl),
-                SectionHeader(title: 'manage_progress_section'.tr),
-                SizedBox(height: AppSpacing.sm),
-                Obx(
-                  () => _ResetOptionCard(
-                    icon: Icons.restart_alt_rounded,
-                    color: AppColors.primary,
-                    title: 'reset_learning_title'.tr,
-                    subtitle: 'reset_learning_subtitle'.tr,
-                    enabled: !controller.isResetting.value,
-                    onTap: () => _handleResetLearning(context, controller),
-                  ),
-                ),
-                SizedBox(height: AppSpacing.md),
-                Obx(
-                  () => _ResetOptionCard(
-                    icon: Icons.map_outlined,
-                    color: AppColors.accent,
-                    title: 'reset_single_title'.tr,
-                    subtitle: 'reset_single_subtitle'.tr,
-                    enabled: !controller.isResetting.value,
-                    onTap: () => _handleResetSingleModule(context, controller),
-                  ),
-                ),
-                SizedBox(height: AppSpacing.md),
-                Obx(
-                  () => _ResetOptionCard(
-                    icon: Icons.warning_amber_rounded,
-                    color: AppColors.error,
-                    title: 'reset_everything_title'.tr,
-                    subtitle: 'reset_everything_subtitle'.tr,
-                    enabled: !controller.isResetting.value,
-                    onTap: () => _handleResetEverything(context, controller),
-                  ),
-                ),
-                SizedBox(height: AppSpacing.xl),
-                SectionHeader(title: 'family_emergency_plan'.tr),
-                SizedBox(height: AppSpacing.sm),
-                const _StubCard(icon: Icons.family_restroom_rounded),
-                SizedBox(height: AppSpacing.xl),
-                SectionHeader(title: 'official_resources'.tr),
-                SizedBox(height: AppSpacing.sm),
-                const _StubCard(icon: Icons.link_rounded),
               ],
-            );
-        }
-      }),
+            ),
+          ),
+          Expanded(
+            child: Obx(() {
+              switch (controller.status.value) {
+                case ParentZoneViewStatus.loading:
+                  return const AppLoader();
+                case ParentZoneViewStatus.error:
+                  return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
+                case ParentZoneViewStatus.data:
+                  return ListView(
+                    padding: EdgeInsets.all(AppSpacing.lg),
+                    children: [
+                      SectionHeader(title: 'progress_summary'.tr),
+                      SizedBox(height: AppSpacing.sm),
+                      AppCard(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: _StatColumn(
+                                icon: Icons.map_rounded,
+                                value: '${controller.completedModules.value}/${controller.totalModules.value}',
+                                label: 'modules_completed'.tr,
+                              ),
+                            ),
+                            Container(width: 1, height: 48.r, color: AppColors.divider),
+                            Expanded(
+                              child: _StatColumn(
+                                icon: Icons.backpack_rounded,
+                                value: '${controller.completedActivities.value}/${controller.totalActivities.value}',
+                                label: 'activities_completed'.tr,
+                              ),
+                            ),
+                            Container(width: 1, height: 48.r, color: AppColors.divider),
+                            Expanded(
+                              child: _StatColumn(
+                                icon: Icons.emoji_events_rounded,
+                                value: '${controller.badgesEarned.value}',
+                                label: 'badges_earned'.tr,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.xl),
+                      SectionHeader(title: 'settings'.tr),
+                      SizedBox(height: AppSpacing.sm),
+                      AppCard(
+                        onTap: () => Get.toNamed(AppRoutes.settings),
+                        semanticsLabel: 'open_settings'.tr,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.settings_rounded, color: AppColors.primary),
+                            SizedBox(width: AppSpacing.md),
+                            Expanded(child: Text('open_settings'.tr, style: AppTextStyles.body)),
+                            const Icon(Icons.chevron_right_rounded, color: AppColors.textGrey),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.xl),
+                      SectionHeader(title: 'manage_progress_section'.tr),
+                      SizedBox(height: AppSpacing.sm),
+                      Obx(
+                        () => _ResetOptionCard(
+                          icon: Icons.restart_alt_rounded,
+                          color: AppColors.primary,
+                          title: 'reset_learning_title'.tr,
+                          subtitle: 'reset_learning_subtitle'.tr,
+                          enabled: !controller.isResetting.value,
+                          onTap: () => _handleResetLearning(context, controller),
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.md),
+                      Obx(
+                        () => _ResetOptionCard(
+                          icon: Icons.map_outlined,
+                          color: AppColors.accent,
+                          title: 'reset_single_title'.tr,
+                          subtitle: 'reset_single_subtitle'.tr,
+                          enabled: !controller.isResetting.value,
+                          onTap: () => _handleResetSingleModule(context, controller),
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.md),
+                      Obx(
+                        () => _ResetOptionCard(
+                          icon: Icons.warning_amber_rounded,
+                          color: AppColors.error,
+                          title: 'reset_everything_title'.tr,
+                          subtitle: 'reset_everything_subtitle'.tr,
+                          enabled: !controller.isResetting.value,
+                          onTap: () => _handleResetEverything(context, controller),
+                        ),
+                      ),
+                      SizedBox(height: AppSpacing.xl),
+                      SectionHeader(title: 'family_emergency_plan'.tr),
+                      SizedBox(height: AppSpacing.sm),
+                      const _StubCard(icon: Icons.family_restroom_rounded),
+                      SizedBox(height: AppSpacing.xl),
+                      SectionHeader(title: 'official_resources'.tr),
+                      SizedBox(height: AppSpacing.sm),
+                      const _StubCard(icon: Icons.link_rounded),
+                    ],
+                  );
+              }
+            }),
+          ),
+        ],
+      ),
     );
   }
 }

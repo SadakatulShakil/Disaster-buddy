@@ -7,6 +7,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_radii.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../widgets/app_button.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_error_view.dart';
 import '../widgets/app_loader.dart';
@@ -28,18 +29,44 @@ class ActivitiesPage extends GetView<ActivitiesController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBar: AppBar(title: Text('activities'.tr)),
       showSkyDecoration: true,
-      body: Obx(() {
-        switch (controller.status.value) {
-          case ActivitiesViewStatus.loading:
-            return const AppLoader();
-          case ActivitiesViewStatus.error:
-            return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
-          case ActivitiesViewStatus.data:
-            return _ActivitiesGrid(controller: controller);
-        }
-      }),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
+            child: Row(
+              children: [
+                AppButton(
+                  variant: AppButtonVariant.icon,
+                  icon: Icons.arrow_back_rounded,
+                  color: AppColors.primary,
+                  semanticsLabel: 'back'.tr,
+                  onPressed: () => Get.back(),
+                ),
+                SizedBox(width: AppSpacing.md),
+                Text(
+                  'activities'.tr,
+                  style: AppTextStyles.h1,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Obx(() {
+              switch (controller.status.value) {
+                case ActivitiesViewStatus.loading:
+                  return const AppLoader();
+                case ActivitiesViewStatus.error:
+                  return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
+                case ActivitiesViewStatus.data:
+                  return _ActivitiesGrid(controller: controller);
+              }
+            }),
+          ),
+        ],
+      ),
     );
   }
 }
