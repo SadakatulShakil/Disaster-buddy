@@ -17,8 +17,7 @@ class KitItemPool extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final activity = controller.activity.value!;
-      final unpacked = activity.items.where((item) => !controller.packedItemIds.contains(item.id)).toList();
+      final unpacked = controller.items.where((item) => !controller.packedItemIds.contains(item.id)).toList();
 
       return SingleChildScrollView(
         padding: EdgeInsets.all(AppSpacing.md),

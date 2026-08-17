@@ -20,6 +20,10 @@ import '../../presentation/parent_gate/parent_gate_binding.dart';
 import '../../presentation/parent_gate/parent_gate_page.dart';
 import '../../presentation/parent_zone/parent_zone_binding.dart';
 import '../../presentation/parent_zone/parent_zone_page.dart';
+import '../../presentation/activities/safe_spot_finder/safe_spot_finder_binding.dart';
+import '../../presentation/activities/safe_spot_finder/safe_spot_finder_page.dart';
+import '../../presentation/activities/signal_colours/signal_colours_binding.dart';
+import '../../presentation/activities/signal_colours/signal_colours_page.dart';
 import '../../presentation/reward/reward_page.dart';
 import '../../presentation/settings/settings_binding.dart';
 import '../../presentation/settings/settings_page.dart';
@@ -106,6 +110,18 @@ class AppPages {
       name: AppRoutes.kitBuilder,
       page: () => const KitBuilderPage(),
       binding: KitBuilderBinding(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
+      name: AppRoutes.signalColours,
+      page: () => const SignalColoursPage(),
+      binding: SignalColoursBinding(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
+      name: AppRoutes.safeSpotFinder,
+      page: () => const SafeSpotFinderPage(),
+      binding: SafeSpotFinderBinding(),
       transition: Transition.zoom,
     ),
     GetPage(

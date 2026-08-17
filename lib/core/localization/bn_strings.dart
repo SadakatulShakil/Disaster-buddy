@@ -105,6 +105,18 @@ const Map<String, String> bnStrings = {
   'back_to_activities': 'কার্যক্রমে ফিরে যাও',
   'kit_bag_semantics': 'জরুরি ব্যাগ: মোট @total টির মধ্যে @packed টি ব্যাগে ভরা হয়েছে',
 
+  // Signal Colours
+  'signal_colours_question': 'এই রংটার মানে কী?',
+  'signal_colours_progress': 'সংকেত @current, মোট @total টির মধ্যে',
+  'signal_colours_complete_summary': 'তুমি সব সংকেত রং চিনে ফেলেছ!',
+
+  // Safe Spot Finder
+  'safe_spot_scene_progress': 'দৃশ্য @current, মোট @total টির মধ্যে',
+  'safe_spot_found_progress': 'মোট @total টির মধ্যে @found টি নিরাপদ জায়গা পাওয়া গেছে',
+  'safe_spot_complete_summary': 'তুমি সব নিরাপদ জায়গা খুঁজে পেয়েছ — তুমি এখন নিরাপত্তা বিশেষজ্ঞ!',
+  'safe_spot_hotspot_semantics_safe': 'নিরাপদ জায়গা: @label',
+  'safe_spot_hotspot_semantics_unsafe': 'নিরাপদ নয়: @label',
+
   // Daily challenge (Phase E1)
   'daily_challenge_title': 'টুকুর দৈনিক চ্যালেঞ্জ',
   'daily_challenge_new_caption': 'আজকের নতুন চ্যালেঞ্জ খেলো!',

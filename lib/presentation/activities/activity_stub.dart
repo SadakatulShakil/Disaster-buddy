@@ -15,8 +15,6 @@ final class ActivityStub {
 
 /// Activities planned for a future phase. Add the real thing by building it
 /// and moving its id into `AppConstants.implementedActivities` — remove it
-/// from this list at the same time.
-const List<ActivityStub> kFutureActivityStubs = [
-  ActivityStub(titleKey: 'activity_signal_colours', icon: Icons.palette_rounded),
-  ActivityStub(titleKey: 'activity_safe_spot_finder', icon: Icons.explore_rounded),
-];
+/// from this list at the same time. Empty for now: every planned activity
+/// has shipped.
+const List<ActivityStub> kFutureActivityStubs = [];

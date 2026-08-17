@@ -105,6 +105,18 @@ const Map<String, String> enStrings = {
   'back_to_activities': 'Back to Activities',
   'kit_bag_semantics': 'Emergency kit bag: @packed of @total items packed',
 
+  // Signal Colours
+  'signal_colours_question': 'What does this colour mean?',
+  'signal_colours_progress': 'Signal @current of @total',
+  'signal_colours_complete_summary': 'You know every signal colour!',
+
+  // Safe Spot Finder
+  'safe_spot_scene_progress': 'Scene @current of @total',
+  'safe_spot_found_progress': '@found of @total safe spots found',
+  'safe_spot_complete_summary': "You found every safe spot — you're a safety expert!",
+  'safe_spot_hotspot_semantics_safe': 'Safe spot: @label',
+  'safe_spot_hotspot_semantics_unsafe': 'Not safe: @label',
+
   // Daily challenge (Phase E1)
   'daily_challenge_title': "Tuku's Daily Challenge",
   'daily_challenge_new_caption': "Play today's new challenge!",

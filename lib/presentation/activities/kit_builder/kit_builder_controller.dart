@@ -5,6 +5,7 @@ import '../../../core/error/result.dart';
 import '../../../core/theme/app_durations.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../domain/entities/activity.dart';
+import '../../../domain/entities/activity_content.dart';
 import '../../../domain/entities/kit_item.dart';
 import '../../../domain/entities/localized_text.dart';
 import '../../../core/services/narration_service.dart';
@@ -50,7 +51,9 @@ class KitBuilderController extends GetxController {
 
   RxBool get isSpeaking => _narrationService.isSpeaking;
 
-  int get correctTotal => activity.value?.items.where((item) => item.isCorrect).length ?? 0;
+  List<KitItem> get items => (activity.value?.content as KitBuilderContent?)?.items ?? const [];
+
+  int get correctTotal => items.where((item) => item.isCorrect).length;
 
   @override
   void onInit() {

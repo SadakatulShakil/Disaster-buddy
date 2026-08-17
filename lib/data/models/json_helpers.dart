@@ -31,6 +31,14 @@ int requireInt(Map<String, dynamic> json, String field, String context) {
   throw ManifestValidationException('Missing or invalid "$field" in $context.');
 }
 
+/// Accepts either a JSON int or double, since a normalized `0`/`1` boundary
+/// value commonly decodes as an int.
+double requireDouble(Map<String, dynamic> json, String field, String context) {
+  final value = json[field];
+  if (value is num) return value.toDouble();
+  throw ManifestValidationException('Missing or invalid "$field" in $context.');
+}
+
 bool requireBool(Map<String, dynamic> json, String field, String context) {
   final value = json[field];
   if (value is bool) return value;

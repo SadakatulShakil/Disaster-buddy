@@ -26,7 +26,7 @@ class GoBagDropTarget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       final activity = controller.activity.value!;
-      final packed = activity.items.where((item) => controller.packedItemIds.contains(item.id)).toList();
+      final packed = controller.items.where((item) => controller.packedItemIds.contains(item.id)).toList();
 
       return DragTarget<KitItem>(
         onWillAcceptWithDetails: (details) => true,

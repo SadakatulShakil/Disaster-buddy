@@ -7,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:bipod_bondhu/core/error/result.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
+import 'package:bipod_bondhu/domain/entities/activity_content.dart';
+import 'package:bipod_bondhu/domain/entities/activity_type.dart';
 import 'package:bipod_bondhu/domain/entities/badge_info.dart';
 import 'package:bipod_bondhu/domain/entities/collectible_sticker.dart';
 import 'package:bipod_bondhu/domain/entities/hazard_module.dart';
@@ -35,11 +37,12 @@ HazardModule _module(String id, int order) => HazardModule(
 
 Activity _activity(String id, {bool withBadge = true}) => Activity(
       id: id,
+      type: ActivityType.kitBuilder,
       title: _text,
       themeColorHex: '#6C63FF',
       iconAsset: 'icon.png',
       instructions: _text,
-      items: const [],
+      content: const KitBuilderContent(items: []),
       badge: withBadge ? BadgeInfo(id: '${id}_badge', title: _text, iconAsset: 'badge.png') : null,
     );
 

@@ -1,12 +1,13 @@
 import '../../domain/entities/activity.dart';
+import '../../domain/entities/activity_type.dart';
+import 'activity_content_dto.dart';
 import 'badge_info_dto.dart';
 import 'json_helpers.dart';
-import 'kit_item_dto.dart';
 import 'localized_text_dto.dart';
-import 'manifest_exception.dart';
 
 /// Parses a whole `assets/content/activities/<id>.json` manifest into an
-/// [Activity].
+/// [Activity]. Common fields are read here; the `type`-specific payload is
+/// delegated to [ActivityContentDto].
 final class ActivityDto {
   const ActivityDto({
     required this.id,
@@ -14,24 +15,13 @@ final class ActivityDto {
     required this.themeColorHex,
     required this.iconAsset,
     required this.instructions,
-    required this.items,
+    required this.content,
     this.badge,
   });
 
   factory ActivityDto.fromJson(Map<String, dynamic> json) {
     const context = 'activity manifest';
-    final itemsJson = requireList(json, 'items', context);
-    if (itemsJson.isEmpty) {
-      throw const ManifestValidationException('"items" must not be empty in activity manifest.');
-    }
-    final items = [
-      for (var i = 0; i < itemsJson.length; i++)
-        KitItemDto.fromJson(requireListItemObject(itemsJson[i], '$context.items[$i]'), '$context.items[$i]'),
-    ];
-    if (!items.any((item) => item.isCorrect)) {
-      throw const ManifestValidationException('"items" must contain at least one correct item in activity manifest.');
-    }
-
+    final type = requireString(json, 'type', context);
     final badgeJson = optionalObject(json, 'badge');
     return ActivityDto(
       id: requireString(json, 'id', context),
@@ -39,7 +29,7 @@ final class ActivityDto {
       themeColorHex: requireString(json, 'themeColor', context),
       iconAsset: requireString(json, 'iconAsset', context),
       instructions: LocalizedTextDto.fromJson(requireObject(json, 'instructions', context), '$context.instructions'),
-      items: items,
+      content: ActivityContentDto.fromJson(json, type, context),
       badge: badgeJson != null ? BadgeInfoDto.fromJson(badgeJson) : null,
     );
   }
@@ -49,16 +39,26 @@ final class ActivityDto {
   final String themeColorHex;
   final String iconAsset;
   final LocalizedTextDto instructions;
-  final List<KitItemDto> items;
+  final ActivityContentDto content;
   final BadgeInfoDto? badge;
 
   Activity toDomain() => Activity(
         id: id,
+        type: _typeOf(content),
         title: title.toDomain(),
         themeColorHex: themeColorHex,
         iconAsset: iconAsset,
         instructions: instructions.toDomain(),
-        items: [for (final item in items) item.toDomain()],
+        content: content.toDomain(),
         badge: badge?.toDomain(),
       );
+
+  /// Derived from the concrete [ActivityContentDto] subtype rather than
+  /// re-reading the raw `type` string, so [ActivityContentDto.fromJson]'s
+  /// switch stays the single source of truth for which types are valid.
+  static ActivityType _typeOf(ActivityContentDto content) => switch (content) {
+        KitBuilderContentDto() => ActivityType.kitBuilder,
+        SignalColoursContentDto() => ActivityType.signalColours,
+        SafeSpotContentDto() => ActivityType.safeSpotFinder,
+      };
 }

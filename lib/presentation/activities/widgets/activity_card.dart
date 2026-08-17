@@ -8,6 +8,7 @@ import '../../../core/theme/app_radii.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../domain/entities/activity.dart';
+import '../../../domain/entities/activity_type.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/badge_chip.dart';
 import '../../widgets/placeholder_art.dart';
@@ -42,7 +43,7 @@ class ActivityCard extends StatelessWidget {
             PlaceholderArt(
               assetPath: activity.iconAsset,
               themeColor: themeColor,
-              fallbackIcon: Icons.backpack_rounded,
+              fallbackIcon: _fallbackIconFor(activity.type),
               size: ActivityGridConstants.iconSize,
               borderRadius: AppRadii.borderPill,
             ),
@@ -68,6 +69,12 @@ class ActivityCard extends StatelessWidget {
       ),
     );
   }
+
+  IconData _fallbackIconFor(ActivityType type) => switch (type) {
+        ActivityType.kitBuilder => Icons.backpack_rounded,
+        ActivityType.signalColours => Icons.palette_rounded,
+        ActivityType.safeSpotFinder => Icons.explore_rounded,
+      };
 }
 
 /// Shared sizing so [ActivityCard] and the "coming soon" stub tiles line up

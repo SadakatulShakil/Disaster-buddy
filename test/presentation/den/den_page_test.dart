@@ -14,6 +14,8 @@ import 'package:bipod_bondhu/core/localization/app_translations.dart';
 import 'package:bipod_bondhu/core/services/narration_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
+import 'package:bipod_bondhu/domain/entities/activity_content.dart';
+import 'package:bipod_bondhu/domain/entities/activity_type.dart';
 import 'package:bipod_bondhu/domain/entities/badge_info.dart';
 import 'package:bipod_bondhu/domain/entities/daily_challenge.dart';
 import 'package:bipod_bondhu/domain/entities/hazard_module.dart';
@@ -73,11 +75,12 @@ DailyChallenge _dailyChallenge() => DailyChallenge(
 
 Activity _activityWithBadge(String id) => Activity(
       id: id,
+      type: ActivityType.kitBuilder,
       title: _text(id),
       themeColorHex: '#6C63FF',
       iconAsset: 'icon.png',
       instructions: _text('instructions'),
-      items: const [],
+      content: const KitBuilderContent(items: []),
       badge: BadgeInfo(id: '${id}_badge', title: _text('$id badge'), iconAsset: 'badge.png'),
     );
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/constants/app_constants.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_radii.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../domain/entities/activity.dart';
+import '../../domain/entities/activity_type.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_error_view.dart';
@@ -20,9 +21,10 @@ import 'activity_stub.dart';
 import 'widgets/activity_card.dart';
 
 /// Activities entry point: cross-cutting, module-independent things to try
-/// anytime, reachable from the Adventure Map. Shows implemented activities
-/// (the Emergency Kit Builder) with real completion state, plus clearly
-/// labelled future stubs so the list reads as extensible, not broken.
+/// anytime, reachable from the Adventure Map. Shows every implemented
+/// activity with real completion state, plus any clearly-labelled future
+/// stubs (`kFutureActivityStubs`) so the list reads as extensible, not
+/// broken — currently empty, since every planned activity has shipped.
 class ActivitiesPage extends GetView<ActivitiesController> {
   const ActivitiesPage({super.key});
 
@@ -83,7 +85,7 @@ class _ActivitiesGrid extends StatelessWidget {
         ActivityCard(
           activity: activity,
           isCompleted: controller.isActivityCompleted(activity.id),
-          onTap: () => _open(activity.id),
+          onTap: () => _open(activity),
         ),
       for (final stub in kFutureActivityStubs) _ActivityStubTile(stub: stub),
     ];
@@ -118,10 +120,13 @@ class _ActivitiesGrid extends StatelessWidget {
     );
   }
 
-  void _open(String activityId) {
-    if (activityId == AppConstants.activityEmergencyKit) {
-      Get.toNamed(AppRoutes.kitBuilder, arguments: activityId);
-    }
+  void _open(Activity activity) {
+    final route = switch (activity.type) {
+      ActivityType.kitBuilder => AppRoutes.kitBuilder,
+      ActivityType.signalColours => AppRoutes.signalColours,
+      ActivityType.safeSpotFinder => AppRoutes.safeSpotFinder,
+    };
+    Get.toNamed(route, arguments: activity.id);
   }
 }
 

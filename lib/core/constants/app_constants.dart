@@ -33,10 +33,16 @@ class AppConstants {
   // assets/content/activities/). Module-independent — reachable from their
   // own Activities entry point rather than the Adventure Map's module chain.
   static const String activityEmergencyKit = 'emergency_kit';
+  static const String activitySignalColours = 'signal_colours';
+  static const String activitySafeSpotFinder = 'safe_spot_finder';
 
   /// Activities with real, loadable manifests. The Activities screen shows
   /// these plus clearly-labelled future stubs that aren't in this list.
-  static const List<String> implementedActivities = [activityEmergencyKit];
+  static const List<String> implementedActivities = [
+    activityEmergencyKit,
+    activitySignalColours,
+    activitySafeSpotFinder,
+  ];
 
   // Database
   static const String dbName = 'bipod_bondhu.db';

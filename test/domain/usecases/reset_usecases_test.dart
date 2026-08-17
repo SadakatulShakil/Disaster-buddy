@@ -78,8 +78,20 @@ void main() {
     await db.badgeDao.insertBadge(const BadgeEntity(badgeId: 'earthquake_badge', moduleId: 'earthquake', earnedAt: 5));
     await db.badgeDao.insertBadge(const BadgeEntity(badgeId: 'flood_badge', moduleId: 'flood', earnedAt: 6));
     await db.badgeDao.insertBadge(const BadgeEntity(badgeId: 'streak_7_badge', moduleId: 'daily_streak', earnedAt: 7));
+    await db.badgeDao.insertBadge(
+      const BadgeEntity(badgeId: 'signal_spotter_badge', moduleId: 'signal_colours', earnedAt: 10),
+    );
+    await db.badgeDao.insertBadge(
+      const BadgeEntity(badgeId: 'safe_spot_hero_badge', moduleId: 'safe_spot_finder', earnedAt: 11),
+    );
     await db.activityProgressDao.insertOrUpdate(
       const ActivityProgressEntity(activityId: 'emergency_kit', isCompleted: true, updatedAt: 8),
+    );
+    await db.activityProgressDao.insertOrUpdate(
+      const ActivityProgressEntity(activityId: 'signal_colours', isCompleted: true, updatedAt: 10),
+    );
+    await db.activityProgressDao.insertOrUpdate(
+      const ActivityProgressEntity(activityId: 'safe_spot_finder', isCompleted: true, updatedAt: 11),
     );
     await db.dailyCompletionDao.insertOrUpdate(
       const DailyCompletionEntity(dateKey: '2026-08-03', challengeId: 'dc_1', wasCorrect: true, completedAt: 9),
@@ -90,6 +102,7 @@ void main() {
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_1', stickerId: 'earthquake_badge'));
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_2', stickerId: 'streak_7_badge'));
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_3', stickerId: 'flood_badge'));
+    await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_4', stickerId: 'signal_spotter_badge'));
     await db.denDao.saveTheme(const DenThemeEntity(themeId: 'sky'));
   }
 
@@ -117,6 +130,8 @@ void main() {
       expect(remainingBadges, hasLength(1));
       expect(remainingBadges.single.badgeId, 'streak_7_badge');
       expect(await db.activityProgressDao.findByActivity('emergency_kit'), isNull);
+      expect(await db.activityProgressDao.findByActivity('signal_colours'), isNull);
+      expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNull);
 
       // Preserved: streak, daily-challenge history, Den theme.
       final streak = await db.streakStateDao.find();
@@ -124,9 +139,9 @@ void main() {
       expect(await db.dailyCompletionDao.findByDate('2026-08-03'), isNotNull);
       expect((await db.denDao.findTheme())?.themeId, 'sky');
 
-      // Integrity rule: the now-unearned hazard stickers are pruned from
-      // the Den, but the still-earned streak sticker stays exactly where
-      // it was placed.
+      // Integrity rule: the now-unearned hazard and activity stickers
+      // (including the two new activities') are pruned from the Den, but
+      // the still-earned streak sticker stays exactly where it was placed.
       final slots = await db.denDao.findAllSlots();
       expect(slots.map((s) => s.slotId), ['shelf_1_slot_2']);
       expect(slots.single.stickerId, 'streak_7_badge');
@@ -151,10 +166,15 @@ void main() {
       expect(await db.badgeDao.findByModule('flood'), hasLength(1));
       expect(await db.badgeDao.findByModule('daily_streak'), hasLength(1));
       expect(await db.activityProgressDao.findByActivity('emergency_kit'), isNotNull);
+      // A single-module reset never touches activities — untouched.
+      expect(await db.activityProgressDao.findByActivity('signal_colours'), isNotNull);
+      expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNotNull);
+      expect(await db.badgeDao.findByModule('signal_colours'), hasLength(1));
+      expect(await db.badgeDao.findByModule('safe_spot_finder'), hasLength(1));
 
       final slots = await db.denDao.findAllSlots();
       final slotIds = slots.map((s) => s.slotId).toSet();
-      expect(slotIds, {'shelf_1_slot_2', 'shelf_1_slot_3'});
+      expect(slotIds, {'shelf_1_slot_2', 'shelf_1_slot_3', 'shelf_1_slot_4'});
       expect(slots.any((s) => s.stickerId == 'earthquake_badge'), isFalse);
     });
 
@@ -166,7 +186,7 @@ void main() {
 
       // Untouched modules stay exactly as seeded.
       expect(await db.progressDao.findByModule('earthquake'), hasLength(1));
-      expect(await db.badgeDao.findAll(), hasLength(3));
+      expect(await db.badgeDao.findAll(), hasLength(5));
     });
   });
 
@@ -181,6 +201,8 @@ void main() {
       expect(await db.progressDao.findByModule('flood'), isEmpty);
       expect(await db.badgeDao.findAll(), isEmpty);
       expect(await db.activityProgressDao.findByActivity('emergency_kit'), isNull);
+      expect(await db.activityProgressDao.findByActivity('signal_colours'), isNull);
+      expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNull);
       expect(await db.dailyCompletionDao.findByDate('2026-08-03'), isNull);
       expect(await db.streakStateDao.find(), isNull);
       expect(await db.denDao.findAllSlots(), isEmpty);

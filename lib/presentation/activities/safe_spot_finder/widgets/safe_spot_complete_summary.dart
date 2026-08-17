@@ -7,32 +7,27 @@ import '../../../../core/theme/app_radii.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/activity.dart';
-import '../../../../domain/entities/activity_content.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/mascot_view.dart';
 import '../../../widgets/placeholder_art.dart';
 
-/// Celebratory summary shown once every correct item is packed: the full
-/// kit, and the badge if this was the first time earning it.
-class KitCompleteSummary extends StatelessWidget {
-  const KitCompleteSummary({
+/// Celebratory summary shown once every scene's safe spots have been found:
+/// the badge, if this was the first time earning it.
+class SafeSpotCompleteSummary extends StatelessWidget {
+  const SafeSpotCompleteSummary({
     super.key,
     required this.activity,
-    required this.packedItemIds,
     required this.badgeAwarded,
     required this.themeColor,
   });
 
   final Activity activity;
-  final Set<String> packedItemIds;
   final bool badgeAwarded;
   final Color themeColor;
 
   @override
   Widget build(BuildContext context) {
     final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
-    final items = (activity.content as KitBuilderContent).items;
-    final packed = items.where((item) => packedItemIds.contains(item.id)).toList();
     final badge = activity.badge;
 
     return SingleChildScrollView(
@@ -44,23 +39,7 @@ class KitCompleteSummary extends StatelessWidget {
           SizedBox(height: AppSpacing.md),
           Text('well_done'.tr, style: AppTextStyles.display, textAlign: TextAlign.center),
           SizedBox(height: AppSpacing.sm),
-          Text('kit_complete_summary'.tr, style: AppTextStyles.body, textAlign: TextAlign.center),
-          SizedBox(height: AppSpacing.lg),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
-            children: [
-              for (final item in packed)
-                PlaceholderArt(
-                  assetPath: item.imageAsset,
-                  themeColor: themeColor,
-                  fallbackIcon: Icons.check_circle_rounded,
-                  size: 56.r,
-                  borderRadius: AppRadii.borderMd,
-                ),
-            ],
-          ),
+          Text('safe_spot_complete_summary'.tr, style: AppTextStyles.body, textAlign: TextAlign.center),
           if (badgeAwarded && badge != null) ...[
             SizedBox(height: AppSpacing.xl),
             PlaceholderArt(

@@ -1,5 +1,6 @@
 {
   "id": "emergency_kit",
+  "type": "kit_builder",
   "title": { "bn": "আমার জরুরি ব্যাগ", "en": "My Emergency Kit" },
   "themeColor": "#6C63FF",
   "iconAsset": "icons/emergency_kit.png",

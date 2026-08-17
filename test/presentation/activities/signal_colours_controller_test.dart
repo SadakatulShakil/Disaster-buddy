@@ -1,6 +1,6 @@
-// Phase 4: packing every correct item must complete the activity, persist
-// it, and award the badge exactly once; dropping a wrong item must never
-// fail, penalize, or complete the activity.
+// Matching the correct meaning for every signal must complete the
+// activity, persist it, and award the badge exactly once; tapping a wrong
+// meaning must never fail, penalize, or complete the activity.
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,11 +12,11 @@ import 'package:bipod_bondhu/domain/entities/activity.dart';
 import 'package:bipod_bondhu/domain/entities/activity_content.dart';
 import 'package:bipod_bondhu/domain/entities/activity_type.dart';
 import 'package:bipod_bondhu/domain/entities/badge_info.dart';
-import 'package:bipod_bondhu/domain/entities/kit_item.dart';
 import 'package:bipod_bondhu/domain/entities/localized_text.dart';
+import 'package:bipod_bondhu/domain/entities/signal_info.dart';
 import 'package:bipod_bondhu/domain/usecases/complete_activity.dart';
 import 'package:bipod_bondhu/domain/usecases/get_activity.dart';
-import 'package:bipod_bondhu/presentation/activities/kit_builder/kit_builder_controller.dart';
+import 'package:bipod_bondhu/presentation/activities/signal_colours/signal_colours_controller.dart';
 
 import '../../fakes/fake_activity_progress_repository.dart';
 import '../../fakes/fake_activity_repository.dart';
@@ -24,52 +24,54 @@ import '../../fakes/fake_progress_repository.dart';
 
 const _text = LocalizedText(bn: 'ক', en: 'a');
 
-Activity _kitActivity() => const Activity(
-      id: 'emergency_kit',
-      type: ActivityType.kitBuilder,
+Activity _signalActivity() => const Activity(
+      id: 'signal_colours',
+      type: ActivityType.signalColours,
       title: _text,
-      themeColorHex: '#6C63FF',
+      themeColorHex: '#5B6EE1',
       iconAsset: 'icon.png',
       instructions: _text,
-      content: KitBuilderContent(
-        items: [
-          KitItem(id: 'water', label: _text, imageAsset: 'water.png', isCorrect: true, affirmation: _text),
-          KitItem(id: 'torch', label: _text, imageAsset: 'torch.png', isCorrect: true, affirmation: _text),
-          KitItem(id: 'toy', label: _text, imageAsset: 'toy.png', isCorrect: false),
+      content: SignalColoursContent(
+        signals: [
+          SignalInfo(id: 'calm', colorHex: '#2E9E5B', meaning: _text, action: _text, actionIcon: 'a.png', affirmation: _text),
+          SignalInfo(
+            id: 'get_ready',
+            colorHex: '#F4C430',
+            meaning: _text,
+            action: _text,
+            actionIcon: 'b.png',
+            affirmation: _text,
+          ),
+          SignalInfo(id: 'danger', colorHex: '#D9534F', meaning: _text, action: _text, actionIcon: 'c.png', affirmation: _text),
         ],
       ),
-      badge: BadgeInfo(id: 'ready_kit_badge', title: _text, iconAsset: 'badge.png'),
+      badge: BadgeInfo(id: 'signal_spotter_badge', title: _text, iconAsset: 'badge.png'),
     );
 
-KitBuilderController _buildController({
+SignalColoursController _buildController({
   required FakeActivityRepository activityRepository,
   required FakeActivityProgressRepository activityProgressRepository,
   required FakeProgressRepository progressRepository,
 }) {
-  return KitBuilderController(
+  return SignalColoursController(
     getActivity: GetActivity(activityRepository),
     completeActivity: CompleteActivity(
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     ),
     narrationService: NarrationService(),
-    activityId: 'emergency_kit',
+    activityId: 'signal_colours',
   );
 }
 
 void main() {
-  // `NarrationService.speak` reads `UserPrefService.instance.soundEnabled`,
-  // which needs a real (mocked) SharedPreferences backing.
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     await UserPrefService.instance.init();
   });
 
-  // testWidgets (not a plain `test`) so `WidgetsFlutterBinding` is
-  // initialized before `NarrationService` constructs its `FlutterTts`,
-  // which registers a MethodChannel handler in its constructor.
-  testWidgets('adding all correct items completes, persists, and awards the badge once', (tester) async {
-    final activityRepository = FakeActivityRepository([_kitActivity()]);
+  testWidgets('matching every signal completes, persists, and awards the badge once', (tester) async {
+    final activityRepository = FakeActivityRepository([_signalActivity()]);
     final activityProgressRepository = FakeActivityProgressRepository();
     final progressRepository = FakeProgressRepository();
     final controller = _buildController(
@@ -79,21 +81,19 @@ void main() {
     );
     await controller.load();
 
-    await controller.handleDrop(controller.items[0]); // water
-    expect(controller.packedItemIds, {'water'});
-    expect(controller.isComplete.value, isFalse);
-
-    await controller.handleDrop(controller.items[1]); // torch — last correct item
+    for (var i = 0; i < 3; i++) {
+      await controller.selectOption(controller.currentSignal);
+    }
 
     expect(controller.isComplete.value, isTrue);
     expect(controller.badgeAwarded.value, isTrue);
-    expect(activityProgressRepository.completedByActivity['emergency_kit'], isTrue);
+    expect(activityProgressRepository.completedByActivity['signal_colours'], isTrue);
     expect(progressRepository.awardBadgeCallCount, 1);
-    expect(progressRepository.earnedBadgeIds, {'ready_kit_badge'});
+    expect(progressRepository.earnedBadgeIds, {'signal_spotter_badge'});
   });
 
-  testWidgets('dropping a wrong item is rejected gently — no penalty, no completion', (tester) async {
-    final activityRepository = FakeActivityRepository([_kitActivity()]);
+  testWidgets('tapping a wrong meaning is rejected gently — no penalty, no completion', (tester) async {
+    final activityRepository = FakeActivityRepository([_signalActivity()]);
     final activityProgressRepository = FakeActivityProgressRepository();
     final progressRepository = FakeProgressRepository();
     final controller = _buildController(
@@ -102,32 +102,33 @@ void main() {
       progressRepository: progressRepository,
     );
     await controller.load();
-    final toy = controller.items.firstWhere((item) => item.id == 'toy');
+    final wrongOption = controller.signals.firstWhere((signal) => signal.id != controller.currentSignal.id);
 
-    await controller.handleDrop(toy);
+    await controller.selectOption(wrongOption);
 
-    expect(controller.packedItemIds, isEmpty);
+    expect(controller.currentAnsweredCorrectly.value, isFalse);
     expect(controller.isComplete.value, isFalse);
-    expect(controller.lastWrongItemId.value, 'toy');
-    expect(activityProgressRepository.completedByActivity['emergency_kit'], isNull);
+    expect(controller.lastWrongOptionId.value, wrongOption.id);
+    expect(activityProgressRepository.completedByActivity['signal_colours'], isNull);
     expect(progressRepository.awardBadgeCallCount, 0);
 
     // Let the reject-feedback clear timer fire so it isn't left pending
     // when the test ends.
     await tester.pump(AppDurations.normal + const Duration(milliseconds: 50));
 
-    // Still fully completable afterwards — the wrong drop didn't corrupt
+    // Still fully completable afterwards — the wrong tap didn't corrupt
     // anything.
-    await controller.handleDrop(controller.items[0]);
-    await controller.handleDrop(controller.items[1]);
+    for (var i = 0; i < 3; i++) {
+      await controller.selectOption(controller.currentSignal);
+    }
     expect(controller.isComplete.value, isTrue);
   });
 
   testWidgets('replaying an already-completed activity does not double-award', (tester) async {
-    final activityRepository = FakeActivityRepository([_kitActivity()]);
+    final activityRepository = FakeActivityRepository([_signalActivity()]);
     final activityProgressRepository = FakeActivityProgressRepository()
-      ..completedByActivity['emergency_kit'] = true;
-    final progressRepository = FakeProgressRepository()..earnedBadgeIds.add('ready_kit_badge');
+      ..completedByActivity['signal_colours'] = true;
+    final progressRepository = FakeProgressRepository()..earnedBadgeIds.add('signal_spotter_badge');
     final controller = _buildController(
       activityRepository: activityRepository,
       activityProgressRepository: activityProgressRepository,
@@ -135,8 +136,9 @@ void main() {
     );
     await controller.load();
 
-    await controller.handleDrop(controller.items[0]);
-    await controller.handleDrop(controller.items[1]);
+    for (var i = 0; i < 3; i++) {
+      await controller.selectOption(controller.currentSignal);
+    }
 
     expect(controller.isComplete.value, isTrue);
     expect(controller.badgeAwarded.value, isFalse);

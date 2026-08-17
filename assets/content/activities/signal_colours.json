@@ -1,0 +1,48 @@
+{
+  "id": "signal_colours",
+  "type": "signal_colours",
+  "title": { "bn": "সিগন্যাল রং", "en": "Signal Colours" },
+  "themeColor": "#5B6EE1",
+  "iconAsset": "icons/signal_colours.png",
+  "instructions": {
+    "bn": "রংটা দেখো, তারপর ঠিক মানে আর কাজটা বেছে নাও!",
+    "en": "Look at the colour, then tap what it means and what to do!"
+  },
+  "badge": {
+    "id": "signal_spotter_badge",
+    "title": { "bn": "সংকেত বিশেষজ্ঞ", "en": "Signal Spotter" },
+    "iconAsset": "icons/badge_signal_colours.png"
+  },
+  "signals": [
+    {
+      "id": "calm",
+      "colorHex": "#2E9E5B",
+      "meaning": { "bn": "সব ঠিক আছে, কোনো বিপদ নেই", "en": "All calm — no danger right now" },
+      "action": { "bn": "খেলো আর তোমার দিন উপভোগ করো", "en": "Play and enjoy your day" },
+      "actionIcon": "activities/signal_colours/action_play.png",
+      "affirmation": { "bn": "সবুজ মানে সব নিরাপদ!", "en": "Green means everything is safe!" }
+    },
+    {
+      "id": "get_ready",
+      "colorHex": "#F4C430",
+      "meaning": { "bn": "ঝড় আসতে পারে, তৈরি হও", "en": "A storm might be coming — get ready" },
+      "action": {
+        "bn": "বড়দের কথা শোনো আর জরুরি ব্যাগ গোছাও",
+        "en": "Listen to a grown-up and pack your emergency kit"
+      },
+      "actionIcon": "activities/signal_colours/action_get_ready.png",
+      "affirmation": { "bn": "হলুদ মানে তৈরি হওয়ার সময়!", "en": "Yellow means it's time to get ready!" }
+    },
+    {
+      "id": "danger",
+      "colorHex": "#D9534F",
+      "meaning": { "bn": "বড় বিপদ খুব কাছে", "en": "Big danger is very close" },
+      "action": {
+        "bn": "পরিবারের সাথে এখনই নিরাপদ জায়গায় যাও",
+        "en": "Go to a safe shelter right now with your family"
+      },
+      "actionIcon": "activities/signal_colours/action_shelter.png",
+      "affirmation": { "bn": "লাল মানে এখনই নিরাপদ জায়গায় যেতে হবে!", "en": "Red means go to shelter right now!" }
+    }
+  ]
+}

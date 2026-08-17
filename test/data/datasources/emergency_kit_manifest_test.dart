@@ -14,6 +14,8 @@ import 'package:bipod_bondhu/core/error/failures.dart';
 import 'package:bipod_bondhu/core/error/result.dart';
 import 'package:bipod_bondhu/data/datasources/activity_asset_source.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
+import 'package:bipod_bondhu/domain/entities/activity_content.dart';
+import 'package:bipod_bondhu/domain/entities/activity_type.dart';
 
 class _FakeAssetBundle extends AssetBundle {
   _FakeAssetBundle(this._contentsByKey);
@@ -44,10 +46,12 @@ void main() {
       expect(result, isA<Success<Activity>>());
       final activity = (result as Success<Activity>).value;
       expect(activity.id, 'emergency_kit');
+      expect(activity.type, ActivityType.kitBuilder);
       expect(activity.badge?.id, 'ready_kit_badge');
-      expect(activity.items.where((item) => item.isCorrect), hasLength(7));
-      expect(activity.items.where((item) => !item.isCorrect), hasLength(4));
-      for (final item in activity.items.where((item) => item.isCorrect)) {
+      final items = (activity.content as KitBuilderContent).items;
+      expect(items.where((item) => item.isCorrect), hasLength(7));
+      expect(items.where((item) => !item.isCorrect), hasLength(4));
+      for (final item in items.where((item) => item.isCorrect)) {
         expect(item.affirmation, isNotNull);
       }
     });
