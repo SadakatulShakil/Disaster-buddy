@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../core/services/narration_service.dart';
+import '../../core/services/sound_service.dart';
 import '../../domain/usecases/award_badge.dart';
 import '../../domain/usecases/complete_beat.dart';
 import '../../domain/usecases/get_module.dart';
@@ -19,9 +20,9 @@ class LessonBinding extends Bindings {
         awardBadge: Get.find<AwardBadge>(),
         saveQuizResult: Get.find<SaveQuizResult>(),
         narrationService: Get.find<NarrationService>(),
+        soundService: Get.find<SoundService>(),
         moduleId: args.moduleId,
         startBeatId: args.startBeatId,
-        isReplay: args.isReplay,
       ),
     );
   }

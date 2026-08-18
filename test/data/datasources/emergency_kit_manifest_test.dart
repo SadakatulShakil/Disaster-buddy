@@ -54,6 +54,10 @@ void main() {
       for (final item in items.where((item) => item.isCorrect)) {
         expect(item.affirmation, isNotNull);
       }
+      // UX pass: every distractor carries its own kind, specific feedback.
+      for (final item in items.where((item) => !item.isCorrect)) {
+        expect(item.feedback, isNotNull, reason: 'distractor "${item.id}" is missing feedback');
+      }
     });
 
     test('a malformed variant (no correct items) returns a Failure<ContentParseFailure>', () async {

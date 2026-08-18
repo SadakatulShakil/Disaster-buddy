@@ -3,9 +3,11 @@
 // fail, penalize, or complete the activity.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bipod_bondhu/core/services/narration_service.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/core/theme/app_durations.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
@@ -17,9 +19,11 @@ import 'package:bipod_bondhu/domain/entities/localized_text.dart';
 import 'package:bipod_bondhu/domain/usecases/complete_activity.dart';
 import 'package:bipod_bondhu/domain/usecases/get_activity.dart';
 import 'package:bipod_bondhu/presentation/activities/kit_builder/kit_builder_controller.dart';
+import 'package:bipod_bondhu/presentation/widgets/feedback_presenter_mixin.dart';
 
 import '../../fakes/fake_activity_progress_repository.dart';
 import '../../fakes/fake_activity_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_progress_repository.dart';
 
 const _text = LocalizedText(bn: 'ক', en: 'a');
@@ -35,7 +39,7 @@ Activity _kitActivity() => const Activity(
         items: [
           KitItem(id: 'water', label: _text, imageAsset: 'water.png', isCorrect: true, affirmation: _text),
           KitItem(id: 'torch', label: _text, imageAsset: 'torch.png', isCorrect: true, affirmation: _text),
-          KitItem(id: 'toy', label: _text, imageAsset: 'toy.png', isCorrect: false),
+          KitItem(id: 'toy', label: _text, imageAsset: 'toy.png', isCorrect: false, feedback: _text),
         ],
       ),
       badge: BadgeInfo(id: 'ready_kit_badge', title: _text, iconAsset: 'badge.png'),
@@ -52,7 +56,8 @@ KitBuilderController _buildController({
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     ),
-    narrationService: NarrationService(),
+    narrationService: NarrationService(tts: FakeFlutterTts()),
+    soundService: SoundService(),
     activityId: 'emergency_kit',
   );
 }
@@ -77,11 +82,24 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
+
+    // `handleDrop` awaits the affirmation narrating fully — including its
+    // own clear-when-done — before returning, so a correct drop's feedback
+    // is already gone again by the time this await resolves. Capture it as
+    // it's shown instead of checking it survives the await.
+    final shownFeedback = <bool>[];
+    final feedbackWorker = ever<ActiveFeedback?>(controller.activeFeedback, (feedback) {
+      if (feedback != null) shownFeedback.add(feedback.isCorrect);
+    });
+    addTearDown(feedbackWorker.dispose);
 
     await controller.handleDrop(controller.items[0]); // water
     expect(controller.packedItemIds, {'water'});
     expect(controller.isComplete.value, isFalse);
+    // Correct drops get a warm confirmation via the same shared component.
+    expect(shownFeedback, contains(true));
 
     await controller.handleDrop(controller.items[1]); // torch — last correct item
 
@@ -101,6 +119,7 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
     final toy = controller.items.firstWhere((item) => item.id == 'toy');
 
@@ -111,6 +130,9 @@ void main() {
     expect(controller.lastWrongItemId.value, 'toy');
     expect(activityProgressRepository.completedByActivity['emergency_kit'], isNull);
     expect(progressRepository.awardBadgeCallCount, 0);
+    // Shows the item's own specific feedback, not a generic fallback.
+    expect(controller.activeFeedback.value?.isCorrect, isFalse);
+    expect(controller.activeFeedback.value?.message, _text.bn);
 
     // Let the reject-feedback clear timer fire so it isn't left pending
     // when the test ends.
@@ -125,14 +147,14 @@ void main() {
 
   testWidgets('replaying an already-completed activity does not double-award', (tester) async {
     final activityRepository = FakeActivityRepository([_kitActivity()]);
-    final activityProgressRepository = FakeActivityProgressRepository()
-      ..completedByActivity['emergency_kit'] = true;
+    final activityProgressRepository = FakeActivityProgressRepository()..completedByActivity['emergency_kit'] = true;
     final progressRepository = FakeProgressRepository()..earnedBadgeIds.add('ready_kit_badge');
     final controller = _buildController(
       activityRepository: activityRepository,
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
 
     await controller.handleDrop(controller.items[0]);

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/error/result.dart';
+import '../../../core/services/sound_service.dart';
 import '../../../core/theme/app_durations.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../domain/entities/activity.dart';
@@ -11,6 +12,7 @@ import '../../../domain/entities/localized_text.dart';
 import '../../../core/services/narration_service.dart';
 import '../../../domain/usecases/complete_activity.dart';
 import '../../../domain/usecases/get_activity.dart';
+import '../../widgets/feedback_presenter_mixin.dart';
 
 /// Load state for [KitBuilderController], observed by the Kit Builder page.
 enum KitBuilderViewStatus { loading, data, error }
@@ -20,20 +22,28 @@ enum KitBuilderViewStatus { loading, data, error }
 /// a wrong drop is just rejected gently; completion is reached only by
 /// placing every correct item, at which point [CompleteActivity] persists
 /// it and awards the activity's badge (once).
-class KitBuilderController extends GetxController {
+class KitBuilderController extends GetxController with FeedbackPresenterMixin {
   KitBuilderController({
     required GetActivity getActivity,
     required CompleteActivity completeActivity,
     required NarrationService narrationService,
+    required SoundService soundService,
     required this.activityId,
   })  : _getActivity = getActivity,
         _completeActivity = completeActivity,
-        _narrationService = narrationService;
+        _narrationService = narrationService,
+        _soundService = soundService;
 
   final GetActivity _getActivity;
   final CompleteActivity _completeActivity;
   final NarrationService _narrationService;
+  final SoundService _soundService;
   final String activityId;
+
+  @override
+  NarrationService get feedbackNarrationService => _narrationService;
+  @override
+  SoundService get feedbackSoundService => _soundService;
 
   final Rx<KitBuilderViewStatus> status = KitBuilderViewStatus.loading.obs;
   final Rx<Activity?> activity = Rx<Activity?>(null);
@@ -63,6 +73,7 @@ class KitBuilderController extends GetxController {
 
   @override
   void onClose() {
+    disposeFeedbackPresenter();
     _narrationService.stop();
     super.onClose();
   }
@@ -101,9 +112,15 @@ class KitBuilderController extends GetxController {
   /// that follows the final correct item; the UI drop callback fires this
   /// and forgets it.
   Future<void> handleDrop(KitItem item) async {
+    final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
+
     if (!item.isCorrect) {
       lastWrongItemId.value = item.id;
       wrongNonce.value++;
+      presentFeedback(
+        message: item.feedback?.resolve(langCode) ?? 'feedback_generic_wrong'.tr,
+        isCorrect: false,
+      );
       // Matches the practice-game reject-feedback duration elsewhere in the
       // app (SequenceTapGame/TapCorrectChoiceGame) for a consistent feel.
       Future.delayed(AppDurations.normal, () {
@@ -114,8 +131,12 @@ class KitBuilderController extends GetxController {
 
     if (packedItemIds.contains(item.id)) return;
     packedItemIds.add(item.id);
-    final affirmation = item.affirmation;
-    if (affirmation != null) narrate(affirmation);
+    // Awaited so the completion summary never replaces the screen before
+    // the child has heard this item's affirmation in full.
+    await presentFeedback(
+      message: item.affirmation?.resolve(langCode) ?? 'feedback_generic_correct'.tr,
+      isCorrect: true,
+    );
 
     if (packedItemIds.length == correctTotal) {
       await _complete();
@@ -126,9 +147,11 @@ class KitBuilderController extends GetxController {
     final badge = activity.value?.badge;
     final result = await _completeActivity(activityId: activityId, badge: badge);
     isComplete.value = true;
+    _soundService.playComplete();
     switch (result) {
       case Success<bool>(value: final awarded):
         badgeAwarded.value = awarded;
+        if (awarded) _soundService.playSticker();
       case Failure<bool>(failure: final failure):
         AppLogger.error('KitBuilderController failed to persist completion: ${failure.message}');
         // The kit is still shown as packed — never trap the child on a

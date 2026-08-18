@@ -68,19 +68,31 @@
             "id": "drop",
             "label": { "bn": "বসো", "en": "Drop" },
             "imageAsset": "practice/eq_drop.png",
-            "sequenceOrder": 1
+            "sequenceOrder": 1,
+            "feedback": {
+              "bn": "মাটিতে বসে পড়াই প্রথম কাজ — এটা পড়ে যাওয়া এড়াতে সাহায্য করে।",
+              "en": "Dropping down first helps you avoid falling — that comes first."
+            }
           },
           {
             "id": "cover",
             "label": { "bn": "ঢেকে রাখো", "en": "Cover" },
             "imageAsset": "practice/under_table.png",
-            "sequenceOrder": 2
+            "sequenceOrder": 2,
+            "feedback": {
+              "bn": "মাথা ও ঘাড় ঢেকে রাখা পড়ে যাওয়া জিনিস থেকে বাঁচায় — এটা বসার পরের ধাপ।",
+              "en": "Covering your head and neck protects you from falling things — that's next, after Drop."
+            }
           },
           {
             "id": "hold",
             "label": { "bn": "ধরে থাকো", "en": "Hold On" },
             "imageAsset": "practice/eq_hold.png",
-            "sequenceOrder": 3
+            "sequenceOrder": 3,
+            "feedback": {
+              "bn": "কাঁপুনি না থামা পর্যন্ত ধরে থাকাই একদম শেষ ধাপ।",
+              "en": "Holding on until it stops is the very last step."
+            }
           }
         ]
       }
@@ -99,8 +111,24 @@
           "imageAsset": "quiz/eq_q1.png",
           "options": [
             { "id": "a", "label": { "bn": "মাটিতে বসে পড়ব", "en": "Drop to the floor" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "দৌড়ে বাইরে যাব", "en": "Run outside fast" }, "isCorrect": false },
-            { "id": "c", "label": { "bn": "জানালার পাশে দাঁড়াব", "en": "Stand near a window" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "দৌড়ে বাইরে যাব", "en": "Run outside fast" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "দৌড়ানো ঝুঁকিপূর্ণ হতে পারে — কাঁপুনির সময় আগে নিচে বসে পড়াই ভালো।",
+                "en": "Running can be risky — it's safer to drop down first while it's shaking."
+              }
+            },
+            {
+              "id": "c",
+              "label": { "bn": "জানালার পাশে দাঁড়াব", "en": "Stand near a window" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "জানালার কাচ ভেঙে যেতে পারে — জানালা থেকে দূরে থাকো।",
+                "en": "Window glass can shatter — stay away from windows."
+              }
+            }
           ]
         },
         {
@@ -109,8 +137,24 @@
           "imageAsset": "quiz/eq_q2.png",
           "options": [
             { "id": "a", "label": { "bn": "শক্ত টেবিলের নিচে", "en": "Under a sturdy table" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "কাঁচের জানালার পাশে", "en": "Next to a glass window" }, "isCorrect": false },
-            { "id": "c", "label": { "bn": "লিফটে", "en": "In an elevator" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "কাঁচের জানালার পাশে", "en": "Next to a glass window" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কাঁচ ভেঙে আঘাত করতে পারে — শক্ত টেবিলের নিচেই নিরাপদ।",
+                "en": "Broken glass can hurt you — under a sturdy table is safer."
+              }
+            },
+            {
+              "id": "c",
+              "label": { "bn": "লিফটে", "en": "In an elevator" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কম্পনের সময় লিফট আটকে যেতে পারে — শক্ত মেঝেতে থাকো।",
+                "en": "Elevators can get stuck during shaking — stay on a solid floor instead."
+              }
+            }
           ]
         },
         {
@@ -119,7 +163,15 @@
           "imageAsset": "quiz/eq_q3.png",
           "options": [
             { "id": "a", "label": { "bn": "শান্ত থেকে ধরে থাকব", "en": "Hold on and stay calm" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "ঘরের মধ্যে দৌড়াব", "en": "Run around the room" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "ঘরের মধ্যে দৌড়াব", "en": "Run around the room" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "দৌড়ালে পড়ে যাওয়া জিনিসে আঘাত পেতে পারো — শান্ত থেকে ধরে থাকাই ভালো।",
+                "en": "Running around can get you hurt by falling things — it's safer to hold on and stay calm."
+              }
+            }
           ]
         }
       ]

@@ -89,13 +89,21 @@
             "id": "flooded_street",
             "label": { "bn": "প্লাবিত রাস্তা", "en": "Flooded street" },
             "imageAsset": "practice/flooded_street.png",
-            "isCorrect": false
+            "isCorrect": false,
+            "feedback": {
+              "bn": "প্লাবিত রাস্তায় পানি গভীর ও বিপজ্জনক হতে পারে।",
+              "en": "Flooded streets can hide deep, dangerous water."
+            }
           },
           {
             "id": "near_river",
             "label": { "bn": "নদীর ধারে", "en": "Near the river" },
             "imageAsset": "practice/near_river.png",
-            "isCorrect": false
+            "isCorrect": false,
+            "feedback": {
+              "bn": "বন্যার সময় নদীর পানি হঠাৎ বেড়ে যেতে পারে।",
+              "en": "River water can rise suddenly during a flood."
+            }
           }
         ]
       }
@@ -114,8 +122,24 @@
           "imageAsset": "quiz/fl_q1.png",
           "options": [
             { "id": "a", "label": { "bn": "উঁচু জায়গায় যাব", "en": "Move to higher ground" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "পানিতে খেলব", "en": "Play in the water" }, "isCorrect": false },
-            { "id": "c", "label": { "bn": "নিচু ঘরে থাকব", "en": "Stay in the low room" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "পানিতে খেলব", "en": "Play in the water" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বন্যার পানিতে খেলা বিপজ্জনক হতে পারে।",
+                "en": "Playing in flood water can be dangerous."
+              }
+            },
+            {
+              "id": "c",
+              "label": { "bn": "নিচু ঘরে থাকব", "en": "Stay in the low room" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "নিচু ঘরে পানি ঢুকে যেতে পারে — উঁচু জায়গায় যাওয়াই নিরাপদ।",
+                "en": "Water can rise into low rooms — higher ground is safer."
+              }
+            }
           ]
         },
         {
@@ -127,7 +151,15 @@
           "imageAsset": "quiz/fl_q2.png",
           "options": [
             { "id": "a", "label": { "bn": "না, কখনোই না", "en": "No, never" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "হ্যাঁ, এটা মজার", "en": "Yes, it's fun" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "হ্যাঁ, এটা মজার", "en": "Yes, it's fun" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "মজার মনে হলেও বন্যার পানিতে স্রোত ও লুকানো বিপদ থাকতে পারে।",
+                "en": "It might look fun, but flood water can hide strong currents and dangers."
+              }
+            }
           ]
         },
         {
@@ -136,7 +168,15 @@
           "imageAsset": "quiz/fl_q3.png",
           "options": [
             { "id": "a", "label": { "bn": "একজন বড় মানুষের সাথে", "en": "A grown-up" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "নিজে একা", "en": "By myself" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "নিজে একা", "en": "By myself" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "একা না থেকে সবসময় একজন বড় মানুষের সাথে থাকো।",
+                "en": "Always stay with a grown-up instead of going alone."
+              }
+            }
           ]
         }
       ]

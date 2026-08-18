@@ -12,6 +12,7 @@ final class KitItem extends Equatable {
     required this.imageAsset,
     required this.isCorrect,
     this.affirmation,
+    this.feedback,
   });
 
   final String id;
@@ -25,6 +26,12 @@ final class KitItem extends Equatable {
   /// safe." Only meaningful for correct items.
   final LocalizedText? affirmation;
 
+  /// Specific, kind explanation shown when this distractor is dropped, e.g.
+  /// "A toy is fun, but it won't keep us safe in an emergency." Only
+  /// meaningful for incorrect items; falls back to a generic message when
+  /// absent.
+  final LocalizedText? feedback;
+
   @override
-  List<Object?> get props => [id, label, imageAsset, isCorrect, affirmation];
+  List<Object?> get props => [id, label, imageAsset, isCorrect, affirmation, feedback];
 }

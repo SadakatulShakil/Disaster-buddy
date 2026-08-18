@@ -9,6 +9,7 @@ import '../../widgets/app_button.dart';
 import '../../widgets/app_error_view.dart';
 import '../../widgets/app_loader.dart';
 import '../../widgets/app_scaffold.dart';
+import '../../widgets/feedback_bubble.dart';
 import '../../widgets/mascot_view.dart';
 import 'kit_builder_controller.dart';
 import 'widgets/go_bag_drop_target.dart';
@@ -114,6 +115,18 @@ class _KitBuilderBodyState extends State<_KitBuilderBody> {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  Obx(() {
+                    final feedback = controller.activeFeedback.value;
+                    if (feedback == null) return const SizedBox.shrink();
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.xs),
+                      child: FeedbackBubble(
+                        message: feedback.message,
+                        isCorrect: feedback.isCorrect,
+                        onTap: controller.dismissFeedback,
+                      ),
+                    );
+                  }),
                   Expanded(
                     flex: 4,
                     child: GoBagDropTarget(

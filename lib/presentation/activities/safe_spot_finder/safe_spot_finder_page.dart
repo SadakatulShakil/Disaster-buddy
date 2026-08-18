@@ -9,6 +9,7 @@ import '../../widgets/app_button.dart';
 import '../../widgets/app_error_view.dart';
 import '../../widgets/app_loader.dart';
 import '../../widgets/app_scaffold.dart';
+import '../../widgets/feedback_bubble.dart';
 import '../../widgets/mascot_view.dart';
 import 'safe_spot_finder_controller.dart';
 import 'widgets/safe_spot_complete_summary.dart';
@@ -105,7 +106,6 @@ class _SafeSpotFinderBodyState extends State<_SafeSpotFinderBody> {
               final sceneIndex = controller.sceneIndex.value;
               final scene = controller.currentScene;
               final found = controller.foundSafeIds.toSet();
-              final feedback = controller.lastFeedback.value;
 
               if (_narratedSceneIndex != sceneIndex) {
                 _narratedSceneIndex = sceneIndex;
@@ -153,10 +153,18 @@ class _SafeSpotFinderBodyState extends State<_SafeSpotFinderBody> {
                       }),
                       style: AppTextStyles.body,
                     ),
-                    if (feedback != null) ...[
-                      SizedBox(height: AppSpacing.sm),
-                      Text(feedback.resolve(langCode), style: AppTextStyles.bodyGrey, textAlign: TextAlign.center),
-                    ],
+                    Obx(() {
+                      final feedback = controller.activeFeedback.value;
+                      if (feedback == null) return const SizedBox.shrink();
+                      return Padding(
+                        padding: EdgeInsets.only(top: AppSpacing.sm),
+                        child: FeedbackBubble(
+                          message: feedback.message,
+                          isCorrect: feedback.isCorrect,
+                          onTap: controller.dismissFeedback,
+                        ),
+                      );
+                    }),
                   ],
                 ),
               );

@@ -14,6 +14,7 @@ final class PracticeItem extends Equatable {
     this.imageAsset,
     this.isCorrect = false,
     this.sequenceOrder,
+    this.feedback,
   });
 
   final String id;
@@ -30,6 +31,11 @@ final class PracticeItem extends Equatable {
   /// if this item isn't part of an ordered sequence.
   final int? sequenceOrder;
 
+  /// Specific, kind explanation shown when this item is tapped wrong (a
+  /// distractor in a choice-style game, or out of order in a sequence-style
+  /// one). Falls back to a generic message when absent.
+  final LocalizedText? feedback;
+
   @override
-  List<Object?> get props => [id, label, imageAsset, isCorrect, sequenceOrder];
+  List<Object?> get props => [id, label, imageAsset, isCorrect, sequenceOrder, feedback];
 }

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../core/services/narration_service.dart';
+import '../../../core/services/sound_service.dart';
 import '../../../domain/usecases/complete_activity.dart';
 import '../../../domain/usecases/get_activity.dart';
 import 'kit_builder_controller.dart';
@@ -14,6 +15,7 @@ class KitBuilderBinding extends Bindings {
         getActivity: Get.find<GetActivity>(),
         completeActivity: Get.find<CompleteActivity>(),
         narrationService: Get.find<NarrationService>(),
+        soundService: Get.find<SoundService>(),
         activityId: activityId,
       ),
     );

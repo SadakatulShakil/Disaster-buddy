@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bipod_bondhu/core/constants/app_constants.dart';
 import 'package:bipod_bondhu/core/localization/app_translations.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
+import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/domain/entities/badge_info.dart';
 import 'package:bipod_bondhu/domain/entities/localized_text.dart';
 import 'package:bipod_bondhu/presentation/reward/reward_args.dart';
@@ -40,6 +43,11 @@ void _useSurfaceSize(WidgetTester tester, Size size) {
 }
 
 void main() {
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    await UserPrefService.instance.init();
+    Get.put<SoundService>(SoundService());
+  });
   tearDown(Get.reset);
 
   testWidgets('shows the Tuku\'s Den invite and back-to-map action with zero overflow', (tester) async {

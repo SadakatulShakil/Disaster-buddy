@@ -9,6 +9,7 @@ final class QuizOption extends Equatable {
     this.imageAsset,
     required this.label,
     required this.isCorrect,
+    this.feedback,
   });
 
   final String id;
@@ -19,6 +20,11 @@ final class QuizOption extends Equatable {
   final LocalizedText label;
   final bool isCorrect;
 
+  /// Specific, kind explanation shown when this option is tapped — e.g. why
+  /// a wrong option isn't safe, tying it back to the right answer. Falls
+  /// back to a generic message when absent.
+  final LocalizedText? feedback;
+
   @override
-  List<Object?> get props => [id, imageAsset, label, isCorrect];
+  List<Object?> get props => [id, imageAsset, label, isCorrect, feedback];
 }

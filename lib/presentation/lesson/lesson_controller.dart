@@ -4,6 +4,7 @@ import '../../core/constants/app_constants.dart';
 import '../../core/error/result.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/services/narration_service.dart';
+import '../../core/services/sound_service.dart';
 import '../../core/utils/app_logger.dart';
 import '../../domain/entities/beat.dart';
 import '../../domain/entities/hazard_module.dart';
@@ -14,44 +15,47 @@ import '../../domain/usecases/complete_beat.dart';
 import '../../domain/usecases/get_module.dart';
 import '../../domain/usecases/save_quiz_result.dart';
 import '../reward/reward_args.dart';
+import '../widgets/feedback_presenter_mixin.dart';
+import 'beat_intro.dart';
 
 /// Load state for [LessonController], observed by [BeatRunnerPage].
 enum LessonViewStatus { loading, data, error }
 
-/// Drives a guided walk through one module's beats, from the beat tapped in
-/// ModuleHome onward. Two modes, chosen by [isReplay]:
-///  - forward (false): walk every remaining beat, ending in the reward
-///    celebration the first time the module becomes fully completed.
-///  - replay (true): show just the tapped beat, then return — used when
-///    reviewing a beat that's already completed.
+/// Drives one beat at a time, opened from ModuleHome at [startBeatId].
+/// Completing that beat always returns to ModuleHome (order-independent —
+/// the module completes whenever its last remaining beat is finished, in
+/// whatever order the child chooses) except the one time it makes the
+/// module newly fully-complete, when it instead awards the badge and shows
+/// the reward celebration.
 ///
-/// Badge-award is guarded by [ModuleProgress.badgeEarned] so replaying the
-/// final beat of an already-completed module never re-awards it.
-class LessonController extends GetxController {
+/// Badge-award is guarded by [ModuleProgress.badgeEarned] so completing the
+/// final beat of an already-completed module (a replay) never re-awards it.
+class LessonController extends GetxController with FeedbackPresenterMixin {
   LessonController({
     required GetModule getModule,
     required CompleteBeat completeBeat,
     required AwardBadge awardBadge,
     required SaveQuizResult saveQuizResult,
     required NarrationService narrationService,
+    required SoundService soundService,
     required this.moduleId,
     required this.startBeatId,
-    required this.isReplay,
   })  : _getModule = getModule,
         _completeBeat = completeBeat,
         _awardBadge = awardBadge,
         _saveQuizResult = saveQuizResult,
-        _narrationService = narrationService;
+        _narrationService = narrationService,
+        _soundService = soundService;
 
   final GetModule _getModule;
   final CompleteBeat _completeBeat;
   final AwardBadge _awardBadge;
   final SaveQuizResult _saveQuizResult;
   final NarrationService _narrationService;
+  final SoundService _soundService;
 
   final String moduleId;
   final String startBeatId;
-  final bool isReplay;
 
   final Rx<LessonViewStatus> status = LessonViewStatus.loading.obs;
   final Rx<HazardModule?> module = Rx<HazardModule?>(null);
@@ -59,9 +63,14 @@ class LessonController extends GetxController {
   final RxString errorMessage = ''.obs;
 
   /// Guards against a beat being completed twice from one tap-driven call —
-  /// e.g. a double-tap landing before the UI has swapped in the next beat's
-  /// runner would otherwise silently complete two beats at once.
+  /// e.g. a double-tap before the UI has navigated away would otherwise
+  /// silently complete the same beat twice.
   bool _isCompletingBeat = false;
+
+  @override
+  NarrationService get feedbackNarrationService => _narrationService;
+  @override
+  SoundService get feedbackSoundService => _soundService;
 
   RxBool get isSpeaking => _narrationService.isSpeaking;
 
@@ -77,6 +86,7 @@ class LessonController extends GetxController {
 
   @override
   void onClose() {
+    disposeFeedbackPresenter();
     _narrationService.stop();
     super.onClose();
   }
@@ -106,15 +116,26 @@ class LessonController extends GetxController {
     _narrationService.speak(text.resolve(langCode), langCode: langCode);
   }
 
+  /// Speaks the brief "Story time!"-style intro cue for [beat] — app-chrome
+  /// text from `.tr`, not manifest content, so it's resolved directly
+  /// rather than via a [LocalizedText]. Resolves once the cue has actually
+  /// finished playing (or immediately if muted/unavailable), so the caller
+  /// can safely show the beat's own content right after without cutting
+  /// this off.
+  Future<void> narrateBeatIntro(Beat beat) {
+    final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
+    return _narrationService.speakAndWaitUntilDone(beatIntroTrKey(beat).tr, langCode: langCode);
+  }
+
   void stopNarration() => _narrationService.stop();
 
   Future<void> recordQuizResult({required String quizId, required int correct, required int total}) =>
       _saveQuizResult(moduleId: moduleId, quizId: quizId, correctCount: correct, totalCount: total);
 
   /// Called by the active runner once the current beat is finished.
-  /// Persists completion, then either advances, replays back to
-  /// ModuleHome, or — the first time the module becomes fully completed —
-  /// awards the badge and shows the reward celebration.
+  /// Persists completion, then either returns to ModuleHome or — the first
+  /// time this makes the module fully completed — awards the badge and
+  /// shows the reward celebration.
   Future<void> completeCurrentBeat() async {
     if (_isCompletingBeat) return;
     _isCompletingBeat = true;
@@ -124,38 +145,30 @@ class LessonController extends GetxController {
 
       if (result case Failure<ModuleProgress>(failure: final failure)) {
         AppLogger.error('LessonController failed to persist beat "$beatId": ${failure.message}');
-        _exitAfterBeat(newlyCompleted: false);
+        Get.back();
         return;
       }
 
+      _soundService.playComplete();
       final progress = (result as Success<ModuleProgress>).value;
-      _exitAfterBeat(newlyCompleted: progress.isCompleted && !progress.badgeEarned);
+      await _exitAfterBeat(newlyCompleted: progress.isCompleted && !progress.badgeEarned);
     } finally {
       _isCompletingBeat = false;
     }
   }
 
   Future<void> _exitAfterBeat({required bool newlyCompleted}) async {
-    if (isReplay) {
+    if (!newlyCompleted) {
       Get.back();
       return;
     }
 
-    final isLastBeat = currentBeatIndex.value == beatCount - 1;
-    if (!isLastBeat) {
-      currentBeatIndex.value++;
-      return;
-    }
-
-    if (newlyCompleted) {
-      final badge = _loadedModule.badge;
-      await _awardBadge(moduleId: moduleId, badge: badge);
-      Get.offNamed(
-        AppRoutes.reward,
-        arguments: RewardArgs(moduleId: moduleId, badge: badge, themeColorHex: _loadedModule.themeColorHex),
-      );
-    } else {
-      Get.back();
-    }
+    final badge = _loadedModule.badge;
+    await _awardBadge(moduleId: moduleId, badge: badge);
+    _soundService.playSticker();
+    Get.offNamed(
+      AppRoutes.reward,
+      arguments: RewardArgs(moduleId: moduleId, badge: badge, themeColorHex: _loadedModule.themeColorHex),
+    );
   }
 }

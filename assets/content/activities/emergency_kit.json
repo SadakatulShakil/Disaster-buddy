@@ -67,25 +67,41 @@
       "id": "toy",
       "label": { "bn": "খেলনা", "en": "Toy" },
       "imageAsset": "activities/kit/toy.png",
-      "isCorrect": false
+      "isCorrect": false,
+      "feedback": {
+        "bn": "খেলনা মজার, কিন্তু জরুরি অবস্থায় এটা আমাদের নিরাপদ রাখবে না।",
+        "en": "A toy is fun, but it won't keep us safe in an emergency."
+      }
     },
     {
       "id": "sweets",
       "label": { "bn": "মিষ্টি", "en": "Sweets" },
       "imageAsset": "activities/kit/sweets.png",
-      "isCorrect": false
+      "isCorrect": false,
+      "feedback": {
+        "bn": "মিষ্টি সুস্বাদু, কিন্তু শুকনো খাবারের মতো অনেকদিন ভালো থাকে না।",
+        "en": "Sweets are tasty, but they don't keep us going like dry food does."
+      }
     },
     {
       "id": "football",
       "label": { "bn": "ফুটবল", "en": "Football" },
       "imageAsset": "activities/kit/football.png",
-      "isCorrect": false
+      "isCorrect": false,
+      "feedback": {
+        "bn": "ফুটবল খেলার জন্য দারুণ, কিন্তু জরুরি ব্যাগে এর দরকার নেই।",
+        "en": "A football is great for playing, but our emergency kit doesn't need it."
+      }
     },
     {
       "id": "video_game",
       "label": { "bn": "ভিডিও গেম", "en": "Video game" },
       "imageAsset": "activities/kit/video_game.png",
-      "isCorrect": false
+      "isCorrect": false,
+      "feedback": {
+        "bn": "ভিডিও গেম বাসায় খেলার জন্য, জরুরি ব্যাগের জন্য না।",
+        "en": "Video games are for playing at home, not for the emergency bag."
+      }
     }
   ]
 }

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/error/result.dart';
+import '../../core/services/sound_service.dart';
 import '../../core/utils/app_logger.dart';
 import '../../core/services/narration_service.dart';
 import '../../domain/entities/daily_challenge.dart';
@@ -10,6 +11,7 @@ import '../../domain/entities/streak_state.dart';
 import '../../domain/services/streak_calculator.dart';
 import '../../domain/usecases/get_todays_challenge.dart';
 import '../../domain/usecases/mark_challenge_complete.dart';
+import '../widgets/feedback_presenter_mixin.dart';
 
 /// Load/interaction state for [DailyChallengeController], observed by
 /// [DailyChallengePage].
@@ -35,18 +37,26 @@ enum DailyChallengeViewStatus {
 /// streak status, renders the challenge through the existing quiz/practice
 /// runners (the page switches on payload type — no interaction logic
 /// lives here), and records completion.
-class DailyChallengeController extends GetxController {
+class DailyChallengeController extends GetxController with FeedbackPresenterMixin {
   DailyChallengeController({
     required GetTodaysChallenge getTodaysChallenge,
     required MarkChallengeComplete markChallengeComplete,
     required NarrationService narrationService,
+    required SoundService soundService,
   })  : _getTodaysChallenge = getTodaysChallenge,
         _markChallengeComplete = markChallengeComplete,
-        _narrationService = narrationService;
+        _narrationService = narrationService,
+        _soundService = soundService;
 
   final GetTodaysChallenge _getTodaysChallenge;
   final MarkChallengeComplete _markChallengeComplete;
   final NarrationService _narrationService;
+  final SoundService _soundService;
+
+  @override
+  NarrationService get feedbackNarrationService => _narrationService;
+  @override
+  SoundService get feedbackSoundService => _soundService;
 
   final Rx<DailyChallengeViewStatus> status = DailyChallengeViewStatus.loading.obs;
   final Rx<DailyChallenge?> challenge = Rx<DailyChallenge?>(null);
@@ -64,6 +74,7 @@ class DailyChallengeController extends GetxController {
 
   @override
   void onClose() {
+    disposeFeedbackPresenter();
     _narrationService.stop();
     super.onClose();
   }
@@ -107,6 +118,8 @@ class DailyChallengeController extends GetxController {
       case Success<StreakUpdate>(value: final update):
         streakState.value = update.state;
         newMilestone.value = update.newMilestone;
+        _soundService.playComplete();
+        if (update.newMilestone != null) _soundService.playSticker();
         status.value = DailyChallengeViewStatus.celebrating;
       case Failure<StreakUpdate>(failure: final failure):
         AppLogger.error('DailyChallengeController failed to record completion: ${failure.message}');

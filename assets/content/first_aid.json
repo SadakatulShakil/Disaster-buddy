@@ -78,19 +78,31 @@
             "id": "stay_calm",
             "label": { "bn": "শান্ত থাকো", "en": "Stay calm" },
             "imageAsset": "practice/fa_calm.png",
-            "sequenceOrder": 1
+            "sequenceOrder": 1,
+            "feedback": {
+              "bn": "শান্ত থাকাই সবার আগে করণীয় — এটাই প্রথম ধাপ।",
+              "en": "Staying calm comes first, before anything else."
+            }
           },
           {
             "id": "get_grownup",
             "label": { "bn": "বড়দের ডাকো", "en": "Get a grown-up" },
             "imageAsset": "practice/fa_grownup.png",
-            "sequenceOrder": 2
+            "sequenceOrder": 2,
+            "feedback": {
+              "bn": "বড়দের ডাকা শান্ত থাকার পরের ধাপ।",
+              "en": "Getting a grown-up comes right after staying calm."
+            }
           },
           {
             "id": "call_999",
             "label": { "bn": "৯৯৯ নম্বরে কল করো", "en": "Call 999" },
             "imageAsset": "practice/fa_call.png",
-            "sequenceOrder": 3
+            "sequenceOrder": 3,
+            "feedback": {
+              "bn": "৯৯৯ নম্বরে কল করা বড়দের কাজ, আর এটা একদম শেষ ধাপ।",
+              "en": "Calling 999 is a grown-up's job, and it's the very last step."
+            }
           }
         ]
       }
@@ -106,8 +118,24 @@
           "imageAsset": "quiz/fa_q1.png",
           "options": [
             { "id": "a", "label": { "bn": "একজন বড় মানুষকে ডাকব", "en": "Get a grown-up" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "সেটা উপেক্ষা করব", "en": "Ignore it" }, "isCorrect": false },
-            { "id": "c", "label": { "bn": "নিজেই চিকিৎসা করব", "en": "Try to treat it myself" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "সেটা উপেক্ষা করব", "en": "Ignore it" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "উপেক্ষা করলে বন্ধুর দরকারি সাহায্য পাওয়া হবে না।",
+                "en": "Ignoring it means your friend might not get the help they need."
+              }
+            },
+            {
+              "id": "c",
+              "label": { "bn": "নিজেই চিকিৎসা করব", "en": "Try to treat it myself" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "নিজে চিকিৎসা করার চেষ্টা না করে সবসময় বড়দের ডাকো।",
+                "en": "Don't try to treat it yourself — always get a grown-up instead."
+              }
+            }
           ]
         },
         {
@@ -116,7 +144,15 @@
           "imageAsset": "quiz/fa_q2.png",
           "options": [
             { "id": "a", "label": { "bn": "একজন বড় মানুষ", "en": "A grown-up" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "আমি নিজে", "en": "I call it myself" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "আমি নিজে", "en": "I call it myself" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "জরুরি কলগুলো সবসময় বড়দের করা উচিত।",
+                "en": "Emergency calls should always be made by a grown-up."
+              }
+            }
           ]
         },
         {
@@ -128,7 +164,15 @@
           "imageAsset": "quiz/fa_q3.png",
           "options": [
             { "id": "a", "label": { "bn": "পাশে থেকে ভরসা দেব", "en": "Stay with them and comfort them" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "একা রেখে চলে যাব", "en": "Leave them alone" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "একা রেখে চলে যাব", "en": "Leave them alone" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বন্ধুকে একা রেখে যাওয়া ঠিক না — পাশে থেকে ভরসা দাও।",
+                "en": "Leaving them alone isn't kind — stay close and comfort them instead."
+              }
+            }
           ]
         }
       ]

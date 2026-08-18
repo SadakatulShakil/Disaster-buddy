@@ -41,6 +41,7 @@ import '../../fakes/fake_content_repository.dart';
 import '../../fakes/fake_daily_challenge_repository.dart';
 import '../../fakes/fake_daily_progress_repository.dart';
 import '../../fakes/fake_den_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_progress_repository.dart';
 
 LocalizedText _text(String value) => LocalizedText(bn: value, en: value);
@@ -136,7 +137,7 @@ class _Fixture {
       placeSticker: PlaceSticker(denRepository: denRepository, progressRepository: progressRepository),
       removeSticker: RemoveSticker(denRepository),
       setDenTheme: SetDenTheme(denRepository),
-      narrationService: NarrationService(),
+      narrationService: NarrationService(tts: FakeFlutterTts()),
     );
   }
 }

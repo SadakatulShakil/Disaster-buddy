@@ -20,6 +20,7 @@ import '../widgets/app_button.dart';
 import '../widgets/app_error_view.dart';
 import '../widgets/app_loader.dart';
 import '../widgets/app_scaffold.dart';
+import '../widgets/feedback_bubble.dart';
 import '../widgets/mascot_view.dart';
 import '../widgets/placeholder_art.dart';
 import '../widgets/streak_chip.dart';
@@ -89,6 +90,9 @@ class _DailyChallengeRunnerState extends State<_DailyChallengeRunner> {
       },
       recordQuizResult: ({required quizId, required correct, required total}) =>
           widget.controller.completeChallenge(wasCorrect: correct >= total),
+      showFeedback: ({required message, required isCorrect}) =>
+          widget.controller.presentFeedback(message: message, isCorrect: isCorrect),
+      clearFeedback: widget.controller.dismissFeedback,
     );
 
     return Column(
@@ -96,20 +100,38 @@ class _DailyChallengeRunnerState extends State<_DailyChallengeRunner> {
         SizedBox(height: AppSpacing.sm),
         Obx(() => MascotView(mood: _mascotMood.value, size: 88)),
         Expanded(
-          child: switch (challenge.payload) {
-            QuizChallengePayload(:final question) => QuizRunner(
-                key: ValueKey(challenge.id),
-                beat: QuizBeat(id: challenge.id, order: 0, questions: [question]),
-                themeColor: AppColors.accent,
-                callbacks: callbacks,
-              ),
-            PracticeChallengePayload(:final gameId, :final config) => PracticeRunner(
-                key: ValueKey(challenge.id),
-                beat: PracticeBeat(id: challenge.id, order: 0, gameId: gameId, config: config),
-                themeColor: AppColors.accent,
-                callbacks: callbacks,
-              ),
-          },
+          child: Stack(
+            children: [
+              switch (challenge.payload) {
+                QuizChallengePayload(:final question) => QuizRunner(
+                    key: ValueKey(challenge.id),
+                    beat: QuizBeat(id: challenge.id, order: 0, questions: [question]),
+                    themeColor: AppColors.accent,
+                    callbacks: callbacks,
+                  ),
+                PracticeChallengePayload(:final gameId, :final config) => PracticeRunner(
+                    key: ValueKey(challenge.id),
+                    beat: PracticeBeat(id: challenge.id, order: 0, gameId: gameId, config: config),
+                    themeColor: AppColors.accent,
+                    callbacks: callbacks,
+                  ),
+              },
+              Obx(() {
+                final feedback = widget.controller.activeFeedback.value;
+                if (feedback == null) return const SizedBox.shrink();
+                return Positioned(
+                  left: AppSpacing.md,
+                  right: AppSpacing.md,
+                  bottom: AppSpacing.md,
+                  child: FeedbackBubble(
+                    message: feedback.message,
+                    isCorrect: feedback.isCorrect,
+                    onTap: widget.controller.dismissFeedback,
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
       ],
     );

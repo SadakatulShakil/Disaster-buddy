@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bipod_bondhu/core/services/narration_service.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/core/theme/app_durations.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
@@ -25,6 +26,7 @@ import 'package:bipod_bondhu/presentation/activities/safe_spot_finder/widgets/sa
 
 import '../../fakes/fake_activity_progress_repository.dart';
 import '../../fakes/fake_activity_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_progress_repository.dart';
 
 const _text = LocalizedText(bn: 'ক', en: 'a');
@@ -89,7 +91,8 @@ SafeSpotFinderController _buildController({
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     ),
-    narrationService: NarrationService(),
+    narrationService: NarrationService(tts: FakeFlutterTts()),
+    soundService: SoundService(),
     activityId: 'safe_spot_finder',
   );
 }
@@ -110,6 +113,7 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
 
     final safe1 = controller.currentScene.spots.firstWhere((spot) => spot.isSafe);
@@ -138,6 +142,7 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
     final unsafe = controller.currentScene.spots.firstWhere((spot) => !spot.isSafe);
 
@@ -150,6 +155,9 @@ void main() {
     expect(controller.lastUnsafeSpotId.value, unsafe.id);
     expect(activityProgressRepository.completedByActivity['safe_spot_finder'], isNull);
     expect(progressRepository.awardBadgeCallCount, 0);
+    // Shows the spot's own kind explanation, narrated via the shared bubble.
+    expect(controller.activeFeedback.value?.isCorrect, isFalse);
+    expect(controller.activeFeedback.value?.message, unsafe.feedback.bn);
 
     // Let the reject-feedback clear timer fire so it isn't left pending
     // when the test ends.
@@ -166,14 +174,14 @@ void main() {
 
   testWidgets('replaying an already-completed activity does not double-award', (tester) async {
     final activityRepository = FakeActivityRepository([_safeSpotActivity()]);
-    final activityProgressRepository = FakeActivityProgressRepository()
-      ..completedByActivity['safe_spot_finder'] = true;
+    final activityProgressRepository = FakeActivityProgressRepository()..completedByActivity['safe_spot_finder'] = true;
     final progressRepository = FakeProgressRepository()..earnedBadgeIds.add('safe_spot_hero_badge');
     final controller = _buildController(
       activityRepository: activityRepository,
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
 
     final safe1 = controller.currentScene.spots.firstWhere((spot) => spot.isSafe);

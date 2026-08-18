@@ -83,13 +83,21 @@
             "id": "open_field",
             "label": { "bn": "খোলা মাঠ", "en": "Open field" },
             "imageAsset": "practice/open_field.png",
-            "isCorrect": false
+            "isCorrect": false,
+            "feedback": {
+              "bn": "খোলা মাঠে তুমিই আশেপাশের সবচেয়ে উঁচু জিনিস হতে পারো — এটা নিরাপদ নয়।",
+              "en": "In an open field, you could be the tallest thing around — that's not safe."
+            }
           },
           {
             "id": "under_tree",
             "label": { "bn": "গাছের নিচে", "en": "Under a tree" },
             "imageAsset": "practice/under_tree.png",
-            "isCorrect": false
+            "isCorrect": false,
+            "feedback": {
+              "bn": "উঁচু গাছ বজ্রপাত টেনে আনতে পারে — গাছের নিচে দাঁড়িও না।",
+              "en": "Tall trees attract lightning — never stand under one."
+            }
           }
         ]
       }
@@ -105,8 +113,24 @@
           "imageAsset": "quiz/lt_q1.png",
           "options": [
             { "id": "a", "label": { "bn": "ঘরে চলে যাব", "en": "Go indoors" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "বাইরে খেলতে থাকব", "en": "Keep playing outside" }, "isCorrect": false },
-            { "id": "c", "label": { "bn": "উঁচু গাছের নিচে দাঁড়াব", "en": "Stand under a tall tree" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "বাইরে খেলতে থাকব", "en": "Keep playing outside" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বাজ পড়লে বাইরে থাকা বিপজ্জনক — ঘরে চলে যাওয়াই নিরাপদ।",
+                "en": "Staying outside during thunder is risky — going indoors is safer."
+              }
+            },
+            {
+              "id": "c",
+              "label": { "bn": "উঁচু গাছের নিচে দাঁড়াব", "en": "Stand under a tall tree" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "উঁচু গাছ বজ্রপাত টানতে পারে — এটা নিরাপদ জায়গা নয়।",
+                "en": "Tall trees can attract lightning — that's not a safe spot."
+              }
+            }
           ]
         },
         {
@@ -118,7 +142,15 @@
           "imageAsset": "quiz/lt_q2.png",
           "options": [
             { "id": "a", "label": { "bn": "খোলা মাঠে", "en": "An open field" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "ঘরের ভেতরে", "en": "Inside a house" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "ঘরের ভেতরে", "en": "Inside a house" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "ঘরের ভেতরে থাকা আসলে নিরাপদ — এটা বিপজ্জনক নয়।",
+                "en": "Being inside a house is actually safe — that's not the dangerous one."
+              }
+            }
           ]
         },
         {
@@ -130,7 +162,15 @@
           "imageAsset": "quiz/lt_q3.png",
           "options": [
             { "id": "a", "label": { "bn": "৩০ মিনিট", "en": "30 minutes" }, "isCorrect": true },
-            { "id": "b", "label": { "bn": "কয়েক সেকেন্ড", "en": "Just a few seconds" }, "isCorrect": false }
+            {
+              "id": "b",
+              "label": { "bn": "কয়েক সেকেন্ড", "en": "Just a few seconds" },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কয়েক সেকেন্ড যথেষ্ট নয় — পুরো ৩০ মিনিট অপেক্ষা করো।",
+                "en": "Just a few seconds isn't long enough — wait the full 30 minutes."
+              }
+            }
           ]
         }
       ]

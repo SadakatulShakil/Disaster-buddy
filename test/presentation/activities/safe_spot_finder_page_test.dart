@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bipod_bondhu/core/constants/app_constants.dart';
 import 'package:bipod_bondhu/core/localization/app_translations.dart';
 import 'package:bipod_bondhu/core/services/narration_service.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
 import 'package:bipod_bondhu/domain/entities/activity_content.dart';
@@ -27,6 +28,7 @@ import 'package:bipod_bondhu/presentation/activities/safe_spot_finder/safe_spot_
 
 import '../../fakes/fake_activity_progress_repository.dart';
 import '../../fakes/fake_activity_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_progress_repository.dart';
 
 /// The real, realistically-short Safe Spot Finder title — the header must
@@ -117,7 +119,8 @@ void main() {
           activityProgressRepository: FakeActivityProgressRepository(),
           progressRepository: FakeProgressRepository(),
         ),
-        narrationService: NarrationService(),
+        narrationService: NarrationService(tts: FakeFlutterTts()),
+        soundService: SoundService(),
         activityId: 'safe_spot_finder',
       );
 

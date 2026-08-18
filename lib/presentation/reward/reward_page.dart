@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../core/constants/app_constants.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services/sound_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_durations.dart';
 import '../../core/theme/app_radii.dart';
@@ -38,6 +39,12 @@ class _RewardPageState extends State<RewardPage> with SingleTickerProviderStateM
   late final List<_ConfettiParticle> _particles = List.generate(20, (i) => _ConfettiParticle.random(Random(i)));
 
   bool _startedForMotion = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<SoundService>().playReward();
+  }
 
   @override
   void didChangeDependencies() {

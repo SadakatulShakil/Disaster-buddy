@@ -8,16 +8,16 @@ import '../../../core/theme/app_durations.dart';
 import '../../../core/theme/app_radii.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../domain/entities/hazard_module.dart';
+import '../../../domain/entities/collectible_sticker.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/placeholder_art.dart';
 
 /// One earned badge in the sticker grid, with a staggered pop/scale-in
-/// entrance. Tapping shows which module it came from.
+/// entrance. Tapping shows which module/activity/streak it came from.
 class StickerTile extends StatefulWidget {
-  const StickerTile({super.key, required this.module, required this.index, required this.onTap});
+  const StickerTile({super.key, required this.sticker, required this.index, required this.onTap});
 
-  final HazardModule module;
+  final CollectibleSticker sticker;
   final int index;
   final VoidCallback onTap;
 
@@ -53,28 +53,28 @@ class _StickerTileState extends State<StickerTile> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
-    final themeColor = AppColors.fromHex(widget.module.themeColorHex);
+    final badge = widget.sticker.badge;
 
     return ScaleTransition(
       scale: _scale,
       child: Semantics(
         button: true,
-        label: widget.module.badge.title.resolve(langCode),
+        label: badge.title.resolve(langCode),
         child: AppCard(
           onTap: widget.onTap,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               PlaceholderArt(
-                assetPath: widget.module.badge.iconAsset,
-                themeColor: themeColor,
+                assetPath: badge.iconAsset,
+                themeColor: AppColors.accent,
                 fallbackIcon: Icons.emoji_events_rounded,
                 size: 64.r,
                 borderRadius: AppRadii.borderPill,
               ),
               SizedBox(height: AppSpacing.sm),
               Text(
-                widget.module.badge.title.resolve(langCode),
+                badge.title.resolve(langCode),
                 style: AppTextStyles.caption,
                 textAlign: TextAlign.center,
                 maxLines: 2,

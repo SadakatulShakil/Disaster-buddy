@@ -42,6 +42,10 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+  # Short joyful sound effects (SoundService) — separate from flutter_tts,
+  # which is speech-only.
+  audioplayers: ^6.7.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -66,8 +70,11 @@ flutter:
     - assets/images/icons/
     - assets/images/mascot/
     - assets/images/activities/kit/
+    - assets/images/activities/safe_spot/
+    - assets/images/activities/signal_colours/
     - assets/icons/
     - assets/audio/
+    - assets/audio/sfx/
     - assets/images/story/
     - assets/images/steps/
     - assets/images/practice/

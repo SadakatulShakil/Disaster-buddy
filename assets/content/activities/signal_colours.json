@@ -20,7 +20,11 @@
       "meaning": { "bn": "সব ঠিক আছে, কোনো বিপদ নেই", "en": "All calm — no danger right now" },
       "action": { "bn": "খেলো আর তোমার দিন উপভোগ করো", "en": "Play and enjoy your day" },
       "actionIcon": "activities/signal_colours/action_play.png",
-      "affirmation": { "bn": "সবুজ মানে সব নিরাপদ!", "en": "Green means everything is safe!" }
+      "affirmation": { "bn": "সবুজ মানে সব নিরাপদ!", "en": "Green means everything is safe!" },
+      "feedback": {
+        "bn": "এই সবুজ রং মানে সব ঠিক আছে আর খেলার সময় — অন্য মানেটা অন্য রঙের জন্য।",
+        "en": "This green colour means all calm and time to play — that other answer is for a different colour."
+      }
     },
     {
       "id": "get_ready",
@@ -31,7 +35,11 @@
         "en": "Listen to a grown-up and pack your emergency kit"
       },
       "actionIcon": "activities/signal_colours/action_get_ready.png",
-      "affirmation": { "bn": "হলুদ মানে তৈরি হওয়ার সময়!", "en": "Yellow means it's time to get ready!" }
+      "affirmation": { "bn": "হলুদ মানে তৈরি হওয়ার সময়!", "en": "Yellow means it's time to get ready!" },
+      "feedback": {
+        "bn": "এই হলুদ রং মানে ঝড় আসতে পারে, তৈরি হও — অন্য মানেটা অন্য রঙের জন্য।",
+        "en": "This yellow colour means a storm might be coming and it's time to get ready — that other answer is for a different colour."
+      }
     },
     {
       "id": "danger",
@@ -42,7 +50,11 @@
         "en": "Go to a safe shelter right now with your family"
       },
       "actionIcon": "activities/signal_colours/action_shelter.png",
-      "affirmation": { "bn": "লাল মানে এখনই নিরাপদ জায়গায় যেতে হবে!", "en": "Red means go to shelter right now!" }
+      "affirmation": { "bn": "লাল মানে এখনই নিরাপদ জায়গায় যেতে হবে!", "en": "Red means go to shelter right now!" },
+      "feedback": {
+        "bn": "এই লাল রং মানে বড় বিপদ কাছে, এখনই নিরাপদ জায়গায় যাও — অন্য মানেটা অন্য রঙের জন্য।",
+        "en": "This red colour means big danger is close and it's time for shelter — that other answer is for a different colour."
+      }
     }
   ]
 }

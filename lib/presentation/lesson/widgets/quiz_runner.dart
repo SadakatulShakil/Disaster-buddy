@@ -62,14 +62,18 @@ class _QuizRunnerState extends State<QuizRunner> {
     if (_currentAnsweredCorrectly) return;
     final isFirstAttempt = !_attemptedCurrent;
     _attemptedCurrent = true;
+    final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
 
     if (option.isCorrect) {
       if (isFirstAttempt) _firstTryCorrectCount++;
       widget.callbacks.setMascotMood(MascotMood.cheer);
-      widget.callbacks.stopNarration();
       setState(() => _currentAnsweredCorrectly = true);
-      Future.delayed(AppDurations.slow, _advance);
+      _celebrateThenAdvance(option, langCode);
     } else {
+      widget.callbacks.showFeedback(
+        message: option.feedback?.resolve(langCode) ?? 'feedback_generic_wrong'.tr,
+        isCorrect: false,
+      );
       setState(() => _wrongOptionId = option.id);
       Future.delayed(AppDurations.normal, () {
         if (mounted) setState(() => _wrongOptionId = null);
@@ -77,8 +81,21 @@ class _QuizRunnerState extends State<QuizRunner> {
     }
   }
 
+  /// Waits for the "well done" feedback to finish narrating — never a fixed
+  /// guessed delay — before moving to the next question, so the child's
+  /// narration is never cut off mid-sentence.
+  Future<void> _celebrateThenAdvance(QuizOption option, String langCode) async {
+    await widget.callbacks.showFeedback(
+      message: option.feedback?.resolve(langCode) ?? 'feedback_generic_correct'.tr,
+      isCorrect: true,
+    );
+    if (!mounted) return;
+    await _advance();
+  }
+
   Future<void> _advance() async {
     if (!mounted) return;
+    widget.callbacks.clearFeedback();
     if (_questionIndex == widget.beat.questions.length - 1) {
       await widget.callbacks.recordQuizResult(
         quizId: widget.beat.id,

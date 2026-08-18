@@ -6,7 +6,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_radii.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_text_styles.dart';
-import '../../domain/entities/hazard_module.dart';
+import '../../domain/entities/collectible_sticker.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_empty_view.dart';
 import '../widgets/app_error_view.dart';
@@ -55,8 +55,8 @@ class StickerBookPage extends GetView<StickerBookController> {
                 case StickerBookViewStatus.error:
                   return AppErrorView(message: controller.errorMessage.value, onRetry: controller.load);
                 case StickerBookViewStatus.data:
-                  final modules = controller.earnedModules;
-                  if (modules.isEmpty) {
+                  final stickers = controller.earnedStickers;
+                  if (stickers.isEmpty) {
                     return AppEmptyView(
                       title: 'empty_stickers_title'.tr,
                       subtitle: 'empty_stickers_subtitle'.tr,
@@ -71,11 +71,11 @@ class StickerBookPage extends GetView<StickerBookController> {
                       crossAxisSpacing: AppSpacing.md,
                       childAspectRatio: 0.85,
                     ),
-                    itemCount: modules.length,
+                    itemCount: stickers.length,
                     itemBuilder: (context, index) => StickerTile(
-                      module: modules[index],
+                      sticker: stickers[index],
                       index: index,
-                      onTap: () => _showSource(context, modules[index]),
+                      onTap: () => _showSource(context, stickers[index]),
                     ),
                   );
               }
@@ -86,8 +86,16 @@ class StickerBookPage extends GetView<StickerBookController> {
     );
   }
 
-  void _showSource(BuildContext context, HazardModule module) {
+  void _showSource(BuildContext context, CollectibleSticker sticker) {
     final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
+    final sourceText = switch (sticker.sourceKind) {
+      CollectibleSourceKind.streak =>
+        'sticker_from_streak'.trParams({'days': '${sticker.streakLength}'}),
+      CollectibleSourceKind.module ||
+      CollectibleSourceKind.activity =>
+        '${'sticker_from'.tr} ${sticker.sourceLabel.resolve(langCode)}',
+    };
+
     showDialog<void>(
       context: context,
       builder: (context) => Dialog(
@@ -97,19 +105,13 @@ class StickerBookPage extends GetView<StickerBookController> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(module.badge.title.resolve(langCode), style: AppTextStyles.h2, textAlign: TextAlign.center),
+              Text(sticker.badge.title.resolve(langCode), style: AppTextStyles.h2, textAlign: TextAlign.center),
               SizedBox(height: AppSpacing.sm),
-              Text(
-                langCode == AppConstants.langBn
-                    ? '${module.title.resolve(langCode)} ${'beat_from'.tr} ${'sticker_from'.tr}'
-                    : '${'sticker_from'.tr} ${module.title.resolve(langCode)} ${'beat_from'.tr}',
-                style: AppTextStyles.bodyGrey,
-                textAlign: TextAlign.center,
-              ),
+              Text(sourceText, style: AppTextStyles.bodyGrey, textAlign: TextAlign.center),
               SizedBox(height: AppSpacing.lg),
               AppButton(
                 label: 'done'.tr,
-                color: AppColors.fromHex(module.themeColorHex),
+                color: AppColors.accent,
                 onPressed: () => Get.back(),
               ),
             ],

@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:bipod_bondhu/core/services/narration_service.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/core/theme/app_durations.dart';
 import 'package:bipod_bondhu/domain/entities/activity.dart';
@@ -20,6 +21,7 @@ import 'package:bipod_bondhu/presentation/activities/signal_colours/signal_colou
 
 import '../../fakes/fake_activity_progress_repository.dart';
 import '../../fakes/fake_activity_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_progress_repository.dart';
 
 const _text = LocalizedText(bn: 'ক', en: 'a');
@@ -33,7 +35,15 @@ Activity _signalActivity() => const Activity(
       instructions: _text,
       content: SignalColoursContent(
         signals: [
-          SignalInfo(id: 'calm', colorHex: '#2E9E5B', meaning: _text, action: _text, actionIcon: 'a.png', affirmation: _text),
+          SignalInfo(
+            id: 'calm',
+            colorHex: '#2E9E5B',
+            meaning: _text,
+            action: _text,
+            actionIcon: 'a.png',
+            affirmation: _text,
+            feedback: _text,
+          ),
           SignalInfo(
             id: 'get_ready',
             colorHex: '#F4C430',
@@ -41,8 +51,17 @@ Activity _signalActivity() => const Activity(
             action: _text,
             actionIcon: 'b.png',
             affirmation: _text,
+            feedback: _text,
           ),
-          SignalInfo(id: 'danger', colorHex: '#D9534F', meaning: _text, action: _text, actionIcon: 'c.png', affirmation: _text),
+          SignalInfo(
+            id: 'danger',
+            colorHex: '#D9534F',
+            meaning: _text,
+            action: _text,
+            actionIcon: 'c.png',
+            affirmation: _text,
+            feedback: _text,
+          ),
         ],
       ),
       badge: BadgeInfo(id: 'signal_spotter_badge', title: _text, iconAsset: 'badge.png'),
@@ -59,7 +78,8 @@ SignalColoursController _buildController({
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     ),
-    narrationService: NarrationService(),
+    narrationService: NarrationService(tts: FakeFlutterTts()),
+    soundService: SoundService(),
     activityId: 'signal_colours',
   );
 }
@@ -79,6 +99,7 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
 
     for (var i = 0; i < 3; i++) {
@@ -101,6 +122,7 @@ void main() {
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
     final wrongOption = controller.signals.firstWhere((signal) => signal.id != controller.currentSignal.id);
 
@@ -111,6 +133,10 @@ void main() {
     expect(controller.lastWrongOptionId.value, wrongOption.id);
     expect(activityProgressRepository.completedByActivity['signal_colours'], isNull);
     expect(progressRepository.awardBadgeCallCount, 0);
+    // Shows the correct signal's own specific feedback, not a generic
+    // fallback.
+    expect(controller.activeFeedback.value?.isCorrect, isFalse);
+    expect(controller.activeFeedback.value?.message, _text.bn);
 
     // Let the reject-feedback clear timer fire so it isn't left pending
     // when the test ends.
@@ -126,14 +152,14 @@ void main() {
 
   testWidgets('replaying an already-completed activity does not double-award', (tester) async {
     final activityRepository = FakeActivityRepository([_signalActivity()]);
-    final activityProgressRepository = FakeActivityProgressRepository()
-      ..completedByActivity['signal_colours'] = true;
+    final activityProgressRepository = FakeActivityProgressRepository()..completedByActivity['signal_colours'] = true;
     final progressRepository = FakeProgressRepository()..earnedBadgeIds.add('signal_spotter_badge');
     final controller = _buildController(
       activityRepository: activityRepository,
       activityProgressRepository: activityProgressRepository,
       progressRepository: progressRepository,
     );
+    addTearDown(controller.onClose);
     await controller.load();
 
     for (var i = 0; i < 3; i++) {

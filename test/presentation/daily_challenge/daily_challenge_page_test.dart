@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bipod_bondhu/core/constants/app_constants.dart';
 import 'package:bipod_bondhu/core/localization/app_translations.dart';
 import 'package:bipod_bondhu/core/services/narration_service.dart';
+import 'package:bipod_bondhu/core/services/sound_service.dart';
 import 'package:bipod_bondhu/core/services/user_pref_service.dart';
 import 'package:bipod_bondhu/core/theme/app_durations.dart';
 import 'package:bipod_bondhu/domain/entities/daily_challenge.dart';
@@ -30,6 +31,7 @@ import 'package:bipod_bondhu/presentation/daily_challenge/daily_challenge_contro
 import 'package:bipod_bondhu/presentation/daily_challenge/daily_challenge_page.dart';
 
 import '../../fakes/fake_content_repository.dart';
+import '../../fakes/fake_flutter_tts.dart';
 import '../../fakes/fake_daily_challenge_repository.dart';
 import '../../fakes/fake_daily_progress_repository.dart';
 import '../../fakes/fake_progress_repository.dart';
@@ -75,7 +77,8 @@ DailyChallengeController _buildController({FakeDailyProgressRepository? dailyPro
       awardBadge: AwardBadge(progressRepository),
       clock: _fixedClock,
     ),
-    narrationService: NarrationService(),
+    narrationService: NarrationService(tts: FakeFlutterTts()),
+    soundService: SoundService(),
   );
 }
 

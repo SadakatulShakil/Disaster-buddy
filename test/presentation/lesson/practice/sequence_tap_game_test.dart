@@ -38,6 +38,8 @@ LessonRunnerCallbacks _callbacks(_Spy spy) => LessonRunnerCallbacks(
       setMascotMood: (_) {},
       onBeatFinished: () => spy.finished = true,
       recordQuizResult: ({required quizId, required correct, required total}) async {},
+      showFeedback: ({required message, required isCorrect}) async {},
+      clearFeedback: () {},
     );
 
 /// Wraps [builder] in a minimal GetX + ScreenUtil shell, calling it with a

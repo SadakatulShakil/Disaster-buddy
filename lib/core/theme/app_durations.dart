@@ -19,4 +19,10 @@ class AppDurations {
 
   /// Minimum time the splash screen stays visible before navigating away.
   static const Duration splashHold = Duration(milliseconds: 1500);
+
+  /// Calm minimum a beat's "Story time!"-style intro cue stays visible for
+  /// before its runner mounts — paired with waiting for the cue's own
+  /// narration to finish, so it's never a shorter, jarring flash even when
+  /// muted.
+  static const Duration beatIntroHold = Duration(milliseconds: 1100);
 }

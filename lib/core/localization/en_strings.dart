@@ -72,6 +72,17 @@ const Map<String, String> enStrings = {
   'resume_here': 'Continue here',
   'start_adventure': 'Start',
 
+  // Beat intro cue + in-lesson header (UX pass)
+  'beat_intro_story': 'Story time!',
+  'beat_intro_steps': "Let's learn the safe steps!",
+  'beat_intro_practice': "Let's practise!",
+  'beat_intro_quiz': 'Quiz time!',
+  'beat_position': 'Part @current of @total',
+
+  // Shared wrong/correct feedback bubble (UX pass)
+  'feedback_generic_wrong': "Not quite — let's try again!",
+  'feedback_generic_correct': 'Well done!',
+
   // Beat stub (Phase 3 placeholder)
   'coming_soon_title': 'Coming soon!',
   'coming_soon_body': 'This part of the adventure is being built. Check back in the next update!',
@@ -80,6 +91,7 @@ const Map<String, String> enStrings = {
   'empty_stickers_title': 'Earn your first sticker!',
   'empty_stickers_subtitle': 'Finish an adventure to earn a badge.',
   'sticker_from': 'From',
+  'sticker_from_streak': 'From a @days-day streak!',
 
   // Settings
   'narration_slow': 'Slow',

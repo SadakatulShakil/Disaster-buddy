@@ -76,12 +76,14 @@ class _SequenceTapViewState extends State<_SequenceTapView> {
       setState(() => _nextExpected++);
       if (_nextExpected > widget.items.length) {
         widget.callbacks.setMascotMood(MascotMood.cheer);
-        widget.callbacks.stopNarration();
-        Future.delayed(AppDurations.slow, () {
-          if (mounted) widget.callbacks.onBeatFinished();
-        });
+        _celebrateThenFinish();
       }
     } else {
+      final langCode = Get.locale?.languageCode ?? AppConstants.langBn;
+      widget.callbacks.showFeedback(
+        message: item.feedback?.resolve(langCode) ?? 'feedback_generic_wrong'.tr,
+        isCorrect: false,
+      );
       setState(() {
         _wrongItemId = item.id;
         _showHint = true;
@@ -90,6 +92,14 @@ class _SequenceTapViewState extends State<_SequenceTapView> {
         if (mounted) setState(() => _wrongItemId = null);
       });
     }
+  }
+
+  /// Waits for the "well done" feedback to finish narrating — never a fixed
+  /// guessed delay — before finishing the beat, so the child's narration is
+  /// never cut off mid-sentence.
+  Future<void> _celebrateThenFinish() async {
+    await widget.callbacks.showFeedback(message: 'feedback_generic_correct'.tr, isCorrect: true);
+    if (mounted) widget.callbacks.onBeatFinished();
   }
 
   @override

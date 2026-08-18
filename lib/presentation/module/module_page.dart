@@ -128,18 +128,14 @@ class _ModuleBody extends StatelessWidget {
     );
   }
 
-  /// Opens the lesson at [beat]. An already-completed beat opens in replay
-  /// mode (shows just that beat, then returns); otherwise the lesson walks
-  /// forward from here. Refreshes ModuleHome's own state on return so the
-  /// resume highlight and completion badges reflect what just happened.
+  /// Opens the lesson at [beat] — whether it's the next beat to start or an
+  /// already-completed one being replayed, completing it always returns
+  /// here. Refreshes ModuleHome's own state on return so the resume
+  /// highlight and completion badges reflect what just happened.
   Future<void> _openBeat(String moduleId, Beat beat) async {
     await Get.toNamed(
       AppRoutes.lesson,
-      arguments: LessonArgs(
-        moduleId: moduleId,
-        startBeatId: beat.id,
-        isReplay: controller.isBeatCompleted(beat),
-      ),
+      arguments: LessonArgs(moduleId: moduleId, startBeatId: beat.id),
     );
     controller.load();
   }

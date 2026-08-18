@@ -10,10 +10,12 @@ final class KitItemDto {
     required this.imageAsset,
     required this.isCorrect,
     this.affirmation,
+    this.feedback,
   });
 
   factory KitItemDto.fromJson(Map<String, dynamic> json, String context) {
     final affirmationJson = optionalObject(json, 'affirmation');
+    final feedbackJson = optionalObject(json, 'feedback');
     return KitItemDto(
       id: requireString(json, 'id', context),
       label: LocalizedTextDto.fromJson(requireObject(json, 'label', context), '$context.label'),
@@ -21,6 +23,7 @@ final class KitItemDto {
       isCorrect: optionalBool(json, 'isCorrect'),
       affirmation:
           affirmationJson != null ? LocalizedTextDto.fromJson(affirmationJson, '$context.affirmation') : null,
+      feedback: feedbackJson != null ? LocalizedTextDto.fromJson(feedbackJson, '$context.feedback') : null,
     );
   }
 
@@ -29,6 +32,7 @@ final class KitItemDto {
   final String imageAsset;
   final bool isCorrect;
   final LocalizedTextDto? affirmation;
+  final LocalizedTextDto? feedback;
 
   KitItem toDomain() => KitItem(
         id: id,
@@ -36,5 +40,6 @@ final class KitItemDto {
         imageAsset: imageAsset,
         isCorrect: isCorrect,
         affirmation: affirmation?.toDomain(),
+        feedback: feedback?.toDomain(),
       );
 }

@@ -42,6 +42,7 @@ import '../../domain/usecases/reset_single_module.dart';
 import '../../domain/usecases/save_quiz_result.dart';
 import '../../domain/usecases/set_den_theme.dart';
 import '../services/narration_service.dart';
+import '../services/sound_service.dart';
 
 /// App-wide dependencies that live for the whole session.
 /// UserPrefService is a plain singleton initialised in main(), so it isn't
@@ -51,6 +52,9 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<NarrationService>(NarrationService(), permanent: true);
+    final soundService = SoundService();
+    Get.put<SoundService>(soundService, permanent: true);
+    soundService.preload();
 
     final db = Get.find<AppDatabase>();
 

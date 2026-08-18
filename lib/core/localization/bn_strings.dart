@@ -72,6 +72,17 @@ const Map<String, String> bnStrings = {
   'resume_here': 'এখান থেকে চালিয়ে যাও',
   'start_adventure': 'শুরু করো',
 
+  // Beat intro cue + in-lesson header (UX pass)
+  'beat_intro_story': 'গল্পের সময়!',
+  'beat_intro_steps': 'চলো নিরাপদ ধাপগুলো শিখি!',
+  'beat_intro_practice': 'চলো অনুশীলন করি!',
+  'beat_intro_quiz': 'কুইজের সময়!',
+  'beat_position': 'অংশ @current, মোট @total টির মধ্যে',
+
+  // Shared wrong/correct feedback bubble (UX pass)
+  'feedback_generic_wrong': 'ঠিক হয়নি — আবার চেষ্টা করো!',
+  'feedback_generic_correct': 'দারুণ হয়েছে!',
+
   // Beat stub (Phase 3 placeholder)
   'coming_soon_title': 'শীঘ্রই আসছে!',
   'coming_soon_body': 'অভিযানের এই অংশটি তৈরি হচ্ছে। পরের আপডেটে আবার দেখো!',
@@ -80,6 +91,7 @@ const Map<String, String> bnStrings = {
   'empty_stickers_title': 'তোমার প্রথম স্টিকার অর্জন করো!',
   'empty_stickers_subtitle': 'একটি অভিযান শেষ করে ব্যাজ অর্জন করো।',
   'sticker_from': 'থেকে',
+  'sticker_from_streak': '@days দিনের ধারা থেকে!',
 
   // Settings
   'narration_slow': 'ধীর',

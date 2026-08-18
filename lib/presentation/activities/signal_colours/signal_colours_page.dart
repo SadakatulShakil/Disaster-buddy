@@ -9,6 +9,7 @@ import '../../widgets/app_button.dart';
 import '../../widgets/app_error_view.dart';
 import '../../widgets/app_loader.dart';
 import '../../widgets/app_scaffold.dart';
+import '../../widgets/feedback_bubble.dart';
 import '../../widgets/mascot_view.dart';
 import '../../widgets/progress_bar.dart';
 import 'signal_colours_controller.dart';
@@ -153,6 +154,18 @@ class _SignalColoursBodyState extends State<_SignalColoursBody> {
                           ),
                       ],
                     ),
+                    Obx(() {
+                      final feedback = controller.activeFeedback.value;
+                      if (feedback == null) return const SizedBox.shrink();
+                      return Padding(
+                        padding: EdgeInsets.only(top: AppSpacing.lg),
+                        child: FeedbackBubble(
+                          message: feedback.message,
+                          isCorrect: feedback.isCorrect,
+                          onTap: controller.dismissFeedback,
+                        ),
+                      );
+                    }),
                   ],
                 ),
               );

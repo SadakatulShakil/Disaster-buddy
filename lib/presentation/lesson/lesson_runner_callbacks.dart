@@ -15,6 +15,8 @@ final class LessonRunnerCallbacks {
     required this.setMascotMood,
     required this.onBeatFinished,
     required this.recordQuizResult,
+    required this.showFeedback,
+    required this.clearFeedback,
   });
 
   /// Speaks [text] in the current locale. Silently no-ops if muted or TTS
@@ -36,4 +38,14 @@ final class LessonRunnerCallbacks {
 
   /// Quiz-only: persists the aggregate score before [onBeatFinished].
   final Future<void> Function({required String quizId, required int correct, required int total}) recordQuizResult;
+
+  /// Shows the shared [FeedbackBubble] with an already-resolved [message],
+  /// narrated and paired with the matching correct/wrong sfx. The returned
+  /// future resolves only once narration actually finishes — await it
+  /// before advancing so the child's narration is never cut off.
+  final Future<void> Function({required String message, required bool isCorrect}) showFeedback;
+
+  /// Hides the feedback bubble immediately, e.g. when moving to the next
+  /// question/item so a stale bubble never lingers into it.
+  final VoidCallback clearFeedback;
 }

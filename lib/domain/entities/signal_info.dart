@@ -20,6 +20,7 @@ final class SignalInfo extends Equatable {
     required this.action,
     required this.actionIcon,
     this.affirmation,
+    this.feedback,
   });
 
   final String id;
@@ -37,6 +38,11 @@ final class SignalInfo extends Equatable {
   /// Narrated when this signal's meaning is matched correctly.
   final LocalizedText? affirmation;
 
+  /// Specific, kind explanation shown when a wrong meaning is tapped while
+  /// this signal is being shown, tying this colour back to its real meaning
+  /// and action. Falls back to a generic message when absent.
+  final LocalizedText? feedback;
+
   @override
-  List<Object?> get props => [id, colorHex, meaning, action, actionIcon, affirmation];
+  List<Object?> get props => [id, colorHex, meaning, action, actionIcon, affirmation, feedback];
 }

@@ -52,6 +52,9 @@ void main() {
       expect(signals.length, greaterThanOrEqualTo(2));
       for (final signal in signals) {
         expect(signal.colorHex, startsWith('#'));
+        expect(signal.affirmation, isNotNull);
+        // UX pass: every signal carries its own specific wrong-tap feedback.
+        expect(signal.feedback, isNotNull, reason: 'signal "${signal.id}" is missing feedback');
       }
     });
 
