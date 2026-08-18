@@ -35,6 +35,7 @@ class AppConstants {
   static const String activityEmergencyKit = 'emergency_kit';
   static const String activitySignalColours = 'signal_colours';
   static const String activitySafeSpotFinder = 'safe_spot_finder';
+  static const String activityReadTheSky = 'read_the_sky';
 
   /// Activities with real, loadable manifests. The Activities screen shows
   /// these plus clearly-labelled future stubs that aren't in this list.
@@ -42,6 +43,7 @@ class AppConstants {
     activityEmergencyKit,
     activitySignalColours,
     activitySafeSpotFinder,
+    activityReadTheSky,
   ];
 
   // Database

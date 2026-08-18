@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'kit_item.dart';
 import 'safe_spot_scene.dart';
 import 'signal_info.dart';
+import 'weather_sign.dart';
 
 /// The type-specific payload of an [Activity]. Every [ActivityType] has
 /// exactly one matching subtype here, mirroring how [Beat] dispatches to
@@ -42,4 +43,15 @@ final class SafeSpotContent extends ActivityContent {
 
   @override
   List<Object?> get props => [scenes];
+}
+
+/// Content for Read the Sky: match each natural early-warning sign to the
+/// hazard it warns about, then reinforce telling a grown-up right away.
+final class ReadTheSkyContent extends ActivityContent {
+  const ReadTheSkyContent({required this.signs});
+
+  final List<WeatherSign> signs;
+
+  @override
+  List<Object?> get props => [signs];
 }

@@ -4,6 +4,7 @@ import 'kit_item_dto.dart';
 import 'manifest_exception.dart';
 import 'safe_spot_scene_dto.dart';
 import 'signal_info_dto.dart';
+import 'weather_sign_dto.dart';
 
 /// Parses the type-specific fields of an activity manifest, dispatching on
 /// its top-level `type` field to the matching [ActivityContent] subtype.
@@ -19,6 +20,8 @@ sealed class ActivityContentDto {
         return SignalColoursContentDto(signals: _signals(json, context));
       case 'safe_spot_finder':
         return SafeSpotContentDto(scenes: _scenes(json, context));
+      case 'read_the_sky':
+        return ReadTheSkyContentDto(signs: _signs(json, context));
       default:
         throw ManifestValidationException('Unknown activity "type": "$type" in $context.');
     }
@@ -61,6 +64,17 @@ sealed class ActivityContentDto {
     ];
   }
 
+  static List<WeatherSignDto> _signs(Map<String, dynamic> json, String context) {
+    final signsJson = requireList(json, 'signs', context);
+    if (signsJson.isEmpty) {
+      throw ManifestValidationException('"signs" must not be empty in $context.');
+    }
+    return [
+      for (var i = 0; i < signsJson.length; i++)
+        WeatherSignDto.fromJson(requireListItemObject(signsJson[i], '$context.signs[$i]'), '$context.signs[$i]'),
+    ];
+  }
+
   ActivityContent toDomain();
 }
 
@@ -89,4 +103,13 @@ final class SafeSpotContentDto extends ActivityContentDto {
 
   @override
   ActivityContent toDomain() => SafeSpotContent(scenes: [for (final scene in scenes) scene.toDomain()]);
+}
+
+final class ReadTheSkyContentDto extends ActivityContentDto {
+  const ReadTheSkyContentDto({required this.signs});
+
+  final List<WeatherSignDto> signs;
+
+  @override
+  ActivityContent toDomain() => ReadTheSkyContent(signs: [for (final sign in signs) sign.toDomain()]);
 }

@@ -74,6 +74,7 @@ class ActivityCard extends StatelessWidget {
         ActivityType.kitBuilder => Icons.backpack_rounded,
         ActivityType.signalColours => Icons.palette_rounded,
         ActivityType.safeSpotFinder => Icons.explore_rounded,
+        ActivityType.readTheSky => Icons.cloud_rounded,
       };
 }
 

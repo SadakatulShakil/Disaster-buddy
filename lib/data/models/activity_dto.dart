@@ -60,5 +60,6 @@ final class ActivityDto {
         KitBuilderContentDto() => ActivityType.kitBuilder,
         SignalColoursContentDto() => ActivityType.signalColours,
         SafeSpotContentDto() => ActivityType.safeSpotFinder,
+        ReadTheSkyContentDto() => ActivityType.readTheSky,
       };
 }

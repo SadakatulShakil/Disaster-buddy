@@ -19,6 +19,8 @@ import 'package:bipod_bondhu/domain/entities/normalized_rect.dart';
 import 'package:bipod_bondhu/domain/entities/safe_spot_hotspot.dart';
 import 'package:bipod_bondhu/domain/entities/safe_spot_scene.dart';
 import 'package:bipod_bondhu/domain/entities/signal_info.dart';
+import 'package:bipod_bondhu/domain/entities/weather_sign.dart';
+import 'package:bipod_bondhu/domain/entities/weather_sign_option.dart';
 import 'package:bipod_bondhu/domain/usecases/get_activities.dart';
 import 'package:bipod_bondhu/domain/usecases/get_activity_progress.dart';
 import 'package:bipod_bondhu/presentation/activities/activities_controller.dart';
@@ -95,6 +97,31 @@ Activity _safeSpotFinderActivity() => const Activity(
       badge: BadgeInfo(id: 'safe_spot_hero_badge', title: _text, iconAsset: 'badge.png'),
     );
 
+/// The real Read the Sky title — used verbatim so the test reproduces the
+/// exact long-label scenario from the bug report.
+Activity _readTheSkyActivity() => const Activity(
+      id: AppConstants.activityReadTheSky,
+      type: ActivityType.readTheSky,
+      title: LocalizedText(bn: 'আকাশ পড়ো', en: 'Read the Sky'),
+      themeColorHex: '#2E86AB',
+      iconAsset: 'icon.png',
+      instructions: _text,
+      content: ReadTheSkyContent(
+        signs: [
+          WeatherSign(
+            id: 'dark_clouds',
+            image: 'sign.png',
+            description: _text,
+            correctHazard: _text,
+            options: [WeatherSignOption(id: 'storm', label: _text, isCorrect: true)],
+            feedback: _text,
+            action: _text,
+          ),
+        ],
+      ),
+      badge: BadgeInfo(id: 'read_the_sky_badge', title: _text, iconAsset: 'badge.png'),
+    );
+
 void _useSurfaceSize(WidgetTester tester, Size size) {
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1.0;
@@ -130,6 +157,7 @@ void main() {
       _emergencyKitActivity(),
       _signalColoursActivity(),
       _safeSpotFinderActivity(),
+      _readTheSkyActivity(),
     ]);
     final controller = ActivitiesController(
       getActivities: GetActivities(activityRepository),
@@ -144,12 +172,13 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
-    expect(find.byType(ActivityCard), findsNWidgets(3));
+    expect(find.byType(ActivityCard), findsNWidgets(4));
     expect(find.text('আমার জরুরি ব্যাগ'), findsOneWidget);
     // Signal Colours and Safe Spot Finder now render as real cards, using
     // their real (long) bn labels — not "coming soon" stubs.
     expect(find.text('সিগন্যাল রং'), findsOneWidget);
     expect(find.text('নিরাপদ জায়গা খুঁজো'), findsOneWidget);
+    expect(find.text('আকাশ পড়ো'), findsOneWidget);
   });
 
   testWidgets('renders every activity card with zero overflow on a tablet-portrait width', (tester) async {
@@ -159,6 +188,7 @@ void main() {
       _emergencyKitActivity(),
       _signalColoursActivity(),
       _safeSpotFinderActivity(),
+      _readTheSkyActivity(),
     ]);
     final controller = ActivitiesController(
       getActivities: GetActivities(activityRepository),
@@ -173,6 +203,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
-    expect(find.byType(ActivityCard), findsNWidgets(3));
+    expect(find.byType(ActivityCard), findsNWidgets(4));
   });
 }

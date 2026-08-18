@@ -20,6 +20,8 @@ import '../../presentation/parent_gate/parent_gate_binding.dart';
 import '../../presentation/parent_gate/parent_gate_page.dart';
 import '../../presentation/parent_zone/parent_zone_binding.dart';
 import '../../presentation/parent_zone/parent_zone_page.dart';
+import '../../presentation/activities/read_the_sky/read_the_sky_binding.dart';
+import '../../presentation/activities/read_the_sky/read_the_sky_page.dart';
 import '../../presentation/activities/safe_spot_finder/safe_spot_finder_binding.dart';
 import '../../presentation/activities/safe_spot_finder/safe_spot_finder_page.dart';
 import '../../presentation/activities/signal_colours/signal_colours_binding.dart';
@@ -122,6 +124,12 @@ class AppPages {
       name: AppRoutes.safeSpotFinder,
       page: () => const SafeSpotFinderPage(),
       binding: SafeSpotFinderBinding(),
+      transition: Transition.zoom,
+    ),
+    GetPage(
+      name: AppRoutes.readTheSky,
+      page: () => const ReadTheSkyPage(),
+      binding: ReadTheSkyBinding(),
       transition: Transition.zoom,
     ),
     GetPage(

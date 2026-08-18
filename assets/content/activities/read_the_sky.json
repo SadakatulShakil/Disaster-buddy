@@ -1,0 +1,121 @@
+{
+  "id": "read_the_sky",
+  "type": "read_the_sky",
+  "title": { "bn": "আকাশ পড়ো", "en": "Read the Sky" },
+  "themeColor": "#2E86AB",
+  "iconAsset": "icons/read_the_sky.png",
+  "instructions": {
+    "bn": "আকাশ আর প্রকৃতির দিকে তাকাও, তারপর ঠিক বিপদটা বেছে নাও!",
+    "en": "Look at the sky and nature, then tap the right warning!"
+  },
+  "badge": {
+    "id": "read_the_sky_badge",
+    "title": { "bn": "আকাশ পাঠক", "en": "Sky Reader" },
+    "iconAsset": "icons/badge_read_the_sky.png"
+  },
+  "signs": [
+    {
+      "id": "dark_clouds",
+      "image": "activities/read_the_sky/sign_dark_clouds.png",
+      "description": {
+        "bn": "আকাশে ঘন কালো মেঘ জমছে আর চারদিক অন্ধকার হয়ে আসছে...",
+        "en": "Heavy, dark clouds are gathering and the sky is turning dark..."
+      },
+      "correctHazard": { "bn": "চমৎকার! একটা ঝড় আসছে।", "en": "Great! A storm is coming." },
+      "options": [
+        { "id": "storm", "label": { "bn": "একটা ঝড় আসছে", "en": "A storm is coming" }, "isCorrect": true },
+        { "id": "flood", "label": { "bn": "একটা বন্যা আসছে", "en": "A flood is coming" }, "isCorrect": false },
+        { "id": "lightning", "label": { "bn": "বজ্রপাত কাছে আসছে", "en": "Lightning is near" }, "isCorrect": false }
+      ],
+      "feedback": {
+        "bn": "আরেকবার ভাবো — ঘন কালো মেঘ আর অন্ধকার আকাশ মানে ঝড় আসছে। অন্য বিপদ না।",
+        "en": "Think again — dark, heavy clouds and a darkening sky mean a storm is coming, not that other hazard."
+      },
+      "action": {
+        "bn": "এখনই একজন বড়োকে বলো, যাতে তোমরা একসাথে তৈরি হতে পারো।",
+        "en": "Now tell a grown-up right away, so you can get ready together."
+      }
+    },
+    {
+      "id": "rising_river",
+      "image": "activities/read_the_sky/sign_rising_river.png",
+      "description": {
+        "bn": "নদীর পানি দ্রুত বাড়ছে আর ঘোলা হয়ে যাচ্ছে...",
+        "en": "The river water is rising fast and turning muddy..."
+      },
+      "correctHazard": { "bn": "চমৎকার! একটা বন্যা আসছে।", "en": "Great! A flood is coming." },
+      "options": [
+        { "id": "flood", "label": { "bn": "একটা বন্যা আসছে", "en": "A flood is coming" }, "isCorrect": true },
+        { "id": "storm", "label": { "bn": "একটা ঝড় আসছে", "en": "A storm is coming" }, "isCorrect": false },
+        {
+          "id": "cyclone",
+          "label": { "bn": "একটা বড় ঘূর্ণিঝড় (কালবৈশাখী) আসছে", "en": "A big windstorm (Kalbaishakhi) is coming" },
+          "isCorrect": false
+        }
+      ],
+      "feedback": {
+        "bn": "আরেকবার ভাবো — নদীর পানি বেড়ে ঘোলা হওয়া মানে বন্যা আসছে। অন্য বিপদ না।",
+        "en": "Think again — rising, muddy river water means a flood is coming, not that other hazard."
+      },
+      "action": {
+        "bn": "এখনই একজন বড়োকে বলো, যাতে তোমরা একসাথে তৈরি হতে পারো।",
+        "en": "Now tell a grown-up right away, so you can get ready together."
+      }
+    },
+    {
+      "id": "strong_wind",
+      "image": "activities/read_the_sky/sign_strong_wind.png",
+      "description": {
+        "bn": "হঠাৎ জোরে বাতাস বইছে, ধুলো উড়ছে আর গাছগুলো দুলছে...",
+        "en": "A sudden strong wind is blowing, carrying dust, and the trees are swaying..."
+      },
+      "correctHazard": {
+        "bn": "চমৎকার! একটা বড় ঘূর্ণিঝড় (কালবৈশাখী) আসছে।",
+        "en": "Great! A big windstorm (Kalbaishakhi) is coming."
+      },
+      "options": [
+        {
+          "id": "cyclone",
+          "label": { "bn": "একটা বড় ঘূর্ণিঝড় (কালবৈশাখী) আসছে", "en": "A big windstorm (Kalbaishakhi) is coming" },
+          "isCorrect": true
+        },
+        { "id": "storm", "label": { "bn": "একটা ঝড় আসছে", "en": "A storm is coming" }, "isCorrect": false },
+        { "id": "flood", "label": { "bn": "একটা বন্যা আসছে", "en": "A flood is coming" }, "isCorrect": false }
+      ],
+      "feedback": {
+        "bn": "আরেকবার ভাবো — জোরে বাতাস আর দুলতে থাকা গাছ মানে বড় ঝড়ো হাওয়া আসছে। অন্য বিপদ না।",
+        "en": "Think again — strong wind and swaying trees mean a big windstorm is coming, not that other hazard."
+      },
+      "action": {
+        "bn": "এখনই একজন বড়োকে বলো, যাতে তোমরা একসাথে তৈরি হতে পারো।",
+        "en": "Now tell a grown-up right away, so you can get ready together."
+      }
+    },
+    {
+      "id": "thunder",
+      "image": "activities/read_the_sky/sign_thunder.png",
+      "description": {
+        "bn": "দূরে বাজ পড়ার শব্দ শোনা যাচ্ছে আর আকাশে বিদ্যুৎ চমকাচ্ছে...",
+        "en": "There's distant thunder, and lightning is flashing in the sky..."
+      },
+      "correctHazard": { "bn": "চমৎকার! বজ্রপাত কাছে আসছে।", "en": "Great! Lightning is near." },
+      "options": [
+        { "id": "lightning", "label": { "bn": "বজ্রপাত কাছে আসছে", "en": "Lightning is near" }, "isCorrect": true },
+        { "id": "storm", "label": { "bn": "একটা ঝড় আসছে", "en": "A storm is coming" }, "isCorrect": false },
+        {
+          "id": "cyclone",
+          "label": { "bn": "একটা বড় ঘূর্ণিঝড় (কালবৈশাখী) আসছে", "en": "A big windstorm (Kalbaishakhi) is coming" },
+          "isCorrect": false
+        }
+      ],
+      "feedback": {
+        "bn": "আরেকবার ভাবো — দূরের বাজ আর বিদ্যুৎ চমকানো মানে বজ্রপাত কাছে আসছে। অন্য বিপদ না।",
+        "en": "Think again — distant thunder and lightning flashes mean lightning is near, not that other hazard."
+      },
+      "action": {
+        "bn": "এখনই একজন বড়োকে বলো, যাতে তোমরা একসাথে তৈরি হতে পারো।",
+        "en": "Now tell a grown-up right away, so you can get ready together."
+      }
+    }
+  ]
+}

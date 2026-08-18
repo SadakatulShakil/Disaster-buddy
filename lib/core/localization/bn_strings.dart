@@ -129,6 +129,11 @@ const Map<String, String> bnStrings = {
   'safe_spot_hotspot_semantics_safe': 'নিরাপদ জায়গা: @label',
   'safe_spot_hotspot_semantics_unsafe': 'নিরাপদ নয়: @label',
 
+  // Read the Sky
+  'read_the_sky_question': 'এই লক্ষণটা কীসের বিপদের কথা বলছে?',
+  'read_the_sky_progress': 'লক্ষণ @current, মোট @total টির মধ্যে',
+  'read_the_sky_complete_summary': 'তুমি আকাশের সব সতর্কতা লক্ষণ চিনে ফেলেছ!',
+
   // Daily challenge (Phase E1)
   'daily_challenge_title': 'টুকুর দৈনিক চ্যালেঞ্জ',
   'daily_challenge_new_caption': 'আজকের নতুন চ্যালেঞ্জ খেলো!',

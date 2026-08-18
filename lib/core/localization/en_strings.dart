@@ -129,6 +129,11 @@ const Map<String, String> enStrings = {
   'safe_spot_hotspot_semantics_safe': 'Safe spot: @label',
   'safe_spot_hotspot_semantics_unsafe': 'Not safe: @label',
 
+  // Read the Sky
+  'read_the_sky_question': 'What is this sign warning about?',
+  'read_the_sky_progress': 'Sign @current of @total',
+  'read_the_sky_complete_summary': 'You can read every warning sign in the sky!',
+
   // Daily challenge (Phase E1)
   'daily_challenge_title': "Tuku's Daily Challenge",
   'daily_challenge_new_caption': "Play today's new challenge!",

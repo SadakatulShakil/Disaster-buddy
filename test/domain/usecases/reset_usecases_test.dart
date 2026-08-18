@@ -67,7 +67,8 @@ void main() {
   late ResetEverything resetEverything;
 
   Future<void> seedRealisticData() async {
-    await db.progressDao.insertProgress(const ProgressEntity(moduleId: 'earthquake', beatId: 'eq_story', completedAt: 1));
+    await db.progressDao
+        .insertProgress(const ProgressEntity(moduleId: 'earthquake', beatId: 'eq_story', completedAt: 1));
     await db.progressDao.insertProgress(const ProgressEntity(moduleId: 'flood', beatId: 'fl_story', completedAt: 2));
     await db.quizResultDao.insertResult(
       const QuizResultEntity(moduleId: 'earthquake', quizId: 'eq_quiz', correctCount: 3, totalCount: 3, attemptedAt: 3),
@@ -84,6 +85,9 @@ void main() {
     await db.badgeDao.insertBadge(
       const BadgeEntity(badgeId: 'safe_spot_hero_badge', moduleId: 'safe_spot_finder', earnedAt: 11),
     );
+    await db.badgeDao.insertBadge(
+      const BadgeEntity(badgeId: 'read_the_sky_badge', moduleId: 'read_the_sky', earnedAt: 12),
+    );
     await db.activityProgressDao.insertOrUpdate(
       const ActivityProgressEntity(activityId: 'emergency_kit', isCompleted: true, updatedAt: 8),
     );
@@ -92,6 +96,9 @@ void main() {
     );
     await db.activityProgressDao.insertOrUpdate(
       const ActivityProgressEntity(activityId: 'safe_spot_finder', isCompleted: true, updatedAt: 11),
+    );
+    await db.activityProgressDao.insertOrUpdate(
+      const ActivityProgressEntity(activityId: 'read_the_sky', isCompleted: true, updatedAt: 12),
     );
     await db.dailyCompletionDao.insertOrUpdate(
       const DailyCompletionEntity(dateKey: '2026-08-03', challengeId: 'dc_1', wasCorrect: true, completedAt: 9),
@@ -103,6 +110,7 @@ void main() {
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_2', stickerId: 'streak_7_badge'));
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_3', stickerId: 'flood_badge'));
     await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_4', stickerId: 'signal_spotter_badge'));
+    await db.denDao.upsertSlot(const DenSlotEntity(slotId: 'shelf_1_slot_5', stickerId: 'read_the_sky_badge'));
     await db.denDao.saveTheme(const DenThemeEntity(themeId: 'sky'));
   }
 
@@ -132,6 +140,7 @@ void main() {
       expect(await db.activityProgressDao.findByActivity('emergency_kit'), isNull);
       expect(await db.activityProgressDao.findByActivity('signal_colours'), isNull);
       expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNull);
+      expect(await db.activityProgressDao.findByActivity('read_the_sky'), isNull);
 
       // Preserved: streak, daily-challenge history, Den theme.
       final streak = await db.streakStateDao.find();
@@ -140,8 +149,9 @@ void main() {
       expect((await db.denDao.findTheme())?.themeId, 'sky');
 
       // Integrity rule: the now-unearned hazard and activity stickers
-      // (including the two new activities') are pruned from the Den, but
-      // the still-earned streak sticker stays exactly where it was placed.
+      // (including all three cross-cutting activities') are pruned from the
+      // Den, but the still-earned streak sticker stays exactly where it was
+      // placed.
       final slots = await db.denDao.findAllSlots();
       expect(slots.map((s) => s.slotId), ['shelf_1_slot_2']);
       expect(slots.single.stickerId, 'streak_7_badge');
@@ -154,7 +164,8 @@ void main() {
   });
 
   group('ResetSingleModule', () {
-    test('clears only the target module, leaving other modules, the streak, and the Den slot for other stickers', () async {
+    test('clears only the target module, leaving other modules, the streak, and the Den slot for other stickers',
+        () async {
       await seedRealisticData();
 
       final result = await resetSingleModule('earthquake');
@@ -169,12 +180,14 @@ void main() {
       // A single-module reset never touches activities — untouched.
       expect(await db.activityProgressDao.findByActivity('signal_colours'), isNotNull);
       expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNotNull);
+      expect(await db.activityProgressDao.findByActivity('read_the_sky'), isNotNull);
       expect(await db.badgeDao.findByModule('signal_colours'), hasLength(1));
       expect(await db.badgeDao.findByModule('safe_spot_finder'), hasLength(1));
+      expect(await db.badgeDao.findByModule('read_the_sky'), hasLength(1));
 
       final slots = await db.denDao.findAllSlots();
       final slotIds = slots.map((s) => s.slotId).toSet();
-      expect(slotIds, {'shelf_1_slot_2', 'shelf_1_slot_3', 'shelf_1_slot_4'});
+      expect(slotIds, {'shelf_1_slot_2', 'shelf_1_slot_3', 'shelf_1_slot_4', 'shelf_1_slot_5'});
       expect(slots.any((s) => s.stickerId == 'earthquake_badge'), isFalse);
     });
 
@@ -186,7 +199,7 @@ void main() {
 
       // Untouched modules stay exactly as seeded.
       expect(await db.progressDao.findByModule('earthquake'), hasLength(1));
-      expect(await db.badgeDao.findAll(), hasLength(5));
+      expect(await db.badgeDao.findAll(), hasLength(6));
     });
   });
 
@@ -203,6 +216,7 @@ void main() {
       expect(await db.activityProgressDao.findByActivity('emergency_kit'), isNull);
       expect(await db.activityProgressDao.findByActivity('signal_colours'), isNull);
       expect(await db.activityProgressDao.findByActivity('safe_spot_finder'), isNull);
+      expect(await db.activityProgressDao.findByActivity('read_the_sky'), isNull);
       expect(await db.dailyCompletionDao.findByDate('2026-08-03'), isNull);
       expect(await db.streakStateDao.find(), isNull);
       expect(await db.denDao.findAllSlots(), isEmpty);
@@ -241,7 +255,8 @@ void main() {
       contentRepository = FakeContentRepository([_module('earthquake'), _module('flood')]);
       activityRepository = FakeActivityRepository(const []);
       getModules = GetModules(contentRepository);
-      getModuleProgress = GetModuleProgress(contentRepository: contentRepository, progressRepository: progressRepository);
+      getModuleProgress =
+          GetModuleProgress(contentRepository: contentRepository, progressRepository: progressRepository);
       getEarnedCollection = GetEarnedCollection(
         getModules: getModules,
         getActivities: GetActivities(activityRepository),
@@ -250,7 +265,8 @@ void main() {
       getDenState = GetDenState(denRepository);
     });
 
-    test('GetModuleProgress/GetEarnedCollection/GetDenState never crash and reflect the reset, with no dangling stickers',
+    test(
+        'GetModuleProgress/GetEarnedCollection/GetDenState never crash and reflect the reset, with no dangling stickers',
         () async {
       await seedRealisticData();
       await resetLearningProgress();

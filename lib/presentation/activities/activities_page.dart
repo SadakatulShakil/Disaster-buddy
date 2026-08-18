@@ -125,6 +125,7 @@ class _ActivitiesGrid extends StatelessWidget {
       ActivityType.kitBuilder => AppRoutes.kitBuilder,
       ActivityType.signalColours => AppRoutes.signalColours,
       ActivityType.safeSpotFinder => AppRoutes.safeSpotFinder,
+      ActivityType.readTheSky => AppRoutes.readTheSky,
     };
     Get.toNamed(route, arguments: activity.id);
   }
@@ -170,7 +171,8 @@ class _ActivityStubTile extends StatelessWidget {
               SizedBox(
                 height: ActivityGridConstants.statusRowHeight,
                 child: Center(
-                  child: BadgeChip(label: 'coming_soon_title'.tr, icon: Icons.schedule_rounded, color: AppColors.textGrey),
+                  child:
+                      BadgeChip(label: 'coming_soon_title'.tr, icon: Icons.schedule_rounded, color: AppColors.textGrey),
                 ),
               ),
             ],

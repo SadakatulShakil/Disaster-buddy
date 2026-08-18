@@ -16,6 +16,7 @@ abstract class AppRoutes {
   static const String kitBuilder = '/kit-builder';
   static const String signalColours = '/signal-colours';
   static const String safeSpotFinder = '/safe-spot-finder';
+  static const String readTheSky = '/read-the-sky';
   static const String dailyChallenge = '/daily-challenge';
   static const String streakChain = '/streak-chain';
   static const String den = '/den';
