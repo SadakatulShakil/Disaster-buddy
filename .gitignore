@@ -53,3 +53,9 @@ lib/core/utils/firebase_option.dart
 *.keystore
 *.jks
 *serviceAccount*.json
+
+# One-off asset optimizer + Python cruft
+optimize_assets.py
+.venv/
+__pycache__/
+*.pyc
