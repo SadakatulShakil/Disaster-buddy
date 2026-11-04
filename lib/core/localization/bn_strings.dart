@@ -163,7 +163,7 @@ const Map<String, String> bnStrings = {
   'den_greeting_milestone': '@days দিন ধরে টানা — বাহ্!',
   'den_greeting_returning': 'ঘরে ফিরে আসার জন্য স্বাগতম!',
   'den_greeting_first_visit': 'আমার ঘরে স্বাগতম!',
-  'den_tap_reaction': 'হিহি, সুড়সুড়ি লাগল!',
+  'den_tap_reaction': 'হিহি-হিহি, সুড়সুড়ি লাগছে, আমকে সুড়সুড়ি দিও না। হাসি পায় আমার!',
   'den_new_sticker_banner_title': 'একটা নতুন স্টিকার এসেছে!',
   'den_new_sticker_banner_cta': 'আমাকে দেখাও!',
   'den_new_sticker_indicator_semantics': '@label: নতুন স্টিকার অপেক্ষা করছে',
@@ -205,4 +205,10 @@ const Map<String, String> bnStrings = {
   'reset_hold_title': 'ধরে রেখে নিশ্চিত করো',
   'reset_hold_body': 'নিচের বোতামটা কিছুক্ষণ চেপে ধরে রাখো সব স্থায়ীভাবে মুছে ফেলতে।',
   'reset_hold_button': 'ধরে রেখে সব রিসেট করো',
+
+  // In-app update
+  'update_ready_title': 'আপডেট তৈরি!',
+  'update_ready_body': 'নতুন সংস্করণ ডাউনলোড হয়ে গেছে। ব্যবহার শুরু করতে অ্যাপ রিস্টার্ট করো।',
+  'restart_now': 'এখনই রিস্টার্ট করো',
+  'later': 'পরে',
 };

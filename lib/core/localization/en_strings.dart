@@ -163,7 +163,7 @@ const Map<String, String> enStrings = {
   'den_greeting_milestone': '@days days in a row — wow!',
   'den_greeting_returning': 'Welcome back to the Den!',
   'den_greeting_first_visit': 'Welcome to my Den!',
-  'den_tap_reaction': 'Hehe, that tickled!',
+  'den_tap_reaction': 'Hehe, that tickled! Don\'t tickle me too much. It\'s make me laugh!',
   'den_new_sticker_banner_title': 'A new sticker is here!',
   'den_new_sticker_banner_cta': 'Show me!',
   'den_new_sticker_indicator_semantics': '@label: new sticker waiting',
@@ -205,4 +205,10 @@ const Map<String, String> enStrings = {
   'reset_hold_title': 'Hold to confirm',
   'reset_hold_body': 'Press and hold the button below for a moment to permanently erase everything.',
   'reset_hold_button': 'Hold to reset everything',
+
+  // In-app update
+  'update_ready_title': 'Update ready!',
+  'update_ready_body': 'A new version has finished downloading. Restart to start using it.',
+  'restart_now': 'Restart now',
+  'later': 'Later',
 };

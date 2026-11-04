@@ -41,6 +41,7 @@ import '../../domain/usecases/reset_learning_progress.dart';
 import '../../domain/usecases/reset_single_module.dart';
 import '../../domain/usecases/save_quiz_result.dart';
 import '../../domain/usecases/set_den_theme.dart';
+import '../services/app_update_service.dart';
 import '../services/narration_service.dart';
 import '../services/sound_service.dart';
 
@@ -51,6 +52,7 @@ import '../services/sound_service.dart';
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put<AppUpdateService>(AppUpdateService(), permanent: true);
     Get.put<NarrationService>(NarrationService(), permanent: true);
     final soundService = SoundService();
     Get.put<SoundService>(soundService, permanent: true);
