@@ -8,8 +8,9 @@ class AssetPaths {
   static const String _audio = 'assets/audio';
   static const String _animations = 'assets/animations';
 
-  // Content manifests (Phase 1)
-  static String manifest(String hazardId) => '$_content/$hazardId.json';
+  // Content manifests (Phase 1) — bundled under their own subfolder,
+  // alongside activities/ and daily/.
+  static String manifest(String hazardId) => '$_content/hazards/$hazardId.json';
 
   /// Cross-cutting activity manifest (Phase 4), e.g. the Emergency Kit
   /// Builder — module-independent content living alongside the hazard

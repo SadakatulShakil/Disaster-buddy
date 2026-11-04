@@ -33,7 +33,7 @@ class _FakeAssetBundle extends AssetBundle {
 }
 
 Future<HazardModule> _loadRealModule(String hazardId) async {
-  final path = 'assets/content/$hazardId.json';
+  final path = 'assets/content/hazards/$hazardId.json';
   final raw = File(path).readAsStringSync();
   final source = ContentAssetSourceImpl(bundle: _FakeAssetBundle({path: raw}));
 

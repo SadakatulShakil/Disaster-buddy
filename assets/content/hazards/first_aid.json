@@ -1,0 +1,256 @@
+{
+  "id": "first_aid",
+  "order": 4,
+  "title": {
+    "bn": "প্রাথমিক সাহায্য",
+    "en": "First Aid"
+  },
+  "themeColor": "#F2896B",
+  "iconAsset": "icons/first_aid.png",
+  "safeAction": {
+    "bn": "শান্ত থাকো, বড়দের ডাকো, আর জরুরি হলে ৩ টা ৯ এ কল করো",
+    "en": "Stay calm, call a grown-up, and dial triple ৯ if it's serious"
+  },
+  "badge": {
+    "id": "first_aid_badge",
+    "title": {
+      "bn": "সাহায্যকারী বীর",
+      "en": "Helper Hero"
+    },
+    "iconAsset": "icons/badge_first_aid.png"
+  },
+  "beats": [
+    {
+      "id": "fa_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/fa_slide_1.png",
+          "text": {
+            "bn": "এক রৌদ্রোজ্জ্বল বিকেলে টুকু আর তার বন্ধু হাসতে হাসতে দৌড়াচ্ছিলো — হঠাৎ বন্ধুটা হোঁচট খেয়ে পড়ে গেলো।",
+            "en": "One sunny afternoon, Tuku and his friend were running and laughing — when suddenly his friend tripped and tumbled down."
+          }
+        },
+        {
+          "imageAsset": "story/fa_slide_2.png",
+          "text": {
+            "bn": "হাঁটুটা ছিলে গিয়ে ব্যথা করছিলো, আর চোখ দুটো জলে ভরে উঠলো।",
+            "en": "Their knee was scraped and sore, and their eyes filled up with tears."
+          }
+        },
+        {
+          "imageAsset": "story/fa_slide_3.png",
+          "text": {
+            "bn": "টুকুর বুকটা ধুকপুক করছিলো, তবু সে একটা শ্বাস নিয়ে শান্ত থাকলো। ঘাবড়ে গেলে তো বন্ধুর কোনো উপকার হবে না।",
+            "en": "Tuku's heart raced, but he took a breath and stayed calm. Panicking wouldn't help his friend."
+          }
+        },
+        {
+          "imageAsset": "story/fa_slide_4.png",
+          "text": {
+            "bn": "“তুই এখানেই থাক, আমি সাহায্য আনছি!” বলে টুকু সোজা একজন বড় মানুষকে ডাকতে ছুটল।",
+            "en": "“Stay here, I'll get help!” And Tuku ran straight to find a grown-up."
+          }
+        }
+      ]
+    },
+    {
+      "id": "fa_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/fa_step_1.png",
+          "text": {
+            "bn": "শান্ত থাকো! ধীরে একটা শ্বাস নাও — শান্ত সাহায্যকারীই সবচেয়ে ভালো সাহায্যকারী।",
+            "en": "STAY CALM! Take a slow breath — a calm helper is the best helper."
+          }
+        },
+        {
+          "imageAsset": "steps/fa_step_2.png",
+          "text": {
+            "bn": "সাহায্য আনো! জোরে ডাকো বা দৌড়ে গিয়ে দ্রুত একজন বড় মানুষকে নিয়ে এসো।",
+            "en": "GET HELP! Call out loud or run to bring a grown-up quickly."
+          }
+        },
+        {
+          "imageAsset": "steps/fa_step_3.png",
+          "text": {
+            "bn": "৩ টা ৯ এ কল! বিষয়টা গুরুতর হলে একজন বড় মানুষ সাহায্যের জন্য ৩ টা ৯ এ কল করবে।",
+            "en": "CALL Triple 9! If it's serious, a grown-up will call Triple 9 for help."
+          }
+        },
+        {
+          "imageAsset": "steps/fa_step_4.png",
+          "text": {
+            "bn": "পাশে থাকো! সাহায্য না আসা পর্যন্ত বন্ধুর পাশে বসে তাকে ভরসা দাও।",
+            "en": "STAY CLOSE! Sit with your friend and comfort them until help comes."
+          }
+        }
+      ]
+    },
+    {
+      "id": "fa_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "sequence_tap",
+      "config": {
+        "instructions": {
+          "bn": "সাহায্যের ধাপগুলো ঠিক ক্রমে সাজাও — তুমি পারবে!",
+          "en": "Put the helper steps in the right order — you can do it!"
+        },
+        "items": [
+          {
+            "id": "stay_calm",
+            "label": {
+              "bn": "শান্ত থাকো",
+              "en": "Stay calm"
+            },
+            "imageAsset": "practice/fa_calm.png",
+            "sequenceOrder": 1,
+            "feedback": {
+              "bn": "শান্ত থাকাই সবার আগে করণীয় — এটাই প্রথম ধাপ।",
+              "en": "Staying calm comes first, before anything else."
+            }
+          },
+          {
+            "id": "get_grownup",
+            "label": {
+              "bn": "বড়দের ডাকো",
+              "en": "Get a grown-up"
+            },
+            "imageAsset": "practice/fa_grownup.png",
+            "sequenceOrder": 2,
+            "feedback": {
+              "bn": "বড়দের ডাকা শান্ত থাকার পরের ধাপ।",
+              "en": "Getting a grown-up comes right after staying calm."
+            }
+          },
+          {
+            "id": "call_999",
+            "label": {
+              "bn": "৯৯৯ নম্বরে কল করো",
+              "en": "Call 999"
+            },
+            "imageAsset": "practice/fa_call.png",
+            "sequenceOrder": 3,
+            "feedback": {
+              "bn": "৩ টা ৯ এ কল করা বড়দের কাজ, আর এটা একদম শেষ ধাপ।",
+              "en": "Calling triple 9 is a grown-up's job, and it's the very last step."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "fa_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "fa_q1",
+          "prompt": {
+            "bn": "তোমার বন্ধু এইমাত্র ব্যথা পেল। সবার আগে কী করবে?",
+            "en": "Your friend just got hurt. What's the very first thing to do?"
+          },
+          "imageAsset": "quiz/fa_q1.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "শান্ত থেকে একজন বড় মানুষকে ডাকা",
+                "en": "Stay calm and get a grown-up"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "ব্যাপারটা এড়িয়ে যাওয়া",
+                "en": "Ignore it"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "উপেক্ষা করলে বন্ধুর দরকারি সাহায্য পাওয়া হবে না।",
+                "en": "Ignoring it means your friend might not get the help they need."
+              }
+            },
+            {
+              "id": "c",
+              "label": {
+                "bn": "নিজে চিকিৎসার চেষ্টা করা",
+                "en": "Try to treat it myself"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "নিজে চিকিৎসা করার চেষ্টা না করে সবসময় বড়দের ডাকো।",
+                "en": "Don't try to treat it yourself — always get a grown-up instead."
+              }
+            }
+          ]
+        },
+        {
+          "id": "fa_q2",
+          "prompt": {
+            "bn": "বিষয়টা গুরুতর হলে, কে, ৩ টা ৯ -এ কল করবে?",
+            "en": "If it's serious, who should call triple 9?"
+          },
+          "imageAsset": "quiz/fa_q2.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "একজন বড় মানুষ",
+                "en": "A grown-up"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "আমি নিজেই কল করব",
+                "en": "I call it myself"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "জরুরি কলগুলো সবসময় বড়দের করা উচিত।",
+                "en": "Emergency calls should always be made by a grown-up."
+              }
+            }
+          ]
+        },
+        {
+          "id": "fa_q3",
+          "prompt": {
+            "bn": "বন্ধু সাহায্যের জন্য অপেক্ষা করছে, তুমি কীভাবে পাশে থাকতে পারো?",
+            "en": "While your friend waits for help, how can you be kind?"
+          },
+          "imageAsset": "quiz/fa_q3.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "পাশে থেকে ভরসা দেওয়া",
+                "en": "Stay with them and comfort them"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "একা রেখে চলে যাওয়া",
+                "en": "Leave them alone"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বন্ধুকে একা রেখে যাওয়া ঠিক না — পাশে থেকে ভরসা দাও।",
+                "en": "Leaving them alone isn't kind — stay close and comfort them instead."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

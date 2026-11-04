@@ -1,0 +1,261 @@
+{
+  "id": "earthquake",
+  "order": 1,
+  "title": {
+    "bn": "ভূমিকম্প",
+    "en": "Earthquake"
+  },
+  "themeColor": "#A0522D",
+  "iconAsset": "icons/earthquake.png",
+  "safeAction": {
+    "bn": "নিচে বসো, ঢেকে রাখো, ধরে থাকো",
+    "en": "Drop, Cover, and Hold On"
+  },
+  "badge": {
+    "id": "earthquake_badge",
+    "title": {
+      "bn": "ভূমিকম্প বীর",
+      "en": "Earthquake Hero"
+    },
+    "iconAsset": "icons/badge_earthquake.png"
+  },
+  "beats": [
+    {
+      "id": "eq_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/eq_slide_1.png",
+          "text": {
+            "bn": "টুকু টেবিলে বসে ছবি আঁকছিলো, ঠিক তখনই — ঝন-ঝন-ঝন! — চায়ের কাপগুলো বেজে উঠলো আর পুরো ঘরটা কেঁপে উঠলো।",
+            "en": "Tuku was drawing at the table when — cling-cling-cling! — the teacups began to rattle and the whole room started to tremble."
+          }
+        },
+        {
+          "imageAsset": "story/eq_slide_2.png",
+          "text": {
+            "bn": "পায়ের নিচে মেঝেটা দুলছিলো, যেন পানির ওপর, একটা নৌকা। টুকুর বুকটা ধুকপুক করছিলো — তাই সে বড়ো করে, ধীরে একটা শ্বাস নিল।",
+            "en": "The floor wobbled under his paws like a boat on the water. Tuku's heart went thump-thump — so he took one big, slow breath."
+          }
+        },
+        {
+          "imageAsset": "story/eq_slide_3.png",
+          "text": {
+            "bn": "টুকুর মনে পড়লো — “এটা তো ভূমিকম্প! মাটি একটুখানি কাঁপে, তারপর আবার থেমে যায়।”",
+            "en": "“This is an earthquake,” Tuku remembered. “The ground shakes for a little while, and then it stops.”"
+          }
+        },
+        {
+          "imageAsset": "story/eq_slide_4.png",
+          "text": {
+            "bn": "টুকু আর ভয় পেল না। সে জানত তিনটি জাদুর কথা, যা তাকে নিরাপদ রাখে, — নিচে বসো, ঢেকে রাখো, ধরে থাকো!",
+            "en": "Tuku wasn't scared anymore. He knew three magic words that keep him safe: Drop, Cover, Hold On!"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eq_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/eq_step_1.png",
+          "text": {
+            "bn": "নিচে বসো! হাত আর হাঁটুর ওপর নিচু হয়ে বসে পড়ো, যেন কাঁপুনি তোমাকে ফেলে দিতে না পারে।",
+            "en": "DROP! Get down low on your hands and knees so the shaking can't knock you over."
+          }
+        },
+        {
+          "imageAsset": "steps/eq_step_2.png",
+          "text": {
+            "bn": "ঢেকে রাখো! শক্ত একটা টেবিলের নিচে ঢুকে হাত দিয়ে মাথা আর ঘাড় ঢেকে রাখো।",
+            "en": "COVER! Tuck under a strong table and cover your head and neck with your arms."
+          }
+        },
+        {
+          "imageAsset": "steps/eq_step_3.png",
+          "text": {
+            "bn": "ধরে থাকো! টেবিলের পা ধরে রাখো আর কাঁপুনি না থামা পর্যন্ত শান্ত হয়ে থাকো।",
+            "en": "HOLD ON! Hold the table leg and stay calm until the shaking stops."
+          }
+        }
+      ]
+    },
+    {
+      "id": "eq_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "sequence_tap",
+      "config": {
+        "instructions": {
+          "bn": "এবার তুমি করো! সঠিক ক্রমে চাপো — আগে বসো, তারপর ঢেকে রাখো, তারপর ধরে থাকো!",
+          "en": "Now you try! Tap them in the right order: Drop, then Cover, then Hold On!"
+        },
+        "items": [
+          {
+            "id": "drop",
+            "label": {
+              "bn": "বসো",
+              "en": "Drop"
+            },
+            "imageAsset": "practice/eq_drop.png",
+            "sequenceOrder": 1,
+            "feedback": {
+              "bn": "মাটিতে বসে পড়াই প্রথম কাজ — এটা পড়ে যাওয়া এড়াতে সাহায্য করে।",
+              "en": "Dropping down first helps you avoid falling — that comes first."
+            }
+          },
+          {
+            "id": "cover",
+            "label": {
+              "bn": "ঢেকে রাখো",
+              "en": "Cover"
+            },
+            "imageAsset": "practice/under_table.png",
+            "sequenceOrder": 2,
+            "feedback": {
+              "bn": "মাথা ও ঘাড় ঢেকে রাখা পড়ে যাওয়া জিনিস থেকে বাঁচায় — এটা বসার পরের ধাপ।",
+              "en": "Covering your head and neck protects you from falling things — that's next, after Drop."
+            }
+          },
+          {
+            "id": "hold",
+            "label": {
+              "bn": "ধরে থাকো",
+              "en": "Hold On"
+            },
+            "imageAsset": "practice/eq_hold.png",
+            "sequenceOrder": 3,
+            "feedback": {
+              "bn": "কাঁপুনি না থামা পর্যন্ত ধরে থাকাই একদম শেষ ধাপ।",
+              "en": "Holding on until it stops is the very last step."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "eq_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "eq_q1",
+          "prompt": {
+            "bn": "মাটি কাঁপতে শুরু করল। টুকুর প্রথমেই কী করা উচিত?",
+            "en": "The ground starts to shake. What's the very first thing Tuku should do?"
+          },
+          "imageAsset": "quiz/eq_q1.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "নিচে বসে পড়া",
+                "en": "Drop down low"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "দৌড়ে বাইরে চলে যাওয়া",
+                "en": "Run outside fast"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "দৌড়ানো ঝুঁকিপূর্ণ হতে পারে — কাঁপুনির সময় আগে নিচে বসে পড়াই ভালো।",
+                "en": "Running can be risky — it's safer to drop down first while it's shaking."
+              }
+            },
+            {
+              "id": "c",
+              "label": {
+                "bn": "জানালার পাশে দাঁড়ানো",
+                "en": "Stand near a window"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "জানালার কাচ ভেঙে যেতে পারে — জানালা থেকে দূরে থাকো।",
+                "en": "Window glass can shatter — stay away from windows."
+              }
+            }
+          ]
+        },
+        {
+          "id": "eq_q2",
+          "prompt": {
+            "bn": "ঢেকে রাখার জন্য সবচেয়ে নিরাপদ জায়গা কোনটি?",
+            "en": "Where is the safest place to take cover?"
+          },
+          "imageAsset": "quiz/eq_q2.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "শক্ত টেবিলের নিচে",
+                "en": "Under a sturdy table"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "কাঁচের জানালার পাশে",
+                "en": "Beside a glass window"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কাঁচ ভেঙে আঘাত করতে পারে — শক্ত টেবিলের নিচেই নিরাপদ।",
+                "en": "Broken glass can hurt you — under a sturdy table is safer."
+              }
+            },
+            {
+              "id": "c",
+              "label": {
+                "bn": "লিফটের ভেতরে",
+                "en": "Inside a lift"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কম্পনের সময় লিফট আটকে যেতে পারে — শক্ত মেঝেতে থাকো।",
+                "en": "Elevators can get stuck during shaking — stay on a solid floor instead."
+              }
+            }
+          ]
+        },
+        {
+          "id": "eq_q3",
+          "prompt": {
+            "bn": "ঘর তখনো কাঁপছে। টুকু এখন কী করবে?",
+            "en": "The room is still shaking. What does Tuku do?"
+          },
+          "imageAsset": "quiz/eq_q3.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "ধরে থেকে শান্ত থাকা",
+                "en": "Hold on and stay calm"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "ঘরময় দৌড়ে বেড়ানো",
+                "en": "Run around the room"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "দৌড়ালে পড়ে যাওয়া জিনিসে আঘাত পেতে পারো — শান্ত থেকে ধরে থাকাই ভালো।",
+                "en": "Running around can get you hurt by falling things — it's safer to hold on and stay calm."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

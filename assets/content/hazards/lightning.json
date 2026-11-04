@@ -1,0 +1,245 @@
+{
+  "id": "lightning",
+  "order": 3,
+  "title": {
+    "bn": "বজ্রপাত",
+    "en": "Lightning"
+  },
+  "themeColor": "#F4C430",
+  "iconAsset": "icons/lightning.png",
+  "safeAction": {
+    "bn": "বাজ পড়লেই ঘরে চলে যাও, খোলা মাঠ, উঁচু গাছ ও পানি থেকে দূরে থাকো",
+    "en": "When thunder roars, go indoors — away from open fields, tall trees, and water"
+  },
+  "badge": {
+    "id": "lightning_badge",
+    "title": {
+      "bn": "বজ্র তারা",
+      "en": "Lightning Star"
+    },
+    "iconAsset": "icons/badge_lightning.png"
+  },
+  "beats": [
+    {
+      "id": "lt_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/lt_slide_1.png",
+          "text": {
+            "bn": "টুকু মাঠে খেলছিলো, তখন ধীরে ধীরে আকাশটা কালচে ধূসর হয়ে গেলো আর গম্ভীর গুড়গুড় শব্দ করলো।",
+            "en": "Tuku was playing in the field when the sky slowly turned dark grey and gave a long, low rumble."
+          }
+        },
+        {
+          "imageAsset": "story/lt_slide_2.png",
+          "text": {
+            "bn": "তারপর — গুড়ুম! গুড়ুম! — আকাশজুড়ে জোরে বাজ পড়লো। টুকুর কান খাড়া হয়ে গেলো।",
+            "en": "Then — KA-BOOM! — a loud clap of thunder rolled across the sky. Tuku's ears perked up."
+          }
+        },
+        {
+          "imageAsset": "story/lt_slide_3.png",
+          "text": {
+            "bn": "টুকুর মনে পড়লো — “বাজ যখন গর্জায়, বজ্রপাত তখন বেশি দূরে নয়।”",
+            "en": "“When thunder roars,” Tuku remembered, “lightning is not far away.”"
+          }
+        },
+        {
+          "imageAsset": "story/lt_slide_4.png",
+          "text": {
+            "bn": "তাই টুকু আর দেরি করলো না। সে সোজা ঘরে ঢুকে গেলো — নিরাপদ আর আরামে — ঝড় থেমে না যাওয়া পর্যন্ত।",
+            "en": "So Tuku didn't wait. He hurried straight indoors, safe and snug, until the storm passed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "lt_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/lt_step_1.png",
+          "text": {
+            "bn": "ঘরে যাও! বাজের শব্দ শোনার সঙ্গে সঙ্গেই দ্রুত ঘরে ঢুকে যাও।",
+            "en": "GO IN! The moment you hear thunder, hurry indoors."
+          }
+        },
+        {
+          "imageAsset": "steps/lt_step_2.png",
+          "text": {
+            "bn": "দূরে থাকো! খোলা মাঠ, উঁচু গাছ আর পানি থেকে দূরে থাকো — বজ্রপাত উঁচু আর খোলা জিনিস পছন্দ করে।",
+            "en": "KEEP AWAY! Stay far from open fields, tall trees, and water — lightning loves tall, open things."
+          }
+        },
+        {
+          "imageAsset": "steps/lt_step_3.png",
+          "text": {
+            "bn": "একটু অপেক্ষা করো! একদম শেষ বাজ শোনার পর আরও ৩০ মিনিট ঘরে থাকো।",
+            "en": "WAIT A WHILE! Stay inside until 30 minutes after the very last thunder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "lt_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "tap_correct_choice",
+      "config": {
+        "instructions": {
+          "bn": "বজ্রপাত থেকে টুকু কোথায় নিরাপদ? নিরাপদ জায়গাটা চাপো!",
+          "en": "Where is Tuku safe from lightning? Tap the safe spot!"
+        },
+        "items": [
+          {
+            "id": "living_room",
+            "label": {
+              "bn": "ঘরের ভেতরে",
+              "en": "Indoors"
+            },
+            "imageAsset": "practice/living_room.png",
+            "isCorrect": true
+          },
+          {
+            "id": "open_field",
+            "label": {
+              "bn": "খোলা মাঠ",
+              "en": "Open field"
+            },
+            "imageAsset": "practice/open_field.png",
+            "isCorrect": false,
+            "feedback": {
+              "bn": "খোলা মাঠে তুমিই আশেপাশের সবচেয়ে উঁচু জিনিস হতে পারো — এটা নিরাপদ নয়।",
+              "en": "In an open field, you could be the tallest thing around — that's not safe."
+            }
+          },
+          {
+            "id": "under_tree",
+            "label": {
+              "bn": "গাছের নিচে",
+              "en": "Under a tree"
+            },
+            "imageAsset": "practice/under_tree.png",
+            "isCorrect": false,
+            "feedback": {
+              "bn": "উঁচু গাছ বজ্রপাত টেনে আনতে পারে — গাছের নিচে দাঁড়িও না।",
+              "en": "Tall trees attract lightning — never stand under one."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "lt_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "lt_q1",
+          "prompt": {
+            "bn": "বাইরে বাজ গর্জাচ্ছে। টুকুর কী করা উচিত?",
+            "en": "Thunder is roaring outside. What should Tuku do?"
+          },
+          "imageAsset": "quiz/lt_q1.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "ঘরে চলে যাওয়া",
+                "en": "Go indoors"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "বাইরে খেলা চালিয়ে যাওয়া",
+                "en": "Keep playing outside"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বাজ পড়লে বাইরে থাকা বিপজ্জনক — ঘরে চলে যাওয়াই নিরাপদ।",
+                "en": "Staying outside during thunder is risky — going indoors is safer."
+              }
+            },
+            {
+              "id": "c",
+              "label": {
+                "bn": "উঁচু গাছের নিচে দাঁড়ানো",
+                "en": "Stand under a tall tree"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "উঁচু গাছ বজ্রপাত টানতে পারে — এটা নিরাপদ জায়গা নয়।",
+                "en": "Tall trees can attract lightning — that's not a safe spot."
+              }
+            }
+          ]
+        },
+        {
+          "id": "lt_q2",
+          "prompt": {
+            "bn": "বজ্রপাতের সময় কোন জায়গাটা বিপজ্জনক?",
+            "en": "Which place is dangerous during lightning?"
+          },
+          "imageAsset": "quiz/lt_q2.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "খোলা মাঠ",
+                "en": "An open field"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "ঘরের ভেতরে",
+                "en": "Inside a house"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "ঘরের ভেতরে থাকা আসলে নিরাপদ — এটা বিপজ্জনক নয়।",
+                "en": "Being inside a house is actually safe — that's not the dangerous one."
+              }
+            }
+          ]
+        },
+        {
+          "id": "lt_q3",
+          "prompt": {
+            "bn": "শেষ বাজের পর টুকু কতক্ষণ ঘরে অপেক্ষা করবে?",
+            "en": "After the last thunder, how long does Tuku wait inside?"
+          },
+          "imageAsset": "quiz/lt_q3.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "৩০ মিনিট",
+                "en": "30 minutes"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "মাত্র কয়েক সেকেন্ড",
+                "en": "Just a few seconds"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "কয়েক সেকেন্ড যথেষ্ট নয় — পুরো ৩০ মিনিট অপেক্ষা করো।",
+                "en": "Just a few seconds isn't long enough — wait the full 30 minutes."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

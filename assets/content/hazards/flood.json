@@ -1,0 +1,245 @@
+{
+  "id": "flood",
+  "order": 2,
+  "title": {
+    "bn": "বন্যা",
+    "en": "Flood"
+  },
+  "themeColor": "#2E86C1",
+  "iconAsset": "icons/flood.png",
+  "safeAction": {
+    "bn": "উঁচু জায়গায় যাও, বন্যার পানিতে খেলবে না বা হাঁটবে না",
+    "en": "Move to higher ground; never wade or play in flood water"
+  },
+  "badge": {
+    "id": "flood_badge",
+    "title": {
+      "bn": "বন্যা রক্ষী",
+      "en": "Flood Guardian"
+    },
+    "iconAsset": "icons/badge_flood.png"
+  },
+  "beats": [
+    {
+      "id": "fl_story",
+      "order": 1,
+      "type": "story",
+      "slides": [
+        {
+          "imageAsset": "story/fl_slide_1.png",
+          "text": {
+            "bn": "দিনের পর দিন বৃষ্টি হতেই থাকলো। টিনের চালে টুপ-টুপ-টুপ, চারদিক যেন, ধূসর আর ভেজা হয়ে গেলো।",
+            "en": "It rained and rained for days. Drip-drip-drip on the tin roof, until the whole world outside looked grey and wet."
+          }
+        },
+        {
+          "imageAsset": "story/fl_slide_2.png",
+          "text": {
+            "bn": "তারপর টুকু বাইরে উঁকি দিলো — দেখতে পেলো, রাস্তার পানি ক্রমেই উপরে উঠছে আর, দরজার দিকে এগিয়ে আসছে।",
+            "en": "Then Tuku peeked outside — the water in the street was climbing higher and higher, creeping toward the door."
+          }
+        },
+        {
+          "imageAsset": "story/fl_slide_3.png",
+          "text": {
+            "bn": "“টুকু!, তারাতারি আয়!” মা ডাকল। পুরো পরিবার হাত ধরাধরি করে উঁচু, শুকনো জায়গায় উঠে গেলো।",
+            "en": "“Come, Tuku!” called Ma. Together the family climbed up to higher, dry ground, holding hands all the way."
+          }
+        },
+        {
+          "imageAsset": "story/fl_slide_4.png",
+          "text": {
+            "bn": "পানি দেখে মনে হচ্ছিল খেলা করা যায় — কিন্তু টুকু জানতো, সেটা ঠিক নয়। বন্যার পানি গভীর হতে পারে, ভেতরে লুকানো বিপদ থাকতে পারে।",
+            "en": "The water looked like fun to splash in — but Tuku knew better. Flood water can be deep and full of hidden dangers."
+          }
+        }
+      ]
+    },
+    {
+      "id": "fl_steps",
+      "order": 2,
+      "type": "steps",
+      "slides": [
+        {
+          "imageAsset": "steps/fl_step_1.png",
+          "text": {
+            "bn": "উপরে যাও! দ্রুত উঁচু, শুকনো জায়গায় চলে যাও — যেখানে পানি পৌঁছাতে পারবে না।",
+            "en": "GO UP! Move to higher, dry ground quickly — where the water can't reach you."
+          }
+        },
+        {
+          "imageAsset": "steps/fl_step_2.png",
+          "text": {
+            "bn": "পানিতে নেমো না! বন্যার পানিতে কখনো হেঁটো না বা সাঁতার কেটো না — এতে ধারালো জিনিস আর প্রবল স্রোত লুকিয়ে থাকে।",
+            "en": "STAY OUT! Never walk or swim in flood water — it hides sharp things and strong currents."
+          }
+        },
+        {
+          "imageAsset": "steps/fl_step_3.png",
+          "text": {
+            "bn": "কাছে থাকো! একজন বড় মানুষের কাছে থাকো আর রেডিওতে নিরাপত্তার খবর শোনো।",
+            "en": "STAY CLOSE! Keep a grown-up nearby and listen to the radio for safety news."
+          }
+        }
+      ]
+    },
+    {
+      "id": "fl_practice",
+      "order": 3,
+      "type": "practice",
+      "gameId": "tap_correct_choice",
+      "config": {
+        "instructions": {
+          "bn": "টুকুকে নিরাপদ, শুকনো জায়গা খুঁজে পেতে সাহায্য করো — উঁচু জায়গাটা চাপো!",
+          "en": "Help Tuku find the safe, dry place — tap the higher ground!"
+        },
+        "items": [
+          {
+            "id": "rooftop",
+            "label": {
+              "bn": "উঁচু ছাদ",
+              "en": "Higher rooftop"
+            },
+            "imageAsset": "practice/rooftop.png",
+            "isCorrect": true
+          },
+          {
+            "id": "flooded_street",
+            "label": {
+              "bn": "প্লাবিত রাস্তা",
+              "en": "Flooded street"
+            },
+            "imageAsset": "practice/flooded_street.png",
+            "isCorrect": false,
+            "feedback": {
+              "bn": "প্লাবিত রাস্তায় পানি গভীর ও বিপজ্জনক হতে পারে।",
+              "en": "Flooded streets can hide deep, dangerous water."
+            }
+          },
+          {
+            "id": "near_river",
+            "label": {
+              "bn": "নদীর ধারে",
+              "en": "Near the river"
+            },
+            "imageAsset": "practice/near_river.png",
+            "isCorrect": false,
+            "feedback": {
+              "bn": "বন্যার সময় নদীর পানি হঠাৎ বেড়ে যেতে পারে।",
+              "en": "River water can rise suddenly during a flood."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "fl_quiz",
+      "order": 4,
+      "type": "quiz",
+      "questions": [
+        {
+          "id": "fl_q1",
+          "prompt": {
+            "bn": "বন্যার পানি দ্রুত বাড়ছে। টুকুর কোথায় যাওয়া উচিত?",
+            "en": "The flood water is rising fast. Where should Tuku go?"
+          },
+          "imageAsset": "quiz/fl_q1.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "উঁচু জায়গায় যাওয়া",
+                "en": "Up to higher ground"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "পানিতে ঝাঁপিয়ে খেলা",
+                "en": "Splash and play in the water"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "বন্যার পানিতে খেলা বিপজ্জনক হতে পারে।",
+                "en": "Playing in flood water can be dangerous."
+              }
+            },
+            {
+              "id": "c",
+              "label": {
+                "bn": "নিচু ঘরেই থাকা",
+                "en": "Stay in the low room"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "নিচু ঘরে পানি ঢুকে যেতে পারে — উঁচু জায়গায় যাওয়াই নিরাপদ।",
+                "en": "Water can rise into low rooms — higher ground is safer."
+              }
+            }
+          ]
+        },
+        {
+          "id": "fl_q2",
+          "prompt": {
+            "bn": "বন্যার পানিতে হাঁটা বা সাঁতার কাটা কি কখনো ঠিক?",
+            "en": "Is it ever okay to walk or swim in flood water?"
+          },
+          "imageAsset": "quiz/fl_q2.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "না, কখনোই না",
+                "en": "No, never"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "হ্যাঁ, দেখতে মজার",
+                "en": "Yes, it looks fun"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "মজার মনে হলেও বন্যার পানিতে স্রোত ও লুকানো বিপদ থাকতে পারে।",
+                "en": "It might look fun, but flood water can hide strong currents and dangers."
+              }
+            }
+          ]
+        },
+        {
+          "id": "fl_q3",
+          "prompt": {
+            "bn": "বন্যার সময় টুকুর কার কাছে থাকা উচিত?",
+            "en": "During a flood, who should Tuku stay close to?"
+          },
+          "imageAsset": "quiz/fl_q3.png",
+          "options": [
+            {
+              "id": "a",
+              "label": {
+                "bn": "একজন বড় মানুষ",
+                "en": "A grown-up"
+              },
+              "isCorrect": true
+            },
+            {
+              "id": "b",
+              "label": {
+                "bn": "কেউ না, একদম একা",
+                "en": "Nobody, all alone"
+              },
+              "isCorrect": false,
+              "feedback": {
+                "bn": "একা না থেকে সবসময় একজন বড় মানুষের সাথে থাকো।",
+                "en": "Always stay with a grown-up instead of going alone."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

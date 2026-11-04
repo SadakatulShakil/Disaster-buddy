@@ -18,8 +18,8 @@
       "id": "dark_clouds",
       "image": "activities/read_the_sky/sign_dark_clouds.png",
       "description": {
-        "bn": "আকাশে ঘন কালো মেঘ জমছে আর চারদিক অন্ধকার হয়ে আসছে...",
-        "en": "Heavy, dark clouds are gathering and the sky is turning dark..."
+        "bn": "আকাশে ঘন কালো মেঘ জমছে আর চারদিক অন্ধকার হয়ে আসছে... এই লক্ষণটা কোন বিপদের কথা বলছে?",
+        "en": "Heavy, dark clouds are gathering and the sky is turning dark... What hazard does this sign indicate?"
       },
       "correctHazard": { "bn": "চমৎকার! একটা ঝড় আসছে।", "en": "Great! A storm is coming." },
       "options": [
@@ -40,8 +40,8 @@
       "id": "rising_river",
       "image": "activities/read_the_sky/sign_rising_river.png",
       "description": {
-        "bn": "নদীর পানি দ্রুত বাড়ছে আর ঘোলা হয়ে যাচ্ছে...",
-        "en": "The river water is rising fast and turning muddy..."
+        "bn": "নদীর পানি দ্রুত বাড়ছে আর ঘোলা হয়ে যাচ্ছে... এই লক্ষণটা কোন বিপদের কথা বলছে?",
+        "en": "The river water is rising fast and turning muddy... What hazard does this sign indicate?"
       },
       "correctHazard": { "bn": "চমৎকার! একটা বন্যা আসছে।", "en": "Great! A flood is coming." },
       "options": [
@@ -66,8 +66,8 @@
       "id": "strong_wind",
       "image": "activities/read_the_sky/sign_strong_wind.png",
       "description": {
-        "bn": "হঠাৎ জোরে বাতাস বইছে, ধুলো উড়ছে আর গাছগুলো দুলছে...",
-        "en": "A sudden strong wind is blowing, carrying dust, and the trees are swaying..."
+        "bn": "হঠাৎ জোরে বাতাস বইছে, ধুলো উড়ছে আর গাছগুলো দুলছে... এই লক্ষণটা কোন বিপদের কথা বলছে?",
+        "en": "A sudden strong wind is blowing, carrying dust, and the trees are swaying... What hazard does this sign indicate?"
       },
       "correctHazard": {
         "bn": "চমৎকার! একটা বড় ঘূর্ণিঝড় (কালবৈশাখী) আসছে।",
@@ -95,8 +95,8 @@
       "id": "thunder",
       "image": "activities/read_the_sky/sign_thunder.png",
       "description": {
-        "bn": "দূরে বাজ পড়ার শব্দ শোনা যাচ্ছে আর আকাশে বিদ্যুৎ চমকাচ্ছে...",
-        "en": "There's distant thunder, and lightning is flashing in the sky..."
+        "bn": "দূরে বাজ পড়ার শব্দ শোনা যাচ্ছে আর আকাশে বিদ্যুৎ চমকাচ্ছে... এই লক্ষণটা কোন বিপদের কথা বলছে?",
+        "en": "There's distant thunder, and lightning is flashing in the sky... What hazard does this sign indicate?"
       },
       "correctHazard": { "bn": "চমৎকার! বজ্রপাত কাছে আসছে।", "en": "Great! Lightning is near." },
       "options": [

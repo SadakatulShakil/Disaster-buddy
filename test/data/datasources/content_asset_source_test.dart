@@ -57,7 +57,7 @@ void main() {
         ],
       });
       final source = ContentAssetSourceImpl(
-        bundle: _FakeAssetBundle({'assets/content/flood.json': validJson}),
+        bundle: _FakeAssetBundle({'assets/content/hazards/flood.json': validJson}),
       );
 
       final result = await source.loadModule('flood');
@@ -68,7 +68,7 @@ void main() {
 
     test('returns a Failure<ContentParseFailure> for malformed JSON', () async {
       final source = ContentAssetSourceImpl(
-        bundle: _FakeAssetBundle({'assets/content/flood.json': '{ this is not valid json'}),
+        bundle: _FakeAssetBundle({'assets/content/hazards/flood.json': '{ this is not valid json'}),
       );
 
       final result = await source.loadModule('flood');
@@ -80,7 +80,7 @@ void main() {
     test('returns a Failure<ContentParseFailure> when a required field is missing', () async {
       final invalidJson = jsonEncode({'id': 'flood'}); // missing everything else
       final source = ContentAssetSourceImpl(
-        bundle: _FakeAssetBundle({'assets/content/flood.json': invalidJson}),
+        bundle: _FakeAssetBundle({'assets/content/hazards/flood.json': invalidJson}),
       );
 
       final result = await source.loadModule('flood');

@@ -1,4 +1,4 @@
-// Loads the real assets/content/first_aid.json manifest through the full
+// Loads the real assets/content/hazards/first_aid.json manifest through the full
 // ContentAssetSourceImpl -> HazardModuleDto pipeline, so a mistake in the
 // actual shipped content (not a synthetic fixture) fails this test.
 
@@ -34,8 +34,8 @@ class _FakeAssetBundle extends AssetBundle {
 void main() {
   group('first_aid.json manifest', () {
     test('parses into a well-formed HazardModule', () async {
-      final raw = File('assets/content/first_aid.json').readAsStringSync();
-      final source = ContentAssetSourceImpl(bundle: _FakeAssetBundle({'assets/content/first_aid.json': raw}));
+      final raw = File('assets/content/hazards/first_aid.json').readAsStringSync();
+      final source = ContentAssetSourceImpl(bundle: _FakeAssetBundle({'assets/content/hazards/first_aid.json': raw}));
 
       final result = await source.loadModule('first_aid');
 
@@ -65,10 +65,10 @@ void main() {
     });
 
     test('a malformed variant returns a Failure<ContentParseFailure>', () async {
-      final raw = File('assets/content/first_aid.json').readAsStringSync();
+      final raw = File('assets/content/hazards/first_aid.json').readAsStringSync();
       final broken = jsonDecode(raw) as Map<String, dynamic>..remove('beats');
       final source = ContentAssetSourceImpl(
-        bundle: _FakeAssetBundle({'assets/content/first_aid.json': jsonEncode(broken)}),
+        bundle: _FakeAssetBundle({'assets/content/hazards/first_aid.json': jsonEncode(broken)}),
       );
 
       final result = await source.loadModule('first_aid');
