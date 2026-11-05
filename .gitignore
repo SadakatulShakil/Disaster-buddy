@@ -59,3 +59,8 @@ optimize_assets.py
 .venv/
 __pycache__/
 *.pyc
+
+# Android signing — never commit
+android/key.properties
+*.jks
+*.keystore
