@@ -42,8 +42,8 @@ class BipodBondhuApp extends StatelessWidget {
 
   Locale get _startLocale {
     final code = UserPrefService.instance.languageCode;
-    if (code == AppConstants.langEn) return const Locale('en', 'US');
-    return const Locale('bn', 'BD'); // default
+    if (code == AppConstants.langBn) return const Locale('bn', 'BD');
+    return const Locale('en', 'US'); // default, until the user picks a language
   }
 
   @override
@@ -64,7 +64,7 @@ class BipodBondhuApp extends StatelessWidget {
           // Localization
           translations: AppTranslations(),
           locale: _startLocale,
-          fallbackLocale: const Locale('bn', 'BD'),
+          fallbackLocale: const Locale('en', 'US'),
 
           // Routing
           initialBinding: InitialBinding(),

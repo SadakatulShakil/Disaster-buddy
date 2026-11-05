@@ -7,9 +7,9 @@ import '../../core/services/user_pref_service.dart';
 class LanguageController extends GetxController {
   final _pref = UserPrefService.instance;
 
-  // Default selection = whatever is stored, else Bangla.
+  // Default selection = whatever is stored, else English.
   late final RxString selected =
-      (_pref.languageCode ?? AppConstants.langBn).obs;
+      (_pref.languageCode ?? AppConstants.langEn).obs;
 
   void select(String code) => selected.value = code;
 
