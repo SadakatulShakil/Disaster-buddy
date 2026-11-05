@@ -101,8 +101,11 @@ class _ActivitiesGrid extends StatelessWidget {
         SliverPadding(
           padding: EdgeInsets.all(AppSpacing.lg),
           sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              // Caps card width instead of a fixed column count, so a
+              // tablet's extra width adds columns (3-4) rather than
+              // stretching each card — phones stay at 2 columns.
+              maxCrossAxisExtent: ActivityGridConstants.cellMaxWidth,
               mainAxisSpacing: AppSpacing.md,
               crossAxisSpacing: AppSpacing.md,
               // A fixed cell height (not an aspect ratio) — content height

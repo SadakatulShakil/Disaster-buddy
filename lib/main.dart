@@ -48,8 +48,11 @@ class BipodBondhuApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Tablets get a larger reference design size so .w/.h/.sp/.r scale
+    // factors stay close to 1x instead of ballooning 2-3x on a big screen.
+    final isTablet = MediaQuery.sizeOf(context).shortestSide >= AppConstants.tabletBreakpoint;
     return ScreenUtilInit(
-      designSize: AppConstants.designSize,
+      designSize: isTablet ? AppConstants.tabletDesignSize : AppConstants.designSize,
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {

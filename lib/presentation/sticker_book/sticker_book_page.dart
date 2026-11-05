@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -65,8 +66,11 @@ class StickerBookPage extends GetView<StickerBookController> {
                   }
                   return GridView.builder(
                     padding: EdgeInsets.all(AppSpacing.lg),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      // Caps tile width instead of a fixed column count, so
+                      // a tablet's extra width adds columns (3-4) rather
+                      // than stretching each tile — phones stay at 2 cols.
+                      maxCrossAxisExtent: 180.r,
                       mainAxisSpacing: AppSpacing.md,
                       crossAxisSpacing: AppSpacing.md,
                       childAspectRatio: 0.85,

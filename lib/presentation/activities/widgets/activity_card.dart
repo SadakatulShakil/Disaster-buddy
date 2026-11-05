@@ -96,4 +96,9 @@ class ActivityGridConstants {
   /// English text, and the margin also absorbs a larger system font-scale
   /// setting.
   static double get cellHeight => 232.r;
+
+  /// Max cell width for a [SliverGridDelegateWithMaxCrossAxisExtent] — keeps
+  /// cards at roughly this phone-tuned width and lets extra screen width on
+  /// a tablet add columns instead of stretching cards wider.
+  static double get cellMaxWidth => 180.r;
 }

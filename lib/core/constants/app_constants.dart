@@ -9,6 +9,17 @@ class AppConstants {
   // Design size for flutter_screenutil (iPhone X logical size).
   static const Size designSize = Size(375, 812);
 
+  // Tablet design size — matches real tablet portrait aspect (~0.75) rather
+  // than scaling up the phone's aspect (~0.46), so width/height scale
+  // factors stay close to each other instead of diverging and distorting
+  // spacing. Keeps on-screen element sizes close to the phone experience
+  // instead of ballooning 2-3x on a large screen.
+  static const Size tabletDesignSize = Size(768, 1024);
+
+  // Shortest-side threshold (dp) for treating a device as a tablet —
+  // matches Android's sw600dp convention.
+  static const double tabletBreakpoint = 600;
+
   // Locales
   static const String langBn = 'bn';
   static const String langEn = 'en';
